@@ -322,7 +322,6 @@
         })();
         
 
-
         /* Google map */
         (function () {
             if (!$('#google-map').length) {
