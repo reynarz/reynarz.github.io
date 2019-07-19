@@ -13,13 +13,6 @@ body {
   height: 100vh;
 }
 
-#notfound .notfound-bg:after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(37, 37, 37, 0.329);
-}
 
 #notfound .notfound {
   position: absolute;
