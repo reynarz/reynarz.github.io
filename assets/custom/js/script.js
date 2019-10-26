@@ -13,7 +13,7 @@
             sliderType: "standard",
             sliderLayout: "fullscreen",
             autoHeight: "on",
-            delay: 9000,
+            delay: 5000,
             navigation: {
                 keyboardNavigation: "on",
                 keyboard_direction: "horizontal",
