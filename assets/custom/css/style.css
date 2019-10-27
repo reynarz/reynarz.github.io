@@ -824,7 +824,7 @@ figure.effect-goliath .popup-call {
   figure.effect-goliath .popup-call a:hover, figure.effect-goliath .popup-call a:focus {
     text-decoration: none; }
   figure.effect-goliath .popup-call a i {
-    color: #404040;
+    color: #FFF;
     transition: color 0.5s ease-in-out;
     -moz-transition: color 0.5s ease-in-out;
     -webkit-transition: color 0.5s ease-in-out;
@@ -834,7 +834,7 @@ figure.effect-goliath .popup-call {
       font-size: 24px;
       margin-left: 2px; }
     figure.effect-goliath .popup-call a i:hover {
-      color: #E84855; }
+      color: #FFF; }
 figure.effect-goliath figcaption {
   position: absolute;
   top: 0;
@@ -847,24 +847,28 @@ figure.effect-goliath figcaption {
     position: absolute;
     left: 30px;
     right: 30px;
-    bottom: 30px; }
+    bottom: 30px; 
+    color: #FFF;
+    font-size: 19px;
+  }
   figure.effect-goliath figcaption a {
-    color: #303030;
+    color: #FFF;
     font-size: 11px;
-    line-height: 20px; }
+    line-height: 20px; 
+  }
   figure.effect-goliath figcaption span {
     position: relative;
     margin-right: 2px; }
 figure.effect-goliath img, figure.effect-goliath h3 {
-  -webkit-transition: -webkit-transform 3.5s;
-  transition: transform 3.5s; }
+  -webkit-transition: -webkit-transform 1.5s;
+  transition: transform 1.5s; }
 figure.effect-goliath img {
   max-width: none;
   width: -webkit-calc(100% + 0px);
   width: calc(100% + 0px);
   opacity: 1;
-  -webkit-transition: opacity 3.5s, -webkit-transform 3.5s;
-  transition: opacity 3.5s, transform 3.5s;
+  -webkit-transition: opacity 2.5s, -webkit-transform 2.5s;
+  transition: opacity 2.5s, transform 2.5s;
   -webkit-transform: translate3d(0px, 0, 0) scale(1.12);
   transform: translate3d(0px, 0, 0) scale(1.12);
   -webkit-backface-visibility: hidden;
@@ -872,8 +876,7 @@ figure.effect-goliath img {
 figure.effect-goliath h3 {
   font-family: "Montserrat", sans-serif;
   color: "Raleway", sans-serif !important;
-  text-transform: uppercase;
-  font-size: 16px;
+  font-size: 25px;
   opacity: 0;
   letter-spacing: 3px;
   -webkit-transition: opacity 1s, -webkit-transform 1s;
@@ -887,6 +890,7 @@ figure.effect-goliath h3 {
     bottom: -5px;
     left: 0;
     width: 0;
+    font-size: 19px;
     border-bottom: 1px solid #8e8e8e;
     -webkit-transition: all 0.9s;
     -moz-transition: all 0.9s;
@@ -894,7 +898,7 @@ figure.effect-goliath h3 {
     transition-delay: .2s; }
 figure.effect-goliath p {
   margin-top: 12px;
-  color: #5d5d5d;
+  color: #FFF;
   text-transform: none;
   font-family: "Raleway", sans-serif;
   font-size: 11px;
