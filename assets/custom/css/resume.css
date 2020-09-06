@@ -36,7 +36,10 @@ p.enlarge span { color: #e5e5e5; }
 .first h2 {  font-style: italic; }
 .last { border-bottom: 0 }
 
- 
+  @font-face {
+    font-family: myFirstFont;
+    src: url(assets/vendor/bootstrap/fonts/OpenSans-Regular.ttf);
+}
 /* //-- section styles -- */
 
 a#pdf { display: block; float: left; background: #363636; color: white; padding: 6px 50px 6px 12px; margin-bottom: 6px; text-decoration: none;  }

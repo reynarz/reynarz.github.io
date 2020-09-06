@@ -13,7 +13,6 @@
             sliderType: "standard",
             sliderLayout: "fullscreen",
             autoHeight: "on",
-            delay: 5000,
             navigation: {
                 keyboardNavigation: "on",
                 keyboard_direction: "horizontal",
@@ -50,8 +49,6 @@
                     enable: false,
                     hide_onmobile: true,
                     hide_onleave: true,
-                    hide_delay: 200,
-                    hide_delay_mobile: 1200,
                     hide_under: 0,
                     hide_over: 9999,
                     direction: "horizontal",
@@ -86,7 +83,7 @@
             sliderType: "standart",
             sliderLayout: "fullwidth",
             autoHeight: "off",
-            delay: 9000,
+            
             navigation: {
                 keyboardNavigation: "on",
                 keyboard_direction: "horizontal",
@@ -123,8 +120,6 @@
                     enable: false,
                     hide_onmobile: true,
                     hide_onleave: true,
-                    hide_delay: 200,
-                    hide_delay_mobile: 1200,
                     hide_under: 0,
                     hide_over: 9999,
                     direction: "horizontal",
@@ -237,8 +232,6 @@
 
         /* Animated Counter */
         $('.count-container span').counterUp({
-            delay: 10, // the delay time in ms
-            time: 3000 // the speed time in ms
         });
         
         /* Magnific Popup */
@@ -262,7 +255,6 @@
             dots: true,
             margin:10,
             autoplay: true,
-            autoplayTimeout: 11000,
             autoplayHoverPause: true,
             autoplaySpeed: 1250,
             autoHeight:true
