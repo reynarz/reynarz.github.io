@@ -72,7 +72,7 @@
   background-color: #fff !important; }
 
 .bg-color01 {
-  background-color: #f2f2f2 !important; }
+  background-color: #101010 !important; }
 
 .bg-color02 {
   background-color: #dadada !important; }
@@ -254,7 +254,20 @@ body {
   display: block;
   overflow-x: hidden;
   overflow-y: auto;
-  color: #303030;
+  color: #d4d4d4;
+  font: 14px/1.7 "Raleway", sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  background-color: #fff; }
+
+body2 {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #d4d4d4;
   font: 14px/1.7 "Raleway", sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -529,8 +542,9 @@ input, textarea {
       .infoblock .morelink a i {
         margin-left: 5px; }
 
+/*Background color of the borken path page-----------------------------------------------------------------*/
 section {
-  background-color: #fff; }
+  background-color: #000; }
 
 #about-hero-image,
 #portfolio-hero-image,
