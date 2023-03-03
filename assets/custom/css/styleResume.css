@@ -1572,7 +1572,7 @@ blockquote {
     -o-transition: all 0.15s ease-in-out;
     -ms-transition: all 0.15s ease-in-out; }
   .cbp-af-header .navbar-default, .cbp-af-header .navbar-toggle, .cbp-af-header .navbar-toggle:hover, .cbp-af-header .navbar-toggle:focus {
-    background-color: transparent;
+    background-color: #1c1c1c;
     border: none; }
   .cbp-af-header .navbar-collapse {
     margin-top: 2px;
