@@ -102,7 +102,8 @@ body {
 
 .summary-description{
   color: #BFBFBF;
-
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .skills-grid, .technical-skills {
@@ -192,7 +193,7 @@ body {
   font-family: "Consolas";
   font-size: 14px;
   float: none; /* remove float when using flex */
-  color: white !important;
+  color: #BFBFBF !important;
 }
 
 /*Duties description*/
