@@ -119,9 +119,23 @@
             <section class="video-section">
                 <div class="video-carousel">
                     <div class="carousel-track">
-                        <video class="carousel-video active" src="assets/videos/engine.mp4" autoplay muted loop></video>
-                        <video class="carousel-video" src="video2.mp4" muted loop></video>
-                        <video class="carousel-video" src="video3.mp4" muted loop></video>
+                       <div class="video-wrapper">
+                      <video class="carousel-video active" src="assets/videos/engine.mp4" autoplay muted loop></video>
+                      <div class="video-text title">ENGINE DEMO</div>
+                      <div class="video-text subtitle">This is the engine demo subtitle</div>
+                    </div>
+
+                    <div class="video-wrapper">
+                      <video class="carousel-video" src="video2.mp4" muted loop></video>
+                      <div class="video-text title">Video2</div>
+                      <div class="video-text subtitle">Subtitle for video 2</div>
+                    </div>
+
+                    <div class="video-wrapper">
+                      <video class="carousel-video" src="video3.mp4" muted loop></video>
+                      <div class="video-text title">Video3</div>
+                      <div class="video-text subtitle">Subtitle for video 3</div>
+                    </div>
                     </div>
                     <button class="carousel-arrow left"> <i class="fa fa-chevron-left"  aria-hidden="true"></i></button>
                     <button class="carousel-arrow right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
@@ -131,13 +145,11 @@
         <div class="home-button">
             <a href="#">REYNARZ</a>
         </div>
-       <!-- <nav class="nav-buttons">
-            <a href="#" >Resume</a>
-            <a href="coverletter.html">Cover Letter</a>
-            <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </nav>-->
     </header>
+   <footer class="video-footer-text">
+  <div class="video-title">Scroll down to explore more ↓</div>
+  <div class="video-subtitle"></div>
+</footer>
             </section>
             <section class="grid-section">
 <div class="grid-container">
@@ -210,6 +222,7 @@ function nextVideo() {
     videos[current].classList.add("active");
     videos[current].currentTime = 0;  // reset to start
     videos[current].play();
+     updateFooterText(videos[current]);
 }
 
 function prevVideo() {
@@ -218,6 +231,7 @@ function prevVideo() {
     videos[current].classList.add("active");
     videos[current].currentTime = 0;  // reset to start
     videos[current].play();
+     updateFooterText(videos[current]);
 }
 
 document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
@@ -235,7 +249,9 @@ document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
 document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
-
+const activeVideo = document.querySelector('.carousel-video.active');
+  if (activeVideo) updateFooterText(activeVideo);
+  
     sidebar.addEventListener('wheel', (e) => {
         e.preventDefault();
         mainContent.scrollTop += e.deltaY;
@@ -263,7 +279,10 @@ document.addEventListener('DOMContentLoaded', () => {
         videos.forEach((video, i) => {
             const isActive = i === index;
             video.classList.toggle('active', isActive);
-            if (isActive) {
+            if (isActive) 
+            {
+                updateFooterText(video);
+
                /* video.currentTime = 0;
                 video.play();*/
             } else {
@@ -283,6 +302,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function updateFooterText(video) {
+    const wrapper = video.closest('.video-wrapper');
+    const footer = document.querySelector('.video-footer-text');
+    
+    const title = wrapper.querySelector('.video-text.title');
+    const subtitle = wrapper.querySelector('.video-text.subtitle');
+
+    if (title && subtitle) {
+        footer.querySelector('.video-title').textContent = title.textContent;
+        footer.querySelector('.video-subtitle').textContent = subtitle.textContent;
+    }
+}
  const slideBox = document.querySelector('.slide-box');
   const iframe = slideBox.querySelector('iframe');
   const closeBtn = document.querySelector('.close-btn');
@@ -333,33 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.style.opacity = 0;
 
   });
-/*const gridItems = document.querySelectorAll('.grid-item');
 
-gridItems.forEach(item => {
-  const img = item.querySelector('img');
-  let animationId;
-  let startTime;
 
-  function animate(time) {
-    if (!startTime) startTime = time;
-    const elapsed = time - startTime;
-    // sine oscillation scale between 1 and ~1.1
-    const scale = 1 + 0.2 * ((Math.sin(elapsed / 400) + 1.0) * 0.5);
 
-    img.style.transform = `scale(${scale})`;
-    animationId = requestAnimationFrame(animate);
-  }
 
-  item.addEventListener('mouseenter', () => {
-    startTime = null;
-    animationId = requestAnimationFrame(animate);
-  });
 
-  item.addEventListener('mouseleave', () => {
-    cancelAnimationFrame(animationId);
-    img.style.transform = 'scale(1)'; // smooth return to normal
-  });
-});*/
+
 </script>
 </body>
 </html>

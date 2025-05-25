@@ -1,6 +1,6 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /*Change grid item size*/
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /*Change grid item size*/
 }
 
 .grid-item {
