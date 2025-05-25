@@ -184,6 +184,8 @@ body, html {
     padding-top: 100%; /* keep square shape */
     box-sizing: border-box;
     overflow: hidden; /* clip overflow */
+     display: block;
+  text-decoration: none;
 }
 
 .grid-item img {
@@ -191,10 +193,107 @@ body, html {
     top: 0; left: 0;
     width: 100%;
     height: 100%;
+  display: block;
     object-fit: cover; /* cover the square, cropping if needed */
     display: block;
+    filter: brightness(1.0);      
+    transition: filter 0.9s ease; /* smooth transition */
 }
 
+.grid-item:hover img {
+    filter: brightness(0.5);        /* full brightness on hover */
+      animation: zoomSine 3.0s ease-in-out infinite;
+}
+@keyframes zoomSine {
+  0%, 100% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+}
+.grid-item:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.title {
+  margin: 0 0 5px 0;
+  font-size: 25px; 
+  font-weight: bold;
+    font-family: Consolas, monospace, sans-serif;
+}
+.grid-item .text-container {
+  text-align: center;
+  font-family: Consolas, monospace, sans-serif;
+}
+.grid-item .title {
+  margin: 0 0 8px 0;
+  font-size: 25px;
+  font-weight: bold;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+
+}
+
+.grid-item .title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px; /* space between title text and line */
+  height: 1px;
+    background-color: rgba(255, 255, 255, 0.5); /* semi-transparent gray */  /* or your desired color */
+  width: 0;
+ transition: width 0.9s ease 0.28s;  /* delay of 0.2s */
+
+}
+
+.grid-item .hashtags {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* On hover show text and animate */
+.grid-item:hover .title,
+.grid-item:hover .hashtags {
+  opacity: 1;
+}
+
+.grid-item:hover .title::after {
+  width: 100%;
+}
+.hashtags {
+  margin: 0;
+  font-size: 11px; /* smaller */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Consolas, monospace, sans-serif;
+}
+.title, .hashtags {
+  font-family: Consolas, monospace, sans-serif;
+}
+.overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  opacity: 0;
+  text-align: center;
+  background-color: transparent;
+  pointer-events: none;
+  transition: opacity 1.3s ease;
+  border-radius: 5px;
+}
 /* carousel container fills video section */
 .carousel-container {
     position: absolute;
