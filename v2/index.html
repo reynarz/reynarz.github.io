@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reynarz | P</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="favicon.png">
+</head>
+<body>
+    <div class="container">
+        <!-- 🔴 Sidebar -->
+        <aside class="sidebar">
+    <div class="profile-section">
+        <img src="assets/images/profile.png" alt="Profile Picture" class="profile-pic">
+        <h2 class="name">Reynardo Pérez</h2>
+    </div>
+
+    <div class="sidebar-links">
+        <a href="#">RESUME</a>
+        <a href="#">COVER LETTER</a>
+    </div>
+
+    <div class="intro">
+        <p><strong>HELLO, WELCOME!</strong><br><br>
+        My name is Reynardo Perez (Reynarz) and I’m a game programmer! Here you can see some of my personal projects.
+        </p>
+    </div>
+
+    <div class="social-icons">
+    <a href="https://github.com/reynarzz" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>
+    <a href="https://www.linkedin.com/in/reynardo-p-860a17129" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+    <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+    <a href="https://twitter.com/_reynarz" target="_blank"><i class="fab fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+</div>
+</aside>
+
+        <!-- 🟦 Main Content Area -->
+        <main class="main-content">
+            <!-- 🟡 Top Nav -->
+      
+            <!-- Video section (placeholder) -->
+            <section class="video-section">
+                <div class="video-carousel">
+                    <div class="carousel-track">
+                        <video class="carousel-video active" src="assets/videos/engine.mp4" autoplay muted loop></video>
+                        <video class="carousel-video" src="video2.mp4" muted loop></video>
+                        <video class="carousel-video" src="video3.mp4" muted loop></video>
+                    </div>
+                    <button class="carousel-arrow left"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-arrow right"><i class="fas fa-chevron-right"></i></button>
+             </div>
+
+              <header class="top-nav">
+        <div class="home-button">
+            <a href="#">REYNARZ</a>
+        </div>
+        <nav class="nav-buttons">
+            <a href="#">Resume</a>
+            <a href="#">Cover Letter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+            <a href="#">Projects</a>
+        </nav>
+    </header>
+            </section>
+            <section class="grid-section">
+  <div class="grid-container">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <!-- Add more grid-items if you want more rows -->
+  </div>
+</section>
+        </main>
+    </div>
+    <script>
+const videos = document.querySelectorAll(".carousel-video");
+let current = 0;
+let interval = setInterval(nextVideo, 5000);
+
+function nextVideo() {
+    videos[current].classList.remove("active");
+    current = (current + 1) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+}
+
+function prevVideo() {
+    videos[current].classList.remove("active");
+    current = (current - 1 + videos.length) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+}
+
+document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
+    clearInterval(interval);
+    nextVideo();
+    interval = setInterval(nextVideo, 5000);
+});
+
+document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
+    clearInterval(interval);
+    prevVideo();
+    interval = setInterval(nextVideo, 5000);
+});
+</script>
+</body>
+</html>
