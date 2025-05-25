@@ -21,8 +21,7 @@ body {
     }
 
     h2 {
-      font-style: italic;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
 
     hr {
@@ -39,9 +38,10 @@ body {
     }
 
     .section {
-  align-items: flex-start;
-  gap: 1rem;
-}
+    align-items: flex-start;
+    gap: 1rem;
+    color: white;
+  }
 .section-row {
   display: flex;
   align-items: flex-start;
@@ -91,11 +91,18 @@ body {
 .section-row .skills-grid,
 .section-row .technical-skills {
   flex-grow: 1;
+  color: #BFBFBF;
 }
 .section-title {
   flex-shrink: 0;
   width: 150px;
   text-align: left;
+
+}
+
+.summary-description{
+  color: #BFBFBF;
+
 }
 
 .skills-grid, .technical-skills {
@@ -114,6 +121,7 @@ body {
       grid-template-columns: repeat(3, 1fr);
       gap: 0.5rem;
       margin-top: 1rem;
+      color: #BFBFBF;
     }
 
     ul {
@@ -121,12 +129,32 @@ body {
     }
 
     .contact {
-      text-align: left;
+      text-align: right;
     }
+.links-section p {
+  margin: 0.3rem 0;   /* small vertical spacing between paragraphs */
+    font-weight: bold;
+}
+
+.links-section p:first-child {
+  margin-bottom: 0.5rem; /* a bit more space below "Links:" label */
+}
+
+.links-section a {
+  color: #4da6ff;    /* keep consistent link color */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.links-section a:hover {
+  text-decoration: underline;
+}
 
     .social-icons a {
       font-size: 1.5rem;
-      margin-right: 0.5rem;
+      margin-right: 0.1rem;
+      color: white;
     }
 
     .experience {
@@ -164,13 +192,70 @@ body {
   font-family: "Consolas";
   font-size: 14px;
   float: none; /* remove float when using flex */
-}
-.experience-entry ul li {
-  margin-bottom: 0.5em; /* or try 0.75em or 1em for more space */
+  color: white !important;
 }
 
+/*Duties description*/
+.experience-entry ul li {
+  margin-bottom: 1.0em; /* or try 0.75em or 1em for more space */
+}
 
 
 .experience-entry {
   border-bottom: 2px solid #444;
+  color: #BFBFBF;  /* Changes all text inside experience entries to gray */
+}
+
+
+/* Add a container for your header + links */
+.header-container {
+  display: flex;
+  align-items: center; /* vertical center */
+  justify-content: space-between; /* space between name/title and links */
+  margin-bottom: 2rem; /* optional spacing below */
+  gap: 1rem; /* optional gap between sections */
+}
+
+/* Adjust h1 and h2 margins for better vertical alignment */
+.header-container h1,
+.header-container h2 {
+  margin: 0;
+  line-height: 1.1;
+}
+.name-title h1,
+.name-title h2 {
+  margin: 0;                    /* remove default margins */
+  line-height: 1.1;
+  margin-top: 15px;
+}
+/* Stack h1 and h2 vertically */
+.name-title {
+  display: flex;
+  flex-direction: column;       /* stack h1 and h2 vertically */
+  justify-content: center;      /* center vertically relative to links */
+}
+
+/* Style links container if needed */
+.links {
+  display: flex;
+  gap: 1rem;
+  /* optionally align links vertically center too */
+  align-items: center;
+}
+
+
+/* Optionally keep company titles or dates a different color */
+.experience-entry .company-title {
+  color: white; /* Or any other color */
+}
+
+.experience-entry .company-title-date {
+  color: #BFBFBF; /* Lighter gray, for example */
+}
+.game-description {
+  color: #BFBFBF;
+}
+.label-title,
+.label-project {
+  color: white; /* Gray or any color you want */
 }
