@@ -57,11 +57,11 @@ body, html {
 }
 
 .name {
-    font-size: 24px;
+    font-size: 25px;
     text-align: center;
     margin: 0;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     line-height: 1.1;
     font-family: 'Consolas', sans-serif;
     font-weight: 400;
@@ -79,12 +79,12 @@ body, html {
 .sidebar-links a {
     display: block;              /* block makes width apply fully */
     width: 100%;                /* fill container width */
-    height: 40px;
-    line-height: 40px;          /* vertical center text */
-    padding-left: 40px;         /* indent text */
+    height: 30px;
+    line-height: 30px;          /* vertical center text */
+    padding-left: 35px;         /* indent text */
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     letter-spacing: 2px;
@@ -105,12 +105,12 @@ body, html {
     line-height: 1.6;
     margin-bottom: 30px;
     margin-top: 20px;
-    padding-left: 40px;
+    padding-left: 35px;
 }
 
 .intro strong {
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
 }
 .intro-text {
     padding-top: 10px;
@@ -124,7 +124,7 @@ body, html {
     justify-content: center;
     gap: 12px;
     margin-top: auto;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
 
 }
 .social-icons a {
@@ -156,25 +156,29 @@ body, html {
     height: auto;
     overflow: visible;
     position: relative;
-
+    overflow-y: auto;
 }
 
 /* 🟡 Top Nav - now overlays video */
 .top-nav {
     position: fixed;
     top: 0;
-    left: 300px;  /* start after sidebar */
-    right: 0;      /* stretch to the right edge */
+    left: 300px;
+    right: 0;
     height: 60px;
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 20;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    transition: background 0.3s ease;
+    background: transparent;
+    /*background: rgba(0, 0, 0, 0.7);*/
 }
 
+.top-nav.scrolled {
+    background: rgba(0, 0, 0, 0.7);
+}
 .home-button a {
     color: white;
     font-weight: 400;
@@ -183,7 +187,7 @@ body, html {
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-size: 2.1em;
+    font-size: 1.9em;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -195,11 +199,11 @@ body, html {
     letter-spacing: 2px;
     font-family: "Consolas";
     text-transform: uppercase;
-
+    transition: 0.2s ease; /* smooth transition */
 }
 
 .nav-buttons a:hover {
-    color: white;
+    color: #E84855;
 }
 
 /* 🎥 Video Carousel Background */
@@ -243,11 +247,12 @@ body, html {
     object-fit: cover; /* cover the square, cropping if needed */
     display: block;
     filter: brightness(1.0);      
-    transition: 0.7s ease; /* smooth transition */
+    transition: 0.74s ease; /* smooth transition */
 }
 
 .grid-item:hover img {
-    filter: brightness(0.5);        /* full brightness on hover */
+    filter: brightness(0.35);        /* full brightness on hover */
+      transform: scale(1.07);
 }
 
 .grid-item:hover .overlay {
@@ -367,22 +372,33 @@ body, html {
     transform: translateY(-50%);
     font-size: 36px;
     color: white;
+    color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.0);  /* REMOVE this */
-    padding: 10px;                   /* OPTIONAL: remove this */
-    border-radius: 50%;             /* OPTIONAL: remove this */
-    transition: background 0.3s;
+    padding: 45px;                   /* OPTIONAL: remove this */
+    border-color:rgba(0, 0, 0, 0) ;
+    transition: color 0.3s ease; /* smooth transition */
+    filter: contrast(80%);
+}
+
+.carousel-arrow i {
+  pointer-events: none;  /* icon ignores mouse events */
 }
 
 .carousel-arrow:hover {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.0);
+    color: rgba(255, 255, 255, 1.0);
+
 }
 
 .carousel-arrow.left {
     left: 20px;
+    background: rgba(0, 0, 0, 0);
+
 }
 
 .carousel-arrow.right {
     right: 20px;
+    background: rgba(0, 0, 0, 0);
+
 }

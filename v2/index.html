@@ -53,8 +53,8 @@
                         <video class="carousel-video" src="video2.mp4" muted loop></video>
                         <video class="carousel-video" src="video3.mp4" muted loop></video>
                     </div>
-                    <button class="carousel-arrow left"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-arrow right"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-arrow left"> <i class="fa fa-chevron-left"  aria-hidden="true"></i></button>
+                    <button class="carousel-arrow right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
              </div>
 
               <header class="top-nav">
@@ -161,9 +161,29 @@ document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
     interval = setInterval(nextVideo, 5000);
 });
 
-/*Change the video when clicking*/
+
 document.addEventListener('DOMContentLoaded', () => {
-    const gridItems = document.querySelectorAll('.grid-item');
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    sidebar.addEventListener('wheel', (e) => {
+        e.preventDefault(); // prevent sidebar default scrolling if any
+        mainContent.scrollTop += e.deltaY;
+    }, { passive: false });
+
+ const nav = document.querySelector(".top-nav");
+const scrollTarget = document.querySelector(".main-content"); // or whatever actually scrolls
+
+scrollTarget.addEventListener("scroll", function () {
+    const scrollThreshold = 100;
+    if (scrollTarget.scrollTop > scrollThreshold) {
+        nav.classList.add("scrolled");
+    } else {
+        nav.classList.remove("scrolled");
+    }
+});
+
+         const gridItems = document.querySelectorAll('.grid-item');
     const videos = document.querySelectorAll('.carousel-video');
 
     function setActiveVideo(index) {
@@ -177,17 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setActiveVideo(index);
         });
     });
-});
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-
-    sidebar.addEventListener('wheel', (e) => {
-        e.preventDefault(); // prevent sidebar default scrolling if any
-        mainContent.scrollTop += e.deltaY;
-    }, { passive: false });
 });
 
 /*const gridItems = document.querySelectorAll('.grid-item');
