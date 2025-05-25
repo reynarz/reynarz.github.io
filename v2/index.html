@@ -20,8 +20,8 @@
     </div>
 
     <div class="sidebar-links">
-        <a href="#">RESUME</a>
-        <a href="#">COVER LETTER</a>
+        <a href="resume.html">RESUME</a>
+        <a href="coverletter.html">COVER LETTER</a>
     </div>
 
     <div class="intro">
@@ -63,7 +63,7 @@
         </div>
         <nav class="nav-buttons">
             <a href="#" >Resume</a>
-            <a href="coverletter.html" >Cover Letter</a>
+            <a href="coverletter.html">Cover Letter</a>
             <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer">GitHub</a>
         </nav>
@@ -126,8 +126,11 @@
 </div>
 </section>
         </main>
+        
     </div>
+
     <script>
+
 const videos = document.querySelectorAll(".carousel-video");
 let current = 0;
 let interval = setInterval(nextVideo, 5000);
@@ -172,15 +175,7 @@ sidebar.addEventListener('wheel', (e) => {
 
 const nav = document.querySelector(".top-nav");
 
-window.addEventListener("scroll", () => {
-  const scrollThreshold = 10;
 
-  // Use `window.scrollY` to get vertical scroll of the page
-  if (window.scrollY > scrollThreshold) {
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
          const gridItems = document.querySelectorAll('.grid-item');
     const videos = document.querySelectorAll('.carousel-video');
 
@@ -196,7 +191,6 @@ window.addEventListener("scroll", () => {
         });
     });
 
-});
 
 /*const gridItems = document.querySelectorAll('.grid-item');
 
