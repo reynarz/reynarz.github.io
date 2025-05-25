@@ -30,6 +30,7 @@
     right: -100%; /* Start fully off-screen to the right */
     width: calc(100% - 300px); /* Leave space for the 300px sidebar */
     height: 100vh;
+    /*background-color: #0a0a0a;*/
     background-color: black;
     transition: right 0.5s ease;
     z-index: 9999;
@@ -44,7 +45,7 @@
   height: 100%;
   border: none;
   opacity: 1;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
 .slide-box iframe.fade-out {
@@ -262,7 +263,7 @@ scrollTarget.addEventListener("scroll", function () {
     });
 
 });
-const slideBox = document.querySelector('.slide-box');
+ const slideBox = document.querySelector('.slide-box');
   const iframe = slideBox.querySelector('iframe');
   const closeBtn = document.querySelector('.close-btn');
 
@@ -272,38 +273,45 @@ const slideBox = document.querySelector('.slide-box');
     link.addEventListener('click', e => {
       e.preventDefault();
       const file = link.getAttribute('data-file');
+      iframe.style.opacity = 0;
 
-      // If the same file is clicked and box is open, close the box
-      if (slideBox.classList.contains('show') && file === currentFile) {
+      // If same file clicked and box is open, close
+      if (slideBox.classList.contains('show') && currentFile === file) {
         slideBox.classList.remove('show');
         return;
       }
 
-      // If box not visible, show and set iframe immediately
+      // Set iframe transparent before doing anything
+      iframe.style.opacity = 0;
+
+      // If box is not visible
       if (!slideBox.classList.contains('show')) {
         slideBox.classList.add('show');
-        iframe.src = file;
-        currentFile = file;
-        return;
-      }
-
-      // Fade out, switch content, fade in
-      iframe.classList.add('fade-out');
-      iframe.addEventListener('transitionend', function handler() {
-        iframe.removeEventListener('transitionend', handler);
-        iframe.src = file;
         currentFile = file;
 
-        // Optional: wait before removing fade-out to allow new content to load
+        // Wait for slide transition (matches CSS duration)
         setTimeout(() => {
-          iframe.classList.remove('fade-out');
-        }, 100);
-      });
+          iframe.src = file;
+          // Delay fade-in just a bit to allow iframe load
+          setTimeout(() => iframe.style.opacity = 1, 50);
+        }, 500); // match CSS .slide-box transition duration
+      } else {
+        // If box is already visible, fade out old content, then fade in new
+        iframe.style.opacity = 0;
+        iframe.addEventListener('transitionend', function handler() {
+          iframe.removeEventListener('transitionend', handler);
+          iframe.src = file;
+          currentFile = file;
+          setTimeout(() => iframe.style.opacity = 1, 50);
+        });
+      }
     });
   });
 
   closeBtn.addEventListener('click', () => {
     slideBox.classList.remove('show');
+        iframe.style.opacity = 0;
+
   });
 /*const gridItems = document.querySelectorAll('.grid-item');
 
