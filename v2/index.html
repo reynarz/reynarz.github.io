@@ -18,10 +18,10 @@
     <link rel="icon" href="favicon.png">
 </head>
 <body>
-        <button id="toggleBoxBtn" class="toggle-btn">Toggle Panel</button>
 
-<div class="slide-box" id="slideBox">
-    <iframe src="resume.html" style="width: 100%; height: 100%; border: none;"></iframe>
+<div class="slide-box">
+    <button id="closeBtn" class="close-btn">×</button>
+  <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
 <style>
 .slide-box {
@@ -38,16 +38,37 @@
 .slide-box.show {
     right: 0; /* Slide into position */
 }
-.toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 10000;
-    background-color: #444;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+
+.slide-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.slide-box iframe.fade-out {
+  opacity: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  background: transparent;
+  border: none;
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  z-index: 10001;
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-out, color 0.5s ease;
+  padding: 20px;
+}
+
+.close-btn:hover {
+  color: gray;
+  /*transform: rotate(90deg);*/
 }
 </style>
 </div>
@@ -60,10 +81,10 @@
         <h2 class="name">Reynardo Pérez</h2>
     </div>
 
-    <div class="sidebar-links">
-        <a href="resume.html">RESUME</a>
-        <a href="coverletter.html">COVER LETTER</a>
-    </div>
+   <div class="sidebar-links">
+  <a href="#" data-file="resume.html">RESUME</a>
+  <a href="#" data-file="coverletter.html">COVER LETTER</a>
+</div>
 
     <div class="intro">
        <p><strong>HELLO, WELCOME!</strong><br>
@@ -241,25 +262,49 @@ scrollTarget.addEventListener("scroll", function () {
     });
 
 });
-const slideBox = document.getElementById('slideBox');
-const toggleBtn = document.getElementById('toggleBoxBtn');
+const slideBox = document.querySelector('.slide-box');
+  const iframe = slideBox.querySelector('iframe');
+  const closeBtn = document.querySelector('.close-btn');
 
-toggleBtn.addEventListener('click', async () => {
-  slideBox.classList.toggle('show');
-  
-  // If box is shown and empty, load HTML
-  if (slideBox.classList.contains('show') && !slideBox.innerHTML.trim()) {
-    try {
-      const response = await fetch('resume.html'); // your HTML file URL
-      if (!response.ok) throw new Error('Network error');
-      const html = await response.text();
-      slideBox.innerHTML = html;
-    } catch (error) {
-      slideBox.innerHTML = '<p style="color:red;">Failed to load content.</p>';
-      console.error(error);
-    }
-  }
-});
+  let currentFile = "";
+
+  document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const file = link.getAttribute('data-file');
+
+      // If the same file is clicked and box is open, close the box
+      if (slideBox.classList.contains('show') && file === currentFile) {
+        slideBox.classList.remove('show');
+        return;
+      }
+
+      // If box not visible, show and set iframe immediately
+      if (!slideBox.classList.contains('show')) {
+        slideBox.classList.add('show');
+        iframe.src = file;
+        currentFile = file;
+        return;
+      }
+
+      // Fade out, switch content, fade in
+      iframe.classList.add('fade-out');
+      iframe.addEventListener('transitionend', function handler() {
+        iframe.removeEventListener('transitionend', handler);
+        iframe.src = file;
+        currentFile = file;
+
+        // Optional: wait before removing fade-out to allow new content to load
+        setTimeout(() => {
+          iframe.classList.remove('fade-out');
+        }, 100);
+      });
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    slideBox.classList.remove('show');
+  });
 /*const gridItems = document.querySelectorAll('.grid-item');
 
 gridItems.forEach(item => {
