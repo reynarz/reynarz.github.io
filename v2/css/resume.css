@@ -10,8 +10,18 @@ body {
     a {
       color: #4da6ff;
       text-decoration: none;
-    }
 
+
+    }
+    
+  .download-resume-top{
+      color:  #4da6ff;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.5s ease;
+    font-family: "Consolas";
+
+  }
     a:hover {
       text-decoration: underline;
     }
@@ -198,12 +208,12 @@ body {
 
 /*Duties description*/
 .experience-entry ul li {
-  margin-bottom: 1.0em; /* or try 0.75em or 1em for more space */
+  margin-bottom: 1.2em; /* or try 0.75em or 1em for more space */
 }
 
 
 .experience-entry {
-  border-bottom: 2px solid #444;
+  border-bottom: 1px solid #FFFFFF70;
   color: #BFBFBF;  /* Changes all text inside experience entries to gray */
 }
 
@@ -258,5 +268,30 @@ body {
 }
 .label-title,
 .label-project {
-  color: white; /* Gray or any color you want */
+  color: #BFBFBF; /* Gray or any color you want */
+}
+
+.experience-entry:last-of-type {
+  border-bottom: none;
+}
+
+.download-wrapper {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.download-resume-link {
+  font-weight: bold;
+  font-size: 1.1em;
+  color:  #4da6ff;
+  text-decoration: none;
+  border: 2px solid #333;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  font-family: "Consolas";
+}
+
+.download-resume-link:hover {
 }
