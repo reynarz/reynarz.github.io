@@ -166,23 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
 
-    sidebar.addEventListener('wheel', (e) => {
-        e.preventDefault(); // prevent sidebar default scrolling if any
-        mainContent.scrollTop += e.deltaY;
-    }, { passive: false });
+sidebar.addEventListener('wheel', (e) => {
+    e.preventDefault();              // prevent sidebar from scrolling
+    mainContent.scrollTop += e.deltaY; // scroll main content instead
+}, { passive: false });
 
- const nav = document.querySelector(".top-nav");
-const scrollTarget = document.querySelector(".main-content"); // or whatever actually scrolls
+const nav = document.querySelector(".top-nav");
 
-scrollTarget.addEventListener("scroll", function () {
-    const scrollThreshold = 100;
-    if (scrollTarget.scrollTop > scrollThreshold) {
-        nav.classList.add("scrolled");
-    } else {
-        nav.classList.remove("scrolled");
-    }
-});
+window.addEventListener("scroll", () => {
+  const scrollThreshold = 10;
 
+  // Use `window.scrollY` to get vertical scroll of the page
+  if (window.scrollY > scrollThreshold) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
          const gridItems = document.querySelectorAll('.grid-item');
     const videos = document.querySelectorAll('.carousel-video');
 
