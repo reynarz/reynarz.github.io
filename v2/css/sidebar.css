@@ -71,6 +71,12 @@
     overflow: hidden;
 }
 
+.sidebar-links a i {
+  margin-right: 8px;
+  width: 20px; /* optional, helps align icons */
+  text-align: center;
+}
+
 .sidebar-links a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.9);
@@ -122,4 +128,35 @@
 
 .social-icons a:hover i {
     color: #ffffff;
+}
+
+
+.sidebar-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.social-buttons a {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.social-buttons a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
 }
