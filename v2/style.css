@@ -44,8 +44,8 @@ body, html {
 }
 
 .profile-pic {
-    width: 120px;
-    height: 121.48px;
+    width: 132px;
+    height: 132px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
@@ -57,29 +57,46 @@ body, html {
 }
 
 .name {
-    font-size: 18px;
+    font-size: 24px;
     text-align: center;
     margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    font-family: 'Consolas', sans-serif;
+    font-weight: 400;
+    color: #D4D4D4;
 }
 
 .sidebar-links {
+    /* Remove padding-left here to avoid double indent */
+    padding-left: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* left-align text */
-    gap: 10px;
+    align-items: flex-start; /* left align */
     margin-bottom: 30px;
-    padding-left: 63px;
-
 }
 .sidebar-links a {
-    color: white;
+    display: block;              /* block makes width apply fully */
+    width: 100%;                /* fill container width */
+    height: 40px;
+    line-height: 40px;          /* vertical center text */
+    padding-left: 40px;         /* indent text */
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 1px;
-     font-family: "Montserrat";
-    letter-spacing: 2px;
+    font-size: 13px;
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.sidebar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light gray translucent background */
+    color: rgba(255, 255, 255, 0.9);            /* Slightly brighter text on hover */
 }
 
 .intro {
@@ -87,19 +104,25 @@ body, html {
     font-family: monospace;
     line-height: 1.6;
     margin-bottom: 30px;
-    text-align: justify;
     margin-top: 20px;
+    padding-left: 40px;
 }
 
 .intro strong {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
 }
-
+.intro-text {
+    padding-top: 10px;
+   max-width: 200px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin: 0 0 10px;
+}
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin-top: auto;
     margin-bottom: 60px;
 
@@ -109,15 +132,18 @@ body, html {
 }
 .social-icons a i {
     color: #8e8e8e;
-    font-size: 30px;
+    font-size: 33px;
     width: 25.72px;
     height: 32px;
     display: inline-block;
     line-height: 30px; /* vertically center if needed */
     text-align: center;
+    transition: color 0.3s ease; /* smooth transition */
 }
+
 .social-icons a:hover i {
-    transform: scale(1.1);
+    color: #ffffff;
+
 }
 
 /* 🟦 Main Content */
@@ -151,16 +177,25 @@ body, html {
 
 .home-button a {
     color: white;
+    font-weight: 400;
     font-size: 24px;
     text-decoration: none;
     font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 2.1em;
+    font-family: "Montserrat", sans-serif;
 }
 
 .nav-buttons a {
-    margin-left: 20px;
-    color: #ccc;
+    margin-left: 30px;
+    color: #FFF;
     text-decoration: none;
     font-size: 14px;
+    letter-spacing: 2px;
+    font-family: "Consolas";
+    text-transform: uppercase;
+
 }
 
 .nav-buttons a:hover {
@@ -230,6 +265,7 @@ body, html {
   text-align: center;
   font-family: Consolas, monospace, sans-serif;
 
+
 }
 .grid-item .title {
   margin: 0 0 8px 0;
@@ -237,14 +273,15 @@ body, html {
   position: relative;
   opacity: 0;
   transition: opacity 0.5s ease;
- text-transform: uppercase;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 .grid-item .title::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px; /* space between title text and line */
+  bottom: -3px; /* space between title text and line */
   height: 1px;
     background-color: rgba(255, 255, 255, 0.5); /* semi-transparent gray */  /* or your desired color */
   width: 0;
