@@ -5,87 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reynardo Perez - Resume</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    body {
-      background-color: #121212;
-      color: white;
-      font-family: Consolas, monospace;
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    a {
-      color: #4da6ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.2rem;
-    }
-
-    h2 {
-      font-style: italic;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #444;
-      margin: 1.5rem 0;
-    }
-
-    .section-title {
-      font-style: italic;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .technical-skills {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-    }
-
-    .contact {
-      text-align: right;
-    }
-
-    .social-icons a {
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
-    }
-
-    .experience {
-      white-space: pre-line;
-    }
-  </style>
+  <link rel="stylesheet" href="css/resume.css">
+ 
 </head>
 <body>
   <div class="header">
     <h1>Reynardo Perez</h1>
-    <h2>UNITY3D DEVELOPER</h2>
+    <h2>Game Developer</h2>
     <div class="contact">
       <p>Links:</p>
-      <p><a href="mailto:reynardzperez@gmail.com">reynardzperez@gmail.com</a></p>
+      <p><a href="reynardzperez@gmail.com">reynardzperez@gmail.com</a></p>
       <p><a href="#">Download Resume</a></p>
       <div class="social-icons">
         <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
@@ -97,7 +26,7 @@
 
   <hr>
 
-  <div class="section">
+  <div class="section summary-section">
     <div class="section-title">Summary</div>
     <p>
       Game developer in the industry for over 7 years
@@ -109,51 +38,53 @@
 
   <hr>
 
-  <div class="section">
-    <div class="section-title">Skills</div>
-    <div class="skills-grid">
-      <div><strong>Gameplay<br>Programming</strong></div>
-      <div><strong>Tools<br>Programming</strong></div>
-      <div><strong>UI<br>Programming</strong></div>
-    </div>
+  <div class="section section-row">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div><strong>Gameplay<br>Programming</strong></div>
+    <div><strong>Tools<br>Programming</strong></div>
+    <div><strong>UI<br>Programming</strong></div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section section-row">
+  <h2 class="section-title">Technical</h2>
+  <div class="technical-skills">
+    <div>Unity3D</div>
+    <div>WPF/WinForms</div>
+    <div>PlayFab</div>
+    <div>C#</div>
+    <div>Tool ports</div>
+    <div>Azure Functions</div>
+    <div>C++</div>
+    <div>Git</div>
+    <div>Play Store API</div>
+    <div>ShaderLab</div>
+    <div>Tortoise SVN</div>
+    <div>Photoshop</div>
+    <div>Native Plugins (Unity3D)</div>
+    <div>Sourcetree</div>
+    <div>Blender</div>
+    <div>OpenGL</div>
+    <div>Unit Testing</div>
+    <div>Aseprite</div>
+    <div>GLSL</div>
+    <div>S.O.L.I.D</div>
+    <div>Dear ImGUI</div>
+    <div>Agile</div>
+    <div>Standalone tools</div>
+  </div>
   </div>
 
   <hr>
 
-  <div class="section">
-    <div class="section-title">Technical</div>
-    <div class="technical-skills">
-      <div>Unity3D</div>
-      <div>WPF/WinForms</div>
-      <div>PlayFab</div>
-      <div>C#</div>
-      <div>Tool ports</div>
-      <div>Azure Functions</div>
-      <div>C++</div>
-      <div>Git</div>
-      <div>Play Store API</div>
-      <div>ShaderLab</div>
-      <div>Tortoise SVN</div>
-      <div>Photoshop</div>
-      <div>Native Plugins (Unity3D)</div>
-      <div>Sourcetree</div>
-      <div>Blender</div>
-      <div>OpenGL</div>
-      <div>Unit Testing</div>
-      <div>Aseprite</div>
-      <div>GLSL</div>
-      <div>S.O.L.I.D</div>
-      <div>Dear ImGUI</div>
-      <div>Agile</div>
-      <div>Standalone tools</div>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="section experience">
+  <section class="section experience-section">
     <div class="section-title">Experience</div>
-    <strong>Bethesda Game Studios (Remote)</strong> <span style="float: right;">2022-Sep – 2023-May</span>
+    <div class="section-content">
+    <div class="experience-entry">
+    <strong class="company-title">Bethesda Game Studios (Remote)</strong> <span style="float: right;">2022-Sep – 2023-May</span>
     <br><em>(Contract under an undisclosed studio)</em>
     <br><strong>Title:</strong> Lead Gameplay Programmer, Tools Programmer
     <br><strong>Project Name:</strong> Fallout Shelter
@@ -171,7 +102,38 @@
       <li>Bi-weekly’s 1-1’s with some of the teammates to solve any doubts and/or perform code reviews.</li>
       <li>Keeping up with new technologies and improving in-studio development procedures.</li>
     </ul>
-  </div>
+</div>
+     <!-- Gala Games -->
+     <div class="experience-entry">
+      <strong class="company-title">Gala Games (Remote)</strong> <span style="float: right;">2023-May – 2024-Jun</span>
+      <br><strong>Title:</strong> Gameplay Programmer, Tools Programmer
+      <br><strong>Platforms:</strong> Unity3D (PC – Android – iOS)
+      <br><strong>Project Name:</strong> VoxVerse (Vexi)
+      <br>
+      <br>GALA Voxverse is a virtual world where players can own and trade unique NFTs, including characters, items, and land.
+      <ul>
+        <li>Work on gameplay to implement various features such as character controller, and camera movement.</li>
+        <li>Work on optimize the asset pipeline, and meshes tri count.</li>
+        <li>Lead internal projects.</li>
+        <li>Maya plugins (C++): Plugin to update old rig of 30k+ models to the animators' requirements, and another plugin to retarget animations to three types of skeletons, small, medium, and large.</li>
+        <li>Learn new technologies and improving in-studio development procedures.</li>
+      </ul>
+      <br>
+</div>
+          <!-- Big Red Button -->
+      <strong class="company-title">Big Red Button (Remote)</strong> <span style="float: right;">2021-Jul – 2022-Sep (Re-Hired 2024-25)</span>
+      <br><strong>Title:</strong> Lead-Gameplay/Tools Programmer
+      <br><strong>Platforms:</strong> Unity3D (PC – MacOS – Linux)
+      <br><strong>Project Name:</strong> Clementine's Nightmare
+      <br>
+      <br>Had the responsibility to lead a team to meet the requirements on time on a fascinating project. Tasks assignment, code reviews, mentorship on not so common subjects, meeting with the bosses to discuss deliverable dates, and adjust accordingly:
+      <ul>
+        <li>Lead the team during the development and help the transition from prototype phase to full production phase.</li>
+        <li>Implemented editor tools (in-engine) to take care of the content creation, and data management.</li>
+        <li>Performed meetings with the bosses and clients to make sure feature delivery is on time and organized per importance.</li>
+      </ul>
+        </div>
+  </section>
 
 </body>
 </html>
