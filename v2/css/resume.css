@@ -13,7 +13,7 @@ body {
 
 
     }
-    
+
   .download-resume-top{
       color:  #4da6ff;
     text-decoration: none;
@@ -201,7 +201,7 @@ body {
 .company-title-date {
   font-weight: bold;
   font-family: "Consolas";
-  font-size: 14px;
+  font-size: 15px;
   float: none; /* remove float when using flex */
   color: #BFBFBF !important;
 }

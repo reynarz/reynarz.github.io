@@ -18,6 +18,40 @@
     <link rel="icon" href="favicon.png">
 </head>
 <body>
+        <button id="toggleBoxBtn" class="toggle-btn">Toggle Panel</button>
+
+<div class="slide-box" id="slideBox">
+    <iframe src="resume.html" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+<style>
+.slide-box {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start fully off-screen to the right */
+    width: calc(100% - 300px); /* Leave space for the 300px sidebar */
+    height: 100vh;
+    background-color: black;
+    transition: right 0.5s ease;
+    z-index: 9999;
+}
+
+.slide-box.show {
+    right: 0; /* Slide into position */
+}
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</div>
+
     <div class="container">
         <!-- 🔴 Sidebar -->
         <aside class="sidebar">
@@ -207,7 +241,25 @@ scrollTarget.addEventListener("scroll", function () {
     });
 
 });
+const slideBox = document.getElementById('slideBox');
+const toggleBtn = document.getElementById('toggleBoxBtn');
 
+toggleBtn.addEventListener('click', async () => {
+  slideBox.classList.toggle('show');
+  
+  // If box is shown and empty, load HTML
+  if (slideBox.classList.contains('show') && !slideBox.innerHTML.trim()) {
+    try {
+      const response = await fetch('resume.html'); // your HTML file URL
+      if (!response.ok) throw new Error('Network error');
+      const html = await response.text();
+      slideBox.innerHTML = html;
+    } catch (error) {
+      slideBox.innerHTML = '<p style="color:red;">Failed to load content.</p>';
+      console.error(error);
+    }
+  }
+});
 /*const gridItems = document.querySelectorAll('.grid-item');
 
 gridItems.forEach(item => {
