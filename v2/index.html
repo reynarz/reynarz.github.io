@@ -95,6 +95,8 @@
     <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
   </div>
 </div>
+
+
         <!-- 🔴 Sidebar -->
         <aside class="sidebar">
     <div class="profile-section">
@@ -384,48 +386,26 @@ const closeBtn = document.querySelector('.close-btn');
 
 let currentFile = "";
 
-/*document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const file = link.getAttribute('data-file');
-        iframe.style.opacity = 0;
-
-        if (slideBox.classList.contains('show') && currentFile === file) {
-            slideBox.classList.remove('show');
-            return;
-        }
-
-        iframe.style.opacity = 0;
-
-        if (!slideBox.classList.contains('show')) {
-            slideBox.classList.add('show');
-            currentFile = file;
-
-            setTimeout(() => {
-                iframe.src = file;
-                setTimeout(() => iframe.style.opacity = 1, 50);
-            }, 500);
-        } else {
-            iframe.style.opacity = 0;
-            iframe.addEventListener('transitionend', function handler() {
-                iframe.removeEventListener('transitionend', handler);
-                iframe.src = file;
-                currentFile = file;
-                setTimeout(() => iframe.style.opacity = 1, 50);
-            });
-        }
-    });
-});
-*/
 closeBtn.addEventListener('click', () => {
     slideBox.classList.remove('show');
     iframe.style.opacity = 0;
 });
 
- function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+document.querySelectorAll("#mobile-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    const menu = document.getElementById("mobile-menu");
+    menu.classList.remove("show");
+  });
+});
+
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobile-menu");
+  if (menu.classList.contains("show")) {
+    menu.classList.remove("show"); // close menu
+  } else {
+    menu.classList.add("show");    // open menu
   }
+}
 function setupSlideBoxLinks(selector) {
     const links = document.querySelectorAll(selector);
     const slideBox = document.querySelector('.slide-box');
@@ -442,7 +422,7 @@ function setupSlideBoxLinks(selector) {
             // Hide mobile menu if present
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenu) {
-                mobileMenu.style.display = 'none';
+                mobileMenu.classList.remove('show');
             }
 
             if (slideBox.classList.contains('show') && currentFile === file) {

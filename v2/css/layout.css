@@ -21,7 +21,7 @@
 }
 
 .mobile-header {
-  display: none;
+display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -31,29 +31,34 @@
   z-index: 20;
   padding: 15px;
   box-sizing: border-box;
+flex-direction: column;       /* Stack hamburger and menu vertically */
+  align-items: flex-start;      /* Align hamburger to the left */
+}
+.mobile-menu {
+display: none;
+  flex-direction: column;
+  background-color: #111;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;  /* Appears below hamburger */
 }
 
+/* Show menu when active */
+.mobile-menu.show {
+  display: flex;
+}
 .hamburger {
-  font-size: 24px;
+font-size: 24px;
   background: none;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background-color: #111;
-  padding: 10px 20px;
-  gap: 10px;
-  align-items: flex-start; /* align items to the left */
-}
 
 .mobile-menu a {
   align-self: stretch; /* make links take full width */
   text-align: left;     /* align text to the left */
-  padding-left: 10px;
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
@@ -69,8 +74,6 @@
 @media (max-width: 900px) {
   .mobile-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 }
 
