@@ -14,10 +14,26 @@
     overflow: visible;
     position: relative;
 }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .main-content {
     margin-left: 0;
   }
+}
+
+
+.mobile-header-top {
+  display: flex;
+  justify-content: space-between; /* Home left, hamburger right */
+  align-items: center;
+  width: 100%;
+}
+
+.home-button a {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .mobile-header {
@@ -34,7 +50,15 @@ display: none;
 flex-direction: column;       /* Stack hamburger and menu vertically */
   align-items: flex-start;      /* Align hamburger to the left */
 }
+
+.hamburger-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end; /* ✅ Align hamburger button to the right */
+}
+
 .mobile-menu {
+
   display: flex; /* keep flex layout */
   max-height: 0;          /* collapsed */
   opacity: 0;
@@ -81,7 +105,7 @@ font-size: 24px;
 .mobile-menu a:hover {
   color: white;
 }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .mobile-header {
     display: flex;
   }

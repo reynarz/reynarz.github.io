@@ -18,7 +18,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@200..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.png">
 
 </head>
@@ -41,7 +40,7 @@
     transition: right 0.5s ease;
     z-index: 9999;
 }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .slide-box {
     width: 100%; /* Take full width on mobile */
   }
@@ -86,13 +85,19 @@
 
     <div class="container">
 
-        <div class="mobile-header">
-  <button class="hamburger" onclick="toggleMobileMenu()">
-    ☰
-  </button>
+  <div class="mobile-header">
+<div class="mobile-header-top">
+    <div class="home-button">
+      <a href="#">REYNARZ</a>
+    </div>
+    <div class="hamburger-container">
+      <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </div>
   <div id="mobile-menu" class="mobile-menu">
     <a href="#" data-file="resume.html"><i class="fas fa-file-alt"></i>RESUMe</a>
     <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+  <hr class="sidebar-divider">
     <a href="https://www.linkedin.com/in/reynardoperez" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
     <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
   </div>
