@@ -295,3 +295,84 @@ body {
 
 .download-resume-link:hover {
 }
+
+@media (max-width: 900px) {
+  body {
+    padding: 1rem;
+    max-width: 100%;
+    font-size: 14px; /* slightly smaller font */
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 18px;
+    width: 100%;  /* make section titles take full width */
+    text-align: left;
+  }
+
+  .summary-section,
+  .experience-section,
+  .section-row {
+    flex-direction: column;
+  }
+
+  .summary-section .section-title,
+  .experience-section .section-title,
+  .section-row .section-title {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-section .section-content,
+  .experience-section .section-content,
+  .section-row .skills-grid,
+  .section-row .technical-skills {
+    width: 100%;
+  }
+
+  .skills-grid,
+  .technical-skills {
+    grid-template-columns: repeat(1, 1fr); /* stack skills vertically */
+    font-size: 16px;
+  }
+
+  .download-resume-link {
+    font-size: 1em;
+    padding: 6px 12px;
+  }
+
+  .company-title {
+    font-size: 18px;
+  }
+
+  .company-title-date {
+    font-size: 13px;
+  }
+
+  .contact {
+    text-align: left; /* align contact info to left on mobile */
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Optional: reduce margin bottom for hr on small screens */
+  hr {
+    margin: 1rem 0;
+  }
+}
