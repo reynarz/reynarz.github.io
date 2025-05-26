@@ -6,8 +6,6 @@
     <title>Reynarz | P</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <!--<link rel="stylesheet" href="style.css">-->
-
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/sidebar.css">
@@ -16,6 +14,9 @@
     <link rel="stylesheet" href="css/grid.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.png">
 </head>
 <body>
@@ -121,8 +122,10 @@
                     <div class="carousel-track">
                        <div class="video-wrapper">
                       <video class="carousel-video active" src="assets/videos/engine.mp4" autoplay muted loop></video>
-                      <div class="video-text title">ENGINE DEMO</div>
-                      <div class="video-text subtitle">This is the engine demo subtitle</div>
+                      <div class="video-overlay"></div>
+                      <div class="video-text title">SHRED ENGINE</div>
+                      <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
+                        </div>
                     </div>
 
                     <div class="video-wrapper">
@@ -147,9 +150,9 @@
         </div>
     </header>
    <footer class="video-footer-text">
-  <div class="video-title">Scroll down to explore more ↓</div>
-  <div class="video-subtitle"></div>
-</footer>
+    <div class="video-title"></div>
+    <div class="video-subtitle"></div>
+    </footer>
             </section>
             <section class="grid-section">
 <div class="grid-container">
@@ -214,7 +217,53 @@
     <script>
 const videos = document.querySelectorAll(".carousel-video");
 let current = 0;
-let interval = setInterval(nextVideo, 5000);
+let interval = setInterval(nextVideo, 12000);
+
+const footer = document.querySelector('.video-footer-text');
+const titleEl = footer.querySelector('.video-title');
+const subtitleEl = footer.querySelector('.video-subtitle');
+let fadeTimeouts = [];
+
+function clearFadeTimeouts() {
+    fadeTimeouts.forEach(t => clearTimeout(t));
+    fadeTimeouts = [];
+}
+
+function fadeOutTexts(callback) {
+    titleEl.classList.remove('visible');
+    subtitleEl.classList.remove('visible');
+    // Wait for fade out transition duration (0.5s)
+    fadeTimeouts.push(setTimeout(() => {
+        if (callback) callback();
+    }, 500));
+}
+
+function fadeInTexts(title, subtitle) {
+    titleEl.textContent = title;
+    subtitleEl.textContent = subtitle;
+
+    // Fade in title after 1 second delay
+    fadeTimeouts.push(setTimeout(() => {
+        titleEl.classList.add('visible');
+    }, 1000));
+
+    // Fade in subtitle 600ms after title fade in starts
+    fadeTimeouts.push(setTimeout(() => {
+        subtitleEl.classList.add('visible');
+    }, 1600));
+}
+
+function updateFooterText(video) {
+    clearFadeTimeouts();
+
+    const wrapper = video.closest('.video-wrapper');
+    const title = wrapper.querySelector('.video-text.title').textContent;
+    const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+
+    fadeOutTexts(() => {
+        fadeInTexts(title, subtitle);
+    });
+}
 
 function nextVideo() {
     videos[current].classList.remove("active");
@@ -222,7 +271,8 @@ function nextVideo() {
     videos[current].classList.add("active");
     videos[current].currentTime = 0;  // reset to start
     videos[current].play();
-     updateFooterText(videos[current]);
+
+    updateFooterText(videos[current]);
 }
 
 function prevVideo() {
@@ -231,27 +281,28 @@ function prevVideo() {
     videos[current].classList.add("active");
     videos[current].currentTime = 0;  // reset to start
     videos[current].play();
-     updateFooterText(videos[current]);
+
+    updateFooterText(videos[current]);
 }
 
 document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
     clearInterval(interval);
     nextVideo();
-    interval = setInterval(nextVideo, 5000);
+    interval = setInterval(nextVideo, 12000);
 });
 
 document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
     clearInterval(interval);
     prevVideo();
-    interval = setInterval(nextVideo, 5000);
+    interval = setInterval(nextVideo, 12000);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
-const activeVideo = document.querySelector('.carousel-video.active');
-  if (activeVideo) updateFooterText(activeVideo);
-  
+    const activeVideo = document.querySelector('.carousel-video.active');
+    if (activeVideo) updateFooterText(activeVideo);
+
     sidebar.addEventListener('wheel', (e) => {
         e.preventDefault();
         mainContent.scrollTop += e.deltaY;
@@ -270,7 +321,6 @@ const activeVideo = document.querySelector('.carousel-video.active');
     });
 
     const gridItems = document.querySelectorAll('.grid-item');
-    const videos = document.querySelectorAll('.carousel-video');
     let activeIndex = -1;
 
     function setActiveVideo(index) {
@@ -279,15 +329,15 @@ const activeVideo = document.querySelector('.carousel-video.active');
         videos.forEach((video, i) => {
             const isActive = i === index;
             video.classList.toggle('active', isActive);
-            if (isActive) 
-            {
+            if (isActive) {
                 updateFooterText(video);
-
-               /* video.currentTime = 0;
-                video.play();*/
+                // Optionally reset and play video here:
+                // video.currentTime = 0;
+                // video.play();
             } else {
-              /*  video.pause();
-                video.currentTime = 0;*/
+                // Optionally pause and reset video here:
+                // video.pause();
+                // video.currentTime = 0;
             }
         });
 
@@ -301,75 +351,52 @@ const activeVideo = document.querySelector('.carousel-video.active');
     });
 });
 
+// The rest of your iframe/sidebar code remains unchanged
 
-function updateFooterText(video) {
-    const wrapper = video.closest('.video-wrapper');
-    const footer = document.querySelector('.video-footer-text');
-    
-    const title = wrapper.querySelector('.video-text.title');
-    const subtitle = wrapper.querySelector('.video-text.subtitle');
+const slideBox = document.querySelector('.slide-box');
+const iframe = slideBox.querySelector('iframe');
+const closeBtn = document.querySelector('.close-btn');
 
-    if (title && subtitle) {
-        footer.querySelector('.video-title').textContent = title.textContent;
-        footer.querySelector('.video-subtitle').textContent = subtitle.textContent;
-    }
-}
- const slideBox = document.querySelector('.slide-box');
-  const iframe = slideBox.querySelector('iframe');
-  const closeBtn = document.querySelector('.close-btn');
+let currentFile = "";
 
-  let currentFile = "";
-
-  document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
+document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
     link.addEventListener('click', e => {
-      e.preventDefault();
-      const file = link.getAttribute('data-file');
-      iframe.style.opacity = 0;
-
-      // If same file clicked and box is open, close
-      if (slideBox.classList.contains('show') && currentFile === file) {
-        slideBox.classList.remove('show');
-        return;
-      }
-
-      // Set iframe transparent before doing anything
-      iframe.style.opacity = 0;
-
-      // If box is not visible
-      if (!slideBox.classList.contains('show')) {
-        slideBox.classList.add('show');
-        currentFile = file;
-
-        // Wait for slide transition (matches CSS duration)
-        setTimeout(() => {
-          iframe.src = file;
-          // Delay fade-in just a bit to allow iframe load
-          setTimeout(() => iframe.style.opacity = 1, 50);
-        }, 500); // match CSS .slide-box transition duration
-      } else {
-        // If box is already visible, fade out old content, then fade in new
+        e.preventDefault();
+        const file = link.getAttribute('data-file');
         iframe.style.opacity = 0;
-        iframe.addEventListener('transitionend', function handler() {
-          iframe.removeEventListener('transitionend', handler);
-          iframe.src = file;
-          currentFile = file;
-          setTimeout(() => iframe.style.opacity = 1, 50);
-        });
-      }
+
+        if (slideBox.classList.contains('show') && currentFile === file) {
+            slideBox.classList.remove('show');
+            return;
+        }
+
+        iframe.style.opacity = 0;
+
+        if (!slideBox.classList.contains('show')) {
+            slideBox.classList.add('show');
+            currentFile = file;
+
+            setTimeout(() => {
+                iframe.src = file;
+                setTimeout(() => iframe.style.opacity = 1, 50);
+            }, 500);
+        } else {
+            iframe.style.opacity = 0;
+            iframe.addEventListener('transitionend', function handler() {
+                iframe.removeEventListener('transitionend', handler);
+                iframe.src = file;
+                currentFile = file;
+                setTimeout(() => iframe.style.opacity = 1, 50);
+            });
+        }
     });
-  });
+});
 
-  closeBtn.addEventListener('click', () => {
+closeBtn.addEventListener('click', () => {
     slideBox.classList.remove('show');
-        iframe.style.opacity = 0;
-
-  });
-
-
-
-
-
-
+    iframe.style.opacity = 0;
+});
 </script>
+
 </body>
 </html>
