@@ -89,6 +89,7 @@
 .overlay {
     position: absolute;
     bottom: 10px;
+    margin-bottom: 16px;
     left: 10px;
     right: 10px;
     color: white;
