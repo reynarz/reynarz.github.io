@@ -273,6 +273,8 @@
     </div>
 
     <script>
+
+
 const videos = document.querySelectorAll(".carousel-video");
 let current = 0;
 let interval = setInterval(nextVideo, 12000);
@@ -294,7 +296,7 @@ function fadeOutTexts(callback) {
     subtitleEl.classList.remove('visible');
     buttonEl.classList.remove('visible');
     buttonEl.style.pointerEvents = 'none';
-    
+
     // Wait for fade out transition duration (0.5s)
     fadeTimeouts.push(setTimeout(() => {
         if (callback) callback();
@@ -304,7 +306,7 @@ function fadeOutTexts(callback) {
 function fadeInTexts(title, subtitle, vidWrapper, file) {
     titleEl.textContent = title;
     subtitleEl.textContent = subtitle;
-    
+
     // Fade in title after 1 second delay
     fadeTimeouts.push(setTimeout(() => {
         titleEl.classList.add('visible');
@@ -445,6 +447,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         activeIndex = index;
     }
+
+   mainContent = document.querySelector('.main-content');
+  const slideBox = document.querySelector('.slide-box');
+  const gridContainer = document.querySelector('.grid-container');
+
+  if (mainContent) clampScrollSmooth(mainContent);
+  if (slideBox) clampScrollSmooth(slideBox);
+  if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) {
+    clampScrollSmooth(gridContainer);
+  }
+
 });
 
 // The rest of your iframe/sidebar code remains unchanged
@@ -580,6 +593,24 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
     }
   });
 });
+
+function clampScroll(div) {
+  div.addEventListener('scroll', () => {
+    div.scrollTop = Math.max(1, Math.min(div.scrollTop, div.scrollHeight - div.clientHeight - 1));
+  });
+}
+
+function clampScrollSmooth(div) {
+  div.addEventListener('scroll', () => {
+    const maxScroll = div.scrollHeight - div.clientHeight - 1;
+    const clamped = Math.max(1, Math.min(div.scrollTop, maxScroll));
+
+    // Only scroll if we need to clamp
+    if (div.scrollTop !== clamped) {
+      div.scrollTo({ top: clamped, behavior: 'smooth' });
+    }
+  });
+}
 
 </script>
 
