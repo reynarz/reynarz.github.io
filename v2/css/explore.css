@@ -46,18 +46,22 @@ body {
 }
 
 .hero-content h1 {
-    
+
     font-size: clamp(1.8rem, 4vw, 3rem);
     letter-spacing: 2px;
     line-height: 1.2;
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .hero-content p {
     font-size: clamp(0.75rem, 1.5vw, 1rem);
     margin-bottom: 1.2rem;
     letter-spacing: 1px;
-    text-transform: uppercase;
     color: #ccc;
+    font-family: 'Dosis', sans-serif;
+
 }
 
 .hero-button {
@@ -65,11 +69,11 @@ body {
     user-drag: none;          /* Standard */
     user-select: none;        /* Prevent selection */
     padding: 0.6em 1.5em;
-    font-size: clamp(0.8rem, 1.3vw, 1rem);
+    font-size: clamp(0.7rem, 1.3vw, 1rem);
     background-color: white;
     color: black;
     text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Consolas', Courier, monospace;
     border-radius: 2px;
     border: 1px solid #ccc;
     transition: background 0.3s ease;
