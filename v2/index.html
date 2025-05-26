@@ -27,6 +27,7 @@
   <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
 <style>
+
 .slide-box {
     position: fixed;
     top: 0;
@@ -38,7 +39,11 @@
     transition: right 0.5s ease;
     z-index: 9999;
 }
-
+@media (max-width: 768px) {
+  .slide-box {
+    width: 100%; /* Take full width on mobile */
+  }
+}
 .slide-box.show {
     right: 0; /* Slide into position */
 }
@@ -78,6 +83,18 @@
 </div>
 
     <div class="container">
+
+        <div class="mobile-header">
+  <button class="hamburger" onclick="toggleMobileMenu()">
+    ☰
+  </button>
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#" data-file="resume.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+    <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+    <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+  </div>
+</div>
         <!-- 🔴 Sidebar -->
         <aside class="sidebar">
     <div class="profile-section">
@@ -152,10 +169,10 @@
                     <button class="carousel-arrow right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
              </div>
 
-              <header class="top-nav">
+             <!-- <header class="top-nav">
         <div class="home-button">
             <a href="#">REYNARZ</a>
-        </div>
+        </div>-->
     </header>
    <footer class="video-footer-text">
     <div class="video-title"></div>
@@ -367,7 +384,7 @@ const closeBtn = document.querySelector('.close-btn');
 
 let currentFile = "";
 
-document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
+/*document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         const file = link.getAttribute('data-file');
@@ -399,11 +416,72 @@ document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
         }
     });
 });
-
+*/
 closeBtn.addEventListener('click', () => {
     slideBox.classList.remove('show');
     iframe.style.opacity = 0;
 });
+
+ function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+function setupSlideBoxLinks(selector) {
+    const links = document.querySelectorAll(selector);
+    const slideBox = document.querySelector('.slide-box');
+    const iframe = slideBox.querySelector('iframe');
+    const closeBtn = document.querySelector('.close-btn');
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+        iframe.style.opacity = 0;
+            
+            e.preventDefault();
+            const file = link.getAttribute('data-file');
+
+            // Hide mobile menu if present
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.style.display = 'none';
+            }
+
+            if (slideBox.classList.contains('show') && currentFile === file) {
+                // Just close if same file is already shown
+                slideBox.classList.remove('show');
+                iframe.style.opacity = 0;
+                return;
+            }
+
+            if (!slideBox.classList.contains('show')) {
+                slideBox.classList.add('show');
+                currentFile = file;
+                setTimeout(() => {
+                    iframe.src = file;
+                    iframe.style.opacity = 1;
+                }, 500);
+            } else {
+                iframe.style.opacity = 0;
+                iframe.addEventListener('transitionend', function handler() {
+                    iframe.removeEventListener('transitionend', handler);
+                    iframe.src = file;
+                    currentFile = file;
+                    setTimeout(() => iframe.style.opacity = 1, 50);
+                });
+            }
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            slideBox.classList.remove('show');
+            iframe.style.opacity = 0;
+        });
+    }
+}
+
+// Apply to both sidebar and mobile menu links
+setupSlideBoxLinks('.sidebar-links a[data-file]');
+setupSlideBoxLinks('.mobile-menu a[data-file]');
 </script>
 
 </body>

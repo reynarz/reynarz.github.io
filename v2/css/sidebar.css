@@ -1,3 +1,4 @@
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -159,4 +160,10 @@
 .social-buttons a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
 }
