@@ -13,11 +13,6 @@
     overflow: visible;
     position: relative;
 }
-@media (max-width: 1024px) {
-  .main-content {
-    margin-left: 0;
-  }
-}
 
 
 .mobile-header-top {
@@ -203,14 +198,6 @@ font-size: 24px;
     margin-left: 30px;
 }
 
-@media (min-width: 1200px) {
-    .video-footer-text .video-title {
-        font-size: 2.45rem;
-    }
-    .video-footer-text .video-subtitle {
-        font-size: 1.2rem;
-    }
-}
 
 .video-footer-text .video-title,
 .video-footer-text .video-subtitle {
@@ -220,4 +207,20 @@ font-size: 24px;
 
 .video-footer-text .visible {
   opacity: 1;
+}
+
+@media (min-width: 1200px) {
+    .video-footer-text .video-title {
+        font-size: 2.45rem;
+    }
+    .video-footer-text .video-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
 }
