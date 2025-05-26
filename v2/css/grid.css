@@ -15,9 +15,9 @@
 }
 
 .grid-item img {
-     -webkit-user-drag: none; /* Safari, Chrome */
-  user-drag: none;          /* Standard */
-  user-select: none;        /* Prevent selection */
+    -webkit-user-drag: none; /* Safari, Chrome */
+    user-drag: none;          /* Standard */
+    user-select: none;        /* Prevent selection */
     position: absolute;
     top: 0;
     left: 0;
