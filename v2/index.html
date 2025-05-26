@@ -211,14 +211,14 @@
             </section>
             <section class="grid-section">
 <div class="grid-container">
-  <a href="#" class="grid-item">
+  <a href="#" class="grid-item" data-file="borkenPathInfo.html">
     <img src="assets/images/01-01.png" alt="Image 1" />
     <div class="overlay">
       <h3 class="title">BROKEN PATH</h3>
       <p class="hashtags">#Unity3D #Game</p>
     </div>
   </a>
-  <a href="#" class="grid-item">
+  <a href="#" class="grid-item" data-file="borkenPathInfo.html">
     <img src="assets/images/engine5.png" alt="Image 2" />
     <div class="overlay">
       <h3 class="title">Shred Engine</h3>
@@ -398,12 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         activeIndex = index;
     }
-
-    /*gridItems.forEach((item, index) => {
-        item.addEventListener('click', () => {
-            setActiveVideo(index);
-        });
-    });*/
 });
 
 // The rest of your iframe/sidebar code remains unchanged
@@ -486,6 +480,53 @@ function setupSlideBoxLinks(selector) {
 // Apply to both sidebar and mobile menu links
 setupSlideBoxLinks('.sidebar-links a[data-file]');
 setupSlideBoxLinks('.mobile-menu a[data-file]');
+
+
+document.querySelectorAll('.grid-container img, .grid-container a').forEach(el => {
+  el.addEventListener('dragstart', e => e.preventDefault());
+});
+
+document.querySelectorAll('.grid-item[data-file]').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+
+    const file = item.getAttribute('data-file');
+    if (!file) return;
+
+    const slideBox = document.querySelector('.slide-box');
+    const iframe = slideBox.querySelector('iframe');
+    const closeBtn = slideBox.querySelector('.close-btn');
+
+    if (!slideBox || !iframe) return;
+
+    iframe.style.opacity = 0;
+
+    // If already showing the same file, close it
+    if (slideBox.classList.contains('show') && iframe.src.includes(file)) {
+      slideBox.classList.remove('show');
+      iframe.style.opacity = 0;
+      return;
+    }
+
+    if (!slideBox.classList.contains('show')) {
+      slideBox.classList.add('show');
+      setTimeout(() => {
+        iframe.src = file;
+        iframe.style.opacity = 1;
+      }, 500);
+    } else {
+      iframe.style.opacity = 0;
+      iframe.addEventListener('transitionend', function handler() {
+        iframe.removeEventListener('transitionend', handler);
+        iframe.src = file;
+        setTimeout(() => {
+          iframe.style.opacity = 1;
+        }, 50);
+      });
+    }
+  });
+});
+
 </script>
 
 
