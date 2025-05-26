@@ -452,6 +452,7 @@ function setupSlideBoxLinks(selector) {
 
             if (!slideBox.classList.contains('show')) {
                 slideBox.classList.add('show');
+                        iframe.style.opacity = 0;
                 currentFile = file;
                 setTimeout(() => {
                     iframe.src = file;
@@ -495,6 +496,7 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
 
     if(iframe)
     {
+        iframe.src = null;
         iframe.style.opacity = 0;
     }
 
@@ -508,6 +510,8 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
     if (slideBox.classList.contains('show') && iframe.src.includes(file)) {
       slideBox.classList.remove('show');
       iframe.style.opacity = 0;
+        iframe.src = null;
+
       return;
     }
 
