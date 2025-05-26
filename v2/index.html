@@ -150,7 +150,7 @@
                 <div class="video-carousel">
                     <div class="carousel-track">
 
-                      <div class="video-wrapper">
+                      <div class="video-wrapper" data-file="broken-path-explore.html" data-button="View More">
                       <video playsinline webkit-playsinline muted class="carousel-video active" src="assets/videos/brokenPath.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       <div class="video-gradient-overlay"></div>
@@ -207,6 +207,9 @@
    <footer class="video-footer-text">
     <div class="video-title"></div>
     <div class="video-subtitle"></div>
+    <a href="#" class="footer-button" target="_blank" rel="noopener noreferrer" data-file="broken-path-explore.html">
+    View more
+  </a>
     </footer>
             </section>
             <section class="grid-section">
@@ -277,6 +280,8 @@ let interval = setInterval(nextVideo, 12000);
 const footer = document.querySelector('.video-footer-text');
 const titleEl = footer.querySelector('.video-title');
 const subtitleEl = footer.querySelector('.video-subtitle');
+const buttonEl = footer.querySelector('.footer-button');
+
 let fadeTimeouts = [];
 
 function clearFadeTimeouts() {
@@ -287,16 +292,19 @@ function clearFadeTimeouts() {
 function fadeOutTexts(callback) {
     titleEl.classList.remove('visible');
     subtitleEl.classList.remove('visible');
+    buttonEl.classList.remove('visible');
+    buttonEl.style.pointerEvents = 'none';
+    
     // Wait for fade out transition duration (0.5s)
     fadeTimeouts.push(setTimeout(() => {
         if (callback) callback();
     }, 500));
 }
 
-function fadeInTexts(title, subtitle) {
+function fadeInTexts(title, subtitle, vidWrapper, file) {
     titleEl.textContent = title;
     subtitleEl.textContent = subtitle;
-
+    
     // Fade in title after 1 second delay
     fadeTimeouts.push(setTimeout(() => {
         titleEl.classList.add('visible');
@@ -306,6 +314,34 @@ function fadeInTexts(title, subtitle) {
     fadeTimeouts.push(setTimeout(() => {
         subtitleEl.classList.add('visible');
     }, 1600));
+
+
+     // Fade in button 600ms after title fade in starts
+    fadeTimeouts.push(setTimeout(() => {
+            buttonEl.classList.add('visible');
+
+   const buttonText = vidWrapper.getAttribute('data-button');
+
+
+    if (buttonText && buttonText.trim().toLowerCase() !== 'none') {
+        buttonEl.textContent = buttonText;
+        buttonEl.setAttribute('data-file', file);
+        buttonEl.style.pointerEvents = 'auto';
+        buttonEl.style.backgroundColor = 'white';
+        buttonEl.style.color = 'black';
+        buttonEl.style.border = '1px solid #ccc';
+    } else {
+        buttonEl.textContent = 'Coming soon';
+        buttonEl.removeAttribute('data-file');
+        buttonEl.style.pointerEvents = 'none';
+        buttonEl.style.backgroundColor = 'transparent';
+        buttonEl.style.color = 'white';
+        buttonEl.style.border = '1px solid white';
+    }
+
+    }, 2300));
+
+
 }
 
 function updateFooterText(video) {
@@ -314,11 +350,22 @@ function updateFooterText(video) {
     const wrapper = video.closest('.video-wrapper');
     const title = wrapper.querySelector('.video-text.title').textContent;
     const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+    const file = wrapper.getAttribute('data-file');
 
     fadeOutTexts(() => {
-        fadeInTexts(title, subtitle);
+        fadeInTexts(title, subtitle, wrapper, file);
     });
+
+    if (file) 
+    {
+        buttonEl.setAttribute('data-file', file);
+    } 
+    else 
+    {
+        buttonEl.removeAttribute('data-file');
+    }
 }
+
 
 function nextVideo() {
     videos[current].classList.remove("active");
@@ -481,7 +528,7 @@ function setupSlideBoxLinks(selector) {
 // Apply to both sidebar and mobile menu links
 setupSlideBoxLinks('.sidebar-links a[data-file]');
 setupSlideBoxLinks('.mobile-menu a[data-file]');
-
+setupSlideBoxLinks('.footer-button[data-file]');
 
 document.querySelectorAll('.grid-container img, .grid-container a').forEach(el => {
   el.addEventListener('dragstart', e => e.preventDefault());
