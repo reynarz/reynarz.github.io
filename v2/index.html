@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reynarz | P</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/grid.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Raleway&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@200..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.png">
+</head>
+<body>
+
+<div class="slide-box">
+    <button id="closeBtn" class="close-btn">×</button>
+  <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+<style>
+.slide-box {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start fully off-screen to the right */
+    width: calc(100% - 300px); /* Leave space for the 300px sidebar */
+    height: 100vh;
+    /*background-color: #0a0a0a;*/
+    background-color: black;
+    transition: right 0.5s ease;
+    z-index: 9999;
+}
+
+.slide-box.show {
+    right: 0; /* Slide into position */
+}
+
+.slide-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.slide-box iframe.fade-out {
+  opacity: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  background: transparent;
+  border: none;
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  z-index: 10001;
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-out, color 0.5s ease;
+  padding: 20px;
+}
+
+.close-btn:hover {
+  color: gray;
+  /*transform: rotate(90deg);*/
+}
+</style>
+</div>
+
+    <div class="container">
+        <!-- 🔴 Sidebar -->
+        <aside class="sidebar">
+    <div class="profile-section">
+        <img src="assets/images/profile.png" alt="Profile Picture" class="profile-pic">
+        <h2 class="name">Reynardo Pérez</h2>
+    </div>
+
+   <div class="sidebar-links">
+  <a href="#" data-file="resume.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+  <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+  <hr class="sidebar-divider">
+
+    <div class="social-buttons">
+    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+    <a href="https://github.com/reynarzz" target="_blank" class="social-btn"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+  </div>
+</div>
+
+    <div class="intro">
+       <p><strong>HELLO, WELCOME!</strong><br>
+        <p class="intro-text">
+  My name is Reynardo Perez (Reynarz) and I’m a game programmer! Here you can see some of my personal projects.
+</p>
+        </p>
+    </div>
+
+    <div class="social-icons">
+       <!--<a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/_reynarz" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+           --> 
+    </div>
+</aside>
+
+        <!-- 🟦 Main Content Area -->
+        <main class="main-content">
+            <!-- 🟡 Top Nav -->
+      
+            <!-- Video section (placeholder) -->
+            <section class="video-section">
+                <div class="video-carousel">
+                    <div class="carousel-track">
+                       <div class="video-wrapper">
+                      <video class="carousel-video active" src="assets/videos/engine.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                      <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">SHRED ENGINE</div>
+                      <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
+                        </div>
+                    </div>
+
+                    <div class="video-wrapper">
+                      <video class="carousel-video" src="video2.mp4" muted loop></video>
+                      <div class="video-overlay"></div>
+
+                       <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Video2</div>
+                      <div class="video-text subtitle">Subtitle for video 2</div>
+                    </div>
+
+                    <div class="video-wrapper">
+                      <video class="carousel-video" src="video3.mp4" muted loop></video>
+                      <div class="video-overlay"></div>
+                      
+                       <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Video3</div>
+                      <div class="video-text subtitle">Subtitle for video 3</div>
+                    </div>
+                    </div>
+                    <button class="carousel-arrow left"> <i class="fa fa-chevron-left"  aria-hidden="true"></i></button>
+                    <button class="carousel-arrow right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+             </div>
+
+              <header class="top-nav">
+        <div class="home-button">
+            <a href="#">REYNARZ</a>
+        </div>
+    </header>
+   <footer class="video-footer-text">
+    <div class="video-title"></div>
+    <div class="video-subtitle"></div>
+    </footer>
+            </section>
+            <section class="grid-section">
+<div class="grid-container">
+  <a href="#" class="grid-item">
+    <img src="assets/images/01-01.png" alt="Image 1" />
+    <div class="overlay">
+      <h3 class="title">BROKEN PATH</h3>
+      <p class="hashtags">#Unity3D #Game</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/engine5.png" alt="Image 2" />
+    <div class="overlay">
+      <h3 class="title">Shred Engine</h3>
+      <p class="hashtags">#Engine #C++ #Jolt #Renderer</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/02-01.png" alt="Image 3" />
+    <div class="overlay">
+      <h3 class="title">Mino Tool</h3>
+      <p class="hashtags">#OpenGL #CSharp #DearImGui</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/04-01.png" alt="Image 4" />
+     <div class="overlay">
+      <h3 class="title">Navecita</h3>
+      <p class="hashtags">#C++ #OpenGL</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/sh3dpic.png" alt="Image 5" />
+    <div class="overlay">
+      <h3 class="title">Shder3D</h3>
+      <p class="hashtags">#Kotlin #OpenGLES #Editor</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/03-01.png" alt="Image 6" />
+      <div class="overlay">
+      <h3 class="title">Minity</h3>
+      <p class="hashtags">#Renderer-In-Engine #Unity3D #OpenGL</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/05-01.png" alt="Image 6" />
+    <div class="overlay">
+      <h3 class="title">U Talk</h3>
+      <p class="hashtags">#Unity3D #Asset #Tool</p>
+    </div>
+  </a>
+ <!-- <a href="#" class="grid-item">
+    <img src="assets/images/03-01.png" alt="Image 6" />
+  </a>-->
+</div>
+</section>
+        </main>
+        
+    </div>
+
+    <script>
+const videos = document.querySelectorAll(".carousel-video");
+let current = 0;
+let interval = setInterval(nextVideo, 12000);
+
+const footer = document.querySelector('.video-footer-text');
+const titleEl = footer.querySelector('.video-title');
+const subtitleEl = footer.querySelector('.video-subtitle');
+let fadeTimeouts = [];
+
+function clearFadeTimeouts() {
+    fadeTimeouts.forEach(t => clearTimeout(t));
+    fadeTimeouts = [];
+}
+
+function fadeOutTexts(callback) {
+    titleEl.classList.remove('visible');
+    subtitleEl.classList.remove('visible');
+    // Wait for fade out transition duration (0.5s)
+    fadeTimeouts.push(setTimeout(() => {
+        if (callback) callback();
+    }, 500));
+}
+
+function fadeInTexts(title, subtitle) {
+    titleEl.textContent = title;
+    subtitleEl.textContent = subtitle;
+
+    // Fade in title after 1 second delay
+    fadeTimeouts.push(setTimeout(() => {
+        titleEl.classList.add('visible');
+    }, 1000));
+
+    // Fade in subtitle 600ms after title fade in starts
+    fadeTimeouts.push(setTimeout(() => {
+        subtitleEl.classList.add('visible');
+    }, 1600));
+}
+
+function updateFooterText(video) {
+    clearFadeTimeouts();
+
+    const wrapper = video.closest('.video-wrapper');
+    const title = wrapper.querySelector('.video-text.title').textContent;
+    const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+
+    fadeOutTexts(() => {
+        fadeInTexts(title, subtitle);
+    });
+}
+
+function nextVideo() {
+    videos[current].classList.remove("active");
+    current = (current + 1) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+
+    updateFooterText(videos[current]);
+}
+
+function prevVideo() {
+    videos[current].classList.remove("active");
+    current = (current - 1 + videos.length) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+
+    updateFooterText(videos[current]);
+}
+
+document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
+    clearInterval(interval);
+    nextVideo();
+    interval = setInterval(nextVideo, 12000);
+});
+
+document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
+    clearInterval(interval);
+    prevVideo();
+    interval = setInterval(nextVideo, 12000);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const activeVideo = document.querySelector('.carousel-video.active');
+    if (activeVideo) updateFooterText(activeVideo);
+
+    sidebar.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        mainContent.scrollTop += e.deltaY;
+    }, { passive: false });
+
+    const nav = document.querySelector(".top-nav");
+    const scrollTarget = document.querySelector(".main-content");
+
+    scrollTarget.addEventListener("scroll", function () {
+        const scrollThreshold = 100;
+        if (scrollTarget.scrollTop > scrollThreshold) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    });
+
+    const gridItems = document.querySelectorAll('.grid-item');
+    let activeIndex = -1;
+
+    function setActiveVideo(index) {
+        if (index === activeIndex) return; // do nothing if the same video
+
+        videos.forEach((video, i) => {
+            const isActive = i === index;
+            video.classList.toggle('active', isActive);
+            if (isActive) {
+                updateFooterText(video);
+                // Optionally reset and play video here:
+                // video.currentTime = 0;
+                // video.play();
+            } else {
+                // Optionally pause and reset video here:
+                // video.pause();
+                // video.currentTime = 0;
+            }
+        });
+
+        activeIndex = index;
+    }
+
+    gridItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            setActiveVideo(index);
+        });
+    });
+});
+
+// The rest of your iframe/sidebar code remains unchanged
+
+const slideBox = document.querySelector('.slide-box');
+const iframe = slideBox.querySelector('iframe');
+const closeBtn = document.querySelector('.close-btn');
+
+let currentFile = "";
+
+document.querySelectorAll('.sidebar-links a[data-file]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const file = link.getAttribute('data-file');
+        iframe.style.opacity = 0;
+
+        if (slideBox.classList.contains('show') && currentFile === file) {
+            slideBox.classList.remove('show');
+            return;
+        }
+
+        iframe.style.opacity = 0;
+
+        if (!slideBox.classList.contains('show')) {
+            slideBox.classList.add('show');
+            currentFile = file;
+
+            setTimeout(() => {
+                iframe.src = file;
+                setTimeout(() => iframe.style.opacity = 1, 50);
+            }, 500);
+        } else {
+            iframe.style.opacity = 0;
+            iframe.addEventListener('transitionend', function handler() {
+                iframe.removeEventListener('transitionend', handler);
+                iframe.src = file;
+                currentFile = file;
+                setTimeout(() => iframe.style.opacity = 1, 50);
+            });
+        }
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    slideBox.classList.remove('show');
+    iframe.style.opacity = 0;
+});
+</script>
+
+</body>
+</html>

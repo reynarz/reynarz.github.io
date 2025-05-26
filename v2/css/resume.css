@@ -1,0 +1,297 @@
+body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: Consolas, monospace;
+      padding: 2rem;
+      max-width: 840px;
+      margin: auto;
+    }
+
+    a {
+      color: #4da6ff;
+      text-decoration: none;
+
+
+    }
+
+  .download-resume-top{
+      color:  #4da6ff;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.5s ease;
+    font-family: "Consolas";
+
+  }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #444;
+      margin: 1.5rem 0;
+    }
+
+    .section-title {
+      font-style: italic;
+      font-weight: bold;
+      font-size: 24px;
+        text-align: left;
+    }
+
+    .section {
+    align-items: flex-start;
+    gap: 1rem;
+    color: white;
+  }
+.section-row {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 1rem;
+}
+.summary-section {
+ display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-section .section-title {
+  flex-shrink: 0;
+  width: 150px;
+}
+
+.summary-section .section-content {
+  flex-grow: 1;
+}
+
+
+.experience-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.experience-section .section-title {
+  flex-shrink: 0;
+  width: 150px;
+}
+
+.experience-section .section-content {
+  flex-grow: 1;
+}
+
+.section-row .section-title {
+  flex-shrink: 0;
+  width: 150px;
+  text-align: left;
+}
+
+
+
+.section-row .skills-grid,
+.section-row .technical-skills {
+  flex-grow: 1;
+  color: #BFBFBF;
+}
+.section-title {
+  flex-shrink: 0;
+  width: 150px;
+  text-align: left;
+
+}
+
+.summary-description{
+  color: #BFBFBF;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.skills-grid, .technical-skills {
+  flex-grow: 1;
+}
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 20px;
+    }
+
+    .technical-skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 1rem;
+      color: #BFBFBF;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    .contact {
+      text-align: right;
+    }
+.links-section p {
+  margin: 0.3rem 0;   /* small vertical spacing between paragraphs */
+    font-weight: bold;
+}
+
+.links-section p:first-child {
+  margin-bottom: 0.5rem; /* a bit more space below "Links:" label */
+}
+
+.links-section a {
+  color: #4da6ff;    /* keep consistent link color */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.links-section a:hover {
+  text-decoration: underline;
+}
+
+    .social-icons a {
+      font-size: 1.5rem;
+      margin-right: 0.1rem;
+      color: white;
+    }
+
+    .experience {
+      white-space: pre-line;
+    }
+
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* vertically center both items */
+  margin-bottom: 0.5em; /* your existing spacing */
+  margin-top: 2.5em;    /* your existing spacing */
+}
+
+
+/*.experience-entry .company-header:not(:first-of-type) {
+  margin-top: 2.5em;
+}*/
+
+.company-header-first 
+{
+    display: flex;
+  justify-content: space-between;
+  align-items: center;  /* vertically center both items */
+}
+
+
+.company-title {
+  font-size: 22px;
+  margin: 0; /* reset margin for inline elements */
+}
+
+.company-title-date {
+  font-weight: bold;
+  font-family: "Consolas";
+  font-size: 15px;
+  float: none; /* remove float when using flex */
+  color: #BFBFBF !important;
+}
+
+/*Duties description*/
+.experience-entry ul li {
+  margin-bottom: 1.2em; /* or try 0.75em or 1em for more space */
+}
+
+
+.experience-entry {
+  border-bottom: 1px solid #FFFFFF70;
+  color: #BFBFBF;  /* Changes all text inside experience entries to gray */
+}
+
+
+/* Add a container for your header + links */
+.header-container {
+  display: flex;
+  align-items: center; /* vertical center */
+  justify-content: space-between; /* space between name/title and links */
+  margin-bottom: 2rem; /* optional spacing below */
+  gap: 1rem; /* optional gap between sections */
+}
+
+/* Adjust h1 and h2 margins for better vertical alignment */
+.header-container h1,
+.header-container h2 {
+  margin: 0;
+  line-height: 1.1;
+}
+.name-title h1,
+.name-title h2 {
+  margin: 0;                    /* remove default margins */
+  line-height: 1.1;
+  margin-top: 15px;
+}
+/* Stack h1 and h2 vertically */
+.name-title {
+  display: flex;
+  flex-direction: column;       /* stack h1 and h2 vertically */
+  justify-content: center;      /* center vertically relative to links */
+}
+
+/* Style links container if needed */
+.links {
+  display: flex;
+  gap: 1rem;
+  /* optionally align links vertically center too */
+  align-items: center;
+}
+
+
+/* Optionally keep company titles or dates a different color */
+.experience-entry .company-title {
+  color: white; /* Or any other color */
+}
+
+.experience-entry .company-title-date {
+  color: #BFBFBF; /* Lighter gray, for example */
+}
+.game-description {
+  color: #BFBFBF;
+}
+.label-title,
+.label-project {
+  color: #BFBFBF; /* Gray or any color you want */
+}
+
+.experience-entry:last-of-type {
+  border-bottom: none;
+}
+
+.download-wrapper {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.download-resume-link {
+  font-weight: bold;
+  font-size: 1.1em;
+  color:  #4da6ff;
+  text-decoration: none;
+  border: 2px solid #333;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  font-family: "Consolas";
+}
+
+.download-resume-link:hover {
+}

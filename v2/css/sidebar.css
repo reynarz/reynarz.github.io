@@ -1,0 +1,162 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 300px;
+    background-color: #111;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 10;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    background-color: #222;
+    image-rendering: auto;
+    -webkit-mask-image: radial-gradient(white, black);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.name {
+    font-size: 25px;
+    text-align: center;
+    margin: 10px 0 15px;
+    line-height: 1.1;
+    font-family: 'Consolas', sans-serif;
+    font-weight: 400;
+    color: #D4D4D4;
+}
+
+.sidebar-links {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.sidebar-links a {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 35px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-links a i {
+  margin-right: 8px;
+  width: 20px; /* optional, helps align icons */
+  text-align: center;
+}
+
+.sidebar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.intro {
+    font-size: 12px;
+    font-family: monospace;
+    line-height: 1.6;
+    margin: 20px 0 30px;
+    padding-left: 35px;
+}
+
+.intro strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+}
+
+.intro-text {
+    padding-top: 10px;
+    max-width: 200px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    margin: 0 0 10px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: auto;
+    margin-bottom: 70px;
+}
+
+.social-icons a {
+    margin: 0;
+}
+
+.social-icons a i {
+    color: #8e8e8e;
+    font-size: 33px;
+    width: 25.72px;
+    height: 32px;
+    display: inline-block;
+    line-height: 30px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover i {
+    color: #ffffff;
+}
+
+
+.sidebar-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.social-buttons a {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.social-buttons a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
