@@ -5,6 +5,8 @@ body {
       padding: 2rem;
       max-width: 840px;
       margin: auto;
+  -webkit-overflow-scrolling: touch; /* enable smooth scrolling on iOS */
+      
     }
 
     a {
