@@ -35,17 +35,22 @@ flex-direction: column;       /* Stack hamburger and menu vertically */
   align-items: flex-start;      /* Align hamburger to the left */
 }
 .mobile-menu {
-display: none;
+  display: flex; /* keep flex layout */
+  max-height: 0;          /* collapsed */
+  opacity: 0;
   flex-direction: column;
   background-color: #111;
   gap: 10px;
   align-items: flex-start;
   margin-top: 10px;  /* Appears below hamburger */
+  transition: max-height 0.4s ease, opacity 0.3s ease;
 }
 
 /* Show menu when active */
 .mobile-menu.show {
   display: flex;
+   max-height: 500px;  /* enough to show the full menu */
+   opacity: 1;
 }
 .hamburger {
 font-size: 24px;
@@ -66,8 +71,13 @@ font-size: 24px;
   font-size: 14px;
   letter-spacing: 2px;
   transition: color 0.3s;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
 }
-
+.mobile-menu a i {
+  margin-right: 8px; /* or whatever spacing you want */
+  min-width: 20px;   /* optional: keeps icons aligned */
+  text-align: center; /* optional: center icon if fixed width */
+}
 .mobile-menu a:hover {
   color: white;
 }
