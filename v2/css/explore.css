@@ -140,6 +140,7 @@ body {
     aspect-ratio: 16 / 9; /* 🔥 Keeps it landscape! */
     object-fit: cover;
     display: block;
+    border-radius: 7px;
 }
 
 .grid-right {
