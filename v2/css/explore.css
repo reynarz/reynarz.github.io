@@ -16,7 +16,8 @@ body {
 .hero-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 4.5; /* 16:9 * 20% = 1.8, or just crop visually with 3.2 */
+    /*  aspect-ratio: 16 / 4.5; */
+    height: 50vh;
     overflow: hidden;
     z-index: 0;
 }
@@ -167,14 +168,14 @@ body {
     justify-content: center;
 }
 
-@media (orientation: portrait) {
+/*@media (orientation: portrait) {
     .hero-image {
         aspect-ratio: 1.3;
         position: relative;
     width: 100%;
     overflow: hidden;
     }
-}
+}*/
 
 
 @media (max-width: 900px) {
