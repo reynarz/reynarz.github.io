@@ -471,8 +471,8 @@ function setupSlideBoxLinks(selector) {
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
-            slideBox.classList.remove('show');
             iframe.style.opacity = 0;
+            slideBox.classList.remove('show');
         });
     }
 }
@@ -490,16 +490,19 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
 
-    const file = item.getAttribute('data-file');
-    if (!file) return;
-
     const slideBox = document.querySelector('.slide-box');
     const iframe = slideBox.querySelector('iframe');
+
+    if(iframe)
+    {
+        iframe.style.opacity = 0;
+    }
+
+    const file = item.getAttribute('data-file');
+    
+    if (!slideBox || !iframe || !file) return;
+
     const closeBtn = slideBox.querySelector('.close-btn');
-
-    if (!slideBox || !iframe) return;
-
-    iframe.style.opacity = 0;
 
     // If already showing the same file, close it
     if (slideBox.classList.contains('show') && iframe.src.includes(file)) {
