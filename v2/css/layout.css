@@ -37,6 +37,7 @@
 }
 
 .mobile-header {
+    display: flex !important;
 display: none;
   position: fixed;
   top: 0;
