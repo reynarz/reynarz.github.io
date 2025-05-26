@@ -6,7 +6,7 @@ body {
       max-width: 840px;
       margin: auto;
   -webkit-overflow-scrolling: touch; /* enable smooth scrolling on iOS */
-      
+
     }
 
     a {
@@ -29,11 +29,11 @@ body {
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.1rem;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
 
     hr {
@@ -109,12 +109,12 @@ body {
   flex-shrink: 0;
   width: 150px;
   text-align: left;
-
+  font-size: 20px;
 }
 
 .summary-description{
   color: #BFBFBF;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: bold;
 }
 
@@ -126,7 +126,7 @@ body {
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin-top: 1rem;
-      font-size: 20px;
+      font-size: 17px;
     }
 
     .technical-skills {
@@ -135,6 +135,7 @@ body {
       gap: 0.5rem;
       margin-top: 1rem;
       color: #BFBFBF;
+      font-size: 15px;
     }
 
     ul {
@@ -147,6 +148,7 @@ body {
 .links-section p {
   margin: 0.3rem 0;   /* small vertical spacing between paragraphs */
     font-weight: bold;
+    font-size: 16px;
 }
 
 .links-section p:first-child {
@@ -157,7 +159,7 @@ body {
   color: #4da6ff;    /* keep consistent link color */
   text-decoration: none;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .links-section a:hover {
@@ -165,7 +167,7 @@ body {
 }
 
     .social-icons a {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin-right: 0.1rem;
       color: white;
     }
@@ -196,7 +198,7 @@ body {
 
 
 .company-title {
-  font-size: 22px;
+  font-size: 20px;
   margin: 0; /* reset margin for inline elements */
 }
 
@@ -240,6 +242,7 @@ body {
   margin: 0;                    /* remove default margins */
   line-height: 1.1;
   margin-top: 15px;
+
 }
 /* Stack h1 and h2 vertically */
 .name-title {
@@ -314,7 +317,6 @@ body {
   }
 
   .section-title {
-    font-size: 18px;
     width: 100%;  /* make section titles take full width */
     text-align: left;
   }
