@@ -39,7 +39,7 @@
     transition: right 0.5s ease;
     z-index: 9999;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .slide-box {
     width: 100%; /* Take full width on mobile */
   }
@@ -435,7 +435,7 @@ function setupSlideBoxLinks(selector) {
     links.forEach(link => {
         link.addEventListener('click', (e) => {
         iframe.style.opacity = 0;
-            
+
             e.preventDefault();
             const file = link.getAttribute('data-file');
 

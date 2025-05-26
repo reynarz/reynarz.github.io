@@ -14,7 +14,7 @@
     overflow: visible;
     position: relative;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .main-content {
     margin-left: 0;
   }
@@ -66,7 +66,7 @@
 .mobile-menu a:hover {
   color: white;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .mobile-header {
     display: flex;
     justify-content: space-between;
