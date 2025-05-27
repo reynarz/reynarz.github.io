@@ -315,3 +315,17 @@ body.no-scroll {
         font-size: 15px;
     }
 }
+
+  .custom-list {
+    color: #aaa; /* soft gray to match your screenshot */
+    margin-top: 12px;
+    padding-left: 16px; /* indentation */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    list-style-type: disc;
+  }
+
+  .custom-list li {
+    margin-bottom: 1rem;
+  }

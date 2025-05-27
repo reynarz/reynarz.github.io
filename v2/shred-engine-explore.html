@@ -36,29 +36,63 @@
 
             <img src="assets/images/explore-shred-engine/show1.png" alt="Screenshot 1">
             <img src="assets/images/explore-shred-engine/show2.png" alt="Screenshot 2">
-            <img src="assets/images/explore-shred-engine/show3.png" alt="Screenshot 3">
+            <img src="assets/images/explore-shred-engine/show4.png" alt="Screenshot 3">
+            <img src="assets/images/explore-shred-engine/show3.png" alt="Screenshot 4">
             <!-- Add more images below if desired -->
         </div>
         <div class="grid-right">
             <div class="block">
-                <h2>OVERVIEW</h2>
+                <h2>ABOUT THE ENGINE</h2>
                 <p>
-                    Broken Path is an upcoming pixel art Metroidvania where you are a 
-                    12-year old kid called Adriel who escaped from his parent's house to fight 
-                    crazy bosses and save the world from the awakening of the machines.
+                 SHRED is a cross-platform C++ 3D/2D engine in development for over two years, with performance, 
+                 flexibility, and ease of use in mind.
+                 Inspired by the Unity3D engine, with the scripting API and usage freedom I always dreamed of.
                 </p>
             </div>
             <div class="block">
-                <h2>ABOUT THIS VERSION</h2>
+                <h2>CROSS-PLATFORM CORE</h2>
                 <p>
-                This version was shown at Game Developer Day in the Dominican Republic and was created solely for showcasing purposes. This is a remaster made in four weeks! The real game will be heavily improved in every aspect: gameplay, art, animations, levels, story, audio, and more.
+                Currently runs on OpenGL/ES, but its rendering backend is designed to support APIs such as Vulkan, Direct3D, Metal, or any other required by the target platform.
+                It includes full cross-platform input handling and an audio system that works seamlessly across all targets. 
+                The editor is available on both Windows and macOS, and supports building final executables for Windows and Android (via NDK).
                 </p>
             </div>
             <div class="block">
-                <h2>DEVELOPMENT HISTORY</h2>
+                <h2>RENDERING & PHYSICS</h2>
                 <p>
-                   In 2018, I created a demo with the code name “Irrt” for my portfolio, and I only recently started showing it to the public. A lot of people reacted with comments like, “Is this a game already?”, “Where can I see more?”, and “Please make this happen!!!” With such great feedback, it became very clear what I had to do: turn it into a full game with compelling gameplay and story.
+                 For physics, the engine integrates both Jolt Physics for 3D simulations and Box2D for 2D. 
+                 Its custom renderer handles both dimensions and is being optimized for high performance and scalability, whether you're building a fast-paced platformer or a 3D world.
                 </p>
+            </div>
+            <div class="block">
+                <h2>FILESYSTEM & BUILD OUTPUT</h2>
+                <p>
+                 An import system ensures that textures, audio, and meshes are automatically converted into optimized custom formats for faster in-game and in-editor loading.
+                Games built with the engine are clean and portable. Only the executable and a .shr data package are needed to run a game. 
+                The .shr file is a custom compressed and encrypted format that contains all game assets.
+                </p>
+            </div>
+            <div class="block">
+                <h2>IN-EDITOR WORKFLOW</h2>
+                <p>
+                 The editor features script hot reloading and a real-time in-editor play mode. 
+                 Developers can instantly preview gameplay changes without restarting. 
+                 A object editor is available, powered by C++ reflection, allowing for efficient editing and debugging of game objects and assets directly in the scene.
+
+<br><br>
+                    <strong>The editor includes a set of tools designed to improve the development workflow and content creation process:</strong>
+<ul class="custom-list">
+  <li>
+    A custom sprite atlas manager allows for precise control over tile sizes, ideal for building 2D worlds and managing spritesheet animations.
+  </li>
+  <li>
+    LDtk 2D level editor files are fully supported, so designers can build levels externally and import them into the engine with zero friction.
+  </li>
+  <li>
+    For showcasing and debugging, the engine also features a built-in video recorder powered by ffmpeg.  
+    It captures gameplay frames directly from the renderer, producing high-quality, lossless footage ideal for trailers, playtesting, or sharing progress without compromising visual fidelity.
+  </li>
+</ul>                </p>
             </div>
         </div>
         </div>
