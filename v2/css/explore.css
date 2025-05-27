@@ -165,6 +165,15 @@ body {
     color: #aaa;
 }
 
+.grid-right,
+.grid-right h2,
+.grid-right p {
+    font-size: initial;         /* reset inheritance */
+    font-size: 15px;            /* fixed size */
+    line-height: 1.5;
+}
+
+
 .content-wrapper {
     display: flex;
     justify-content: center;
@@ -200,3 +209,11 @@ body {
   }
 }
 
+
+
+@media (max-width: 900px) {
+  .grid-right h2,
+  .grid-right p {
+    font-size: 15px;            /* keep same on small screens */
+  }
+}

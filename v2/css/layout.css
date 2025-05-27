@@ -59,7 +59,7 @@ flex-direction: column;       /* Stack hamburger and menu vertically */
 }
 
 .mobile-menu {
-
+ pointer-events: none;
   display: flex; /* keep flex layout */
   max-height: 0;          /* collapsed */
   opacity: 0;
@@ -73,6 +73,7 @@ flex-direction: column;       /* Stack hamburger and menu vertically */
 
 /* Show menu when active */
 .mobile-menu.show {
+    pointer-events: auto;
   display: flex;
    max-height: 500px;  /* enough to show the full menu */
    opacity: 1;
