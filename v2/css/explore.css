@@ -207,13 +207,11 @@ body {
       margin-left: 0;
       width: 100%;
   }
-}
 
-
-
-@media (max-width: 900px) {
-  .grid-right h2,
+   .grid-right h2,
   .grid-right p {
     font-size: 15px;            /* keep same on small screens */
   }
 }
+
+
