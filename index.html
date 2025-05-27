@@ -1,848 +1,620 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--[if IE 9]>
-<html class="ie9" lang="en">    <![endif]-->
-<!--[if IE 8]>
-<html class="ie8" lang="en">    <![endif]-->
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reynarz | P</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-   <title>Reynarz | Portfolio</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/grid.css">
 
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name=viewport content="width=device-width, initial-scale=1">
-   <meta name="description" content="">
-   <meta name="keywords" content="">
-
-   <link rel=icon href=ico_reynarz.png sizes="16x16" type="image/png">
-   <!-- JS -->
-   <script src="assets/vendor/animatedheader/js/modernizr.custom.js"></script>
-
-   <!-- CSS -->
-   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/pe-icon-7-stroke/css/pe-icon-7-stroke.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/mfp/css/magnific-popup.min.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/fontawesome/css/font-awesome.min.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-
-   <link href="assets/vendor/rs-plugin/css/settings.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/rs-plugin/css/layers.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/rs-plugin/css/navigation.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-   <link href="assets/vendor/owl-carousel/assets/owl.carousel.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-
-   <link href="assets/custom/css/style.css" property='stylesheet' rel="stylesheet" type="text/css" media="screen"/>
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Raleway&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@200..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.png">
 
 </head>
-<body class="">
+<body>
 
-<!--Pre-Loader-->
-<!--<div id="preloader"><img src="assets/custom/images/preloader.gif" alt="01"></div>-->
+<div class="slide-box">
+    <button id="closeBtn" class="close-btn">×</button>
+  <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+<style>
 
-<div id="wrapper" class="sidebar-left">
+.slide-box {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start fully off-screen to the right */
+    width: calc(100% - 300px); /* Leave space for the 300px sidebar */
+    height: 100vh;
+    /*background-color: #0a0a0a;*/
+    background-color: black;
+    transition: right 0.5s ease;
+    z-index: 9999;
+}
+@media (max-width: 1024px) {
+  .slide-box {
+    width: 100%; /* Take full width on mobile */
+  }
+}
+.slide-box.show {
+    right: 0; /* Slide into position */
+}
 
-   <!--<a href="#menu-toggle" class="" id="menu-toggle"><span class="" aria-hidden="true"></span></a>-->
+.slide-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
 
-   <!-- Sidebar -->
-   <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-         <li class="e-divider-4"></li>
-         <li class="sidebar-brand">
-            <a href="#"><img src="assets/custom/images/picture.png" width="120" alt="logo"></a>
-         </li>
-     
-         <li><h3>Reynardo Pérez</h3></li>
-            <li class="e-divider-4"></li>
-         <!-- <li><a href="about.html">About</a></li> -->
-         <li><a href="Resume.html">Resume</a></li>
-         <li><a href="coverletter.html">Cover Letter</a></li>
-         <!--<li><a href="#">Contact</a></li>-->
-      </ul>
-      <div class="e-divider-4"></div>
-       
-       
-      <div class="side-widget">
-         <h6 class="font-accident-one-bold e-uppercase">HELLO, WELCOME!</h6>
-         <p class="small">
-            My name is Reynardo Perez (Reynarz) and i'm a game programmer! Here you can see some of my personal projects.
-         </p>
-      </div> 
-      <div class="side-widget">
-         
-      </div> 
-      <div class="bottom-widget">
-         <!--<p class="small">
-            © Last update 
-         </p>-->
-         <!--<p class="small">
-            Port Orange 23645, Florida USA
-            Tel: 1 234 345 45 35
-         </p>-->
-         <div>
-            <a href="https://github.com/reynarzz"><i class="fa fa-github-square" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/reynardo-p-860a17129/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-            <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/_reynarz"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-            
-         </div>
-      </div> 
-       
-       
-   </div>
-   <!-- /#sidebar-wrapper -->
+.slide-box iframe.fade-out {
+  opacity: 0;
+}
 
-   <!-- Content -->
-   <div id="page-content-wrapper" class="content-wrap">
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  background: transparent;
+  border: none;
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  z-index: 10001;
+  transform: rotate(0deg) scale(1);
+  transition: transform 0.24s ease-out, color 0.24s ease;
+  padding: 20px;
+}
 
-      <!-- Header -->
-      <header class="cbp-af-header toggled">
-         <div class="cbp-af-inner">
-            <div class="navbar navbar-default" role="navigation">
-               <div class="container-fluid padding-side-50">
-                  <!-- Brand and toggle get grouped for better mobile display -->
-                  <div class="navbar-header">
-                     <h1><a href="index.html">Reynarz</a></h1>
-                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span>
-                     </button>
-                  </div>
-                  <!-- Collect the nav links, forms, and other content for toggling -->
-                   <nav class="collapse navbar-collapse navbar-ex1-collapse">
-                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Resume.html">Resume</a></li>
-                        <li><a href="coverletter.html">Cover Letter</a></li>                        
-                        <li><a href="https://www.linkedin.com/in/reynardo-p-860a17129/">LinkedIn</a></li>
-                        <li><a href="https://github.com/reynarzz">Github</a></li>
-                        <li class="dropdown">
-                           <a class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="https://bit.ly/3k7lpqG">Broken Path</a></li>
-                              <li><a href="#">Mino Tool</a></li>
-                              <li><a href="#">Navecita</a></li>
-                              <li><a href="#">Minity</a></li>
-                              <li><a href="#">U Talk</a></li>
-                           </ul>
-                        </li>
-                     </ul>
-                  </nav> 
-                  <!-- /.navbar-collapse -->
-               </div>
-            </div>
-         </div>
-      </header>
-      <!-- / Header -->
+.close-btn:hover {
+  color: #FFFFFF90;
+  transform: scale(0.9);
+}
+</style>
 
-      <!-- Content Sections -->
-      <div id="content">
+    <div class="container">
 
-         <!-- Revolution Slider -->
-         <section class="slider-revolution">
-            <div class="rev_slider_wrapper">
-               <div id="slider1" class="rev_slider head-overlay" data-version="5.0">
-                  <ul>
-                     <!-- SLIDE  -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/broken.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
+  <div class="mobile-header">
+<div class="mobile-header-top">
+    <div class="home-button">
+      <a href="#">REYNARZ</a>
+    </div>
+    <div class="hamburger-container">
+      <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#" data-file="resume.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+    <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+  <hr class="sidebar-divider">
+    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+    <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+    <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank"><i class="fa-brands fa-youtube"></i>Youtube</a>
 
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Broken Path
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">My Pixel Art video game being made in Unity3D.
-                        </div>
-
-                     </li>
-                        <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                         
-
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/engineFullGif.gif" alt="fullslide2"
-                             style="filter: brightness(70%);"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Shred Engine
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
-                        </div>
-
-                     </li>
-
-                     <!-- SLIDE  -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                         <img src="assets/custom/images/rs-images/01.png" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <img src="assets/custom/images/portfolio/minoTool.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Mino Tool
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">A multi purpose OpenGL 3.3/ C# lib to create standalone tools.
-                        </div>
-
-                         
-                         
-                     <!-- SLIDE  -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/navecita.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Navecita
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">A game made from scratch powered by C++ and OpenGL 3.3
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                         
-                          <!-- SLIDE  -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/shder3d.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Shder3D
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal color00 e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">3D GLSL Shader Editor for Android made with Kotlin and OpenGL ES 2.0 
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-
-                     </li>
-                         
-                         <!--Minity-->
-                          <!-- SLIDE  -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/minity.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">Minity
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">A wip C++ native plugin that renders objects into an EditorWindow.
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                    
-                         <!--MinityEnd-->
-                         
-                         
-                          <!-- SLIDE Start -->
-                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-                         data-thumb="assets/custom/images/rs-images/fullslide1-320x200.jpg" data-saveperformance="off"
-                         data-title="Slide">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/custom/images/portfolio/utalk.gif" alt="fullslide2"
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                            <div class="gradient-overlay top-gradient"></div>
-                            <div class="gradient-overlay bottom-gradient"></div>
-                        <!-- LAYER NR. 1 -->
-
-                        <div class="tp-caption cap-title font-accident-two-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="40"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="950"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             data-fontsize="['36','34','30','20']"
-                             data-lineheight="['120','100','90','80']"
-                             style="z-index: 2;">UTalk
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption cap-sub-subtitle font-regular-normal e-uppercase tp-resizeme rs-parallaxlevel-2"
-                             data-x="center"
-                             data-y="bottom"
-                             data-basealign="grid"
-                             data-voffset="50"
-                             data-hoffset="0"
-                             data-width=”auto”
-                             data-height=”auto”
-                             data-whitespace=”[‘nowrap’,’normal’,’normal’,’normal’]”
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="auto:auto;s:700;"
-                             data-start="1500"
-                             data-splitin=”none”
-                             data-splitout=”none”
-                             data-responsive_offset=”on”
-                             style="z-index: 2;">Add animations and colors to your texts very easy! #Unity3D # Tool
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                      
-                         <!--SlideEnd-->
-                         
-                     </li>
-
-
-                  </ul>
-                  <div class="tp-bannertimer"></div>
-               </div>
-
-            </div>
-         </section>
-         <!-- /Revolution Slider -->
-
-
-         <!--  Portfolio Block  -->
-         <section id="portfolio" class="e-block e-block-skin pt-section" data-stellar-background-ratio="0.5" data-name="Portfolio">
-
-            <div class="light">
-
-               <!--<div id="isotope-filters" class="port-filter text-right">
-                  <ul>
-                     <li><a href="#cat1" data-filter="*">All</a></li>
-                     <li><a href="#cat2" data-filter=".posters">My Games</a></li>
-                     <li><a href="#cat4" data-filter=".misc">Libs/Tools</a></li>
-                  </ul>
-               </div>-->
-
-               <div class="dividewhite4"></div>
-
-               <div class="grid container-fluid ">
-
-                  <div id="posts" class="row popup-container">
-
-                     <div class="grid-item posters misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/01-01.png" class="img-responsive" alt="img11"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Broken Path</h3>
-                                    <p>#Unity3D #Game</p>
-                                 </div>
-                                 <a href="brokenpath.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                      
-                      <div class="grid-item posters misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/engine5.png" class="img-responsive" alt="img11"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Shred Engine</h3>
-                                    <p>#Engine #C++ #Jolt #Renderer</p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                      
-                      
-                     <div class="grid-item grid-sizer posters col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/02-01.png" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Mino Tool</h3>
-                                    <p>#OpenGL #CSharp #DearImGUI</p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                             <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/04-01.png" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Navecita</h3>
-                                    <p>#C++ #OpenGL</p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                      
-                        <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                            <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/sh3dpic.png" class="img-responsive" alt="img11"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Shder3D</h3>
-                                    <p>#Kotlin #OpenGLES #Editor </p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-
-                      
-                     <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                            <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/03-01.png" class="img-responsive" alt="img11"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Minity</h3>
-                                    <p>#Renderer-In-Engine #Unity3D #OpenGL</p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-
-                     <div class="grid-item posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/05-01.png" class="img-responsive" alt="img11"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>U Talk</h3>
-                                    <p>#Unity3D #Asset #Tool</p>
-                                 </div>
-                                 <a href="#">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                      <!--
-                     <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/08-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Six</h3>
-                                    <p>#media-objects #misc</p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item posters col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/07-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Seven</h3>
-                                    <p>#posters</p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/06-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Eight</h3>
-                                    <p>#others </p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-
-                     <div class="grid-item posters col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/09-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Nine</h3>
-                                    <p>#others </p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/10-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Ten</h3>
-                                    <p>#others </p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/11-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Eleven</h3>
-                                    <p>#others </p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                     <div class="grid-item media-objects posters col-lg-3 col-md-4 col-sm-6 nopadding">
-                        <div class="item-wrap">
-                           <figure class="effect-goliath">
-                              <img src="assets/custom/images/portfolio/thumbs/12-01.jpg" class="img-responsive" alt="img03"/>
-                              <figcaption>
-                                 <div class="fig-description">
-                                    <h3>Twelve</h3>
-                                    <p>#others </p>
-                                 </div>
-                                 <a href="portfolio-item.html">View more</a>
-                              </figcaption>
-                           </figure>
-                        </div>
-                     </div>
-                            -->
-                  </div>
-
-               </div>
-
-            </div>
-         </section>
-         <!-- /Portfolio Block  -->
-
-      </div>
-      <!-- /Content Sections -->
-
-   </div>
-   <!-- /Content -->
-
+  </div>
 </div>
 
 
-<div id="image-cache" class="hidden"></div>
+        <!-- 🔴 Sidebar -->
+        <aside class="sidebar">
+    <div class="profile-section">
+        <img src="assets/images/profile.png" alt="Profile Picture" class="profile-pic">
+        <h2 class="name">Reynardo Pérez</h2>
+    </div>
+
+   <div class="sidebar-links">
+  <a href="#" data-file="resume.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+  <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+  <hr class="sidebar-divider">
+
+    <div class="social-buttons">
+    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+    <a href="https://github.com/reynarzz" target="_blank" class="social-btn"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+    <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i>Youtube</a>
+  </div>
+</div>
+
+    <div class="intro">
+  <strong>HELLO, WELCOME!</strong>
+  <p class="intro-text">
+    My name is Reynardo Perez (Reynarz) and I’m a game programmer! Here you can see some of my personal projects.
+  </p>
+</div>
+
+    <div class="social-icons">
+       <!--<a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/_reynarz" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+           --> 
+    </div>
+</aside>
+
+        <!-- 🟦 Main Content Area -->
+        <main class="main-content">
+            <!-- 🟡 Top Nav -->
+      
+            <!-- Video section (placeholder) -->
+            <section class="video-section">
+                <div class="video-carousel">
+                    <div class="carousel-track">
+
+                      <div class="video-wrapper" data-file="broken-path-explore.html" data-button="View More">
+                      <video playsinline webkit-playsinline muted class="carousel-video active" src="assets/videos/brokenPath.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                      <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Broken Path</div>
+                      <div class="video-text subtitle">My Pixel Art video game being made in Unity3D.</div>
+                      </div>
+
+                       <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/engineView.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                      <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">SHRED ENGINE</div>
+                      <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
+                        </div>
+                    </div>
+<!--
+                    <div class="video-wrapper">
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="video2.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                       <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Video2</div>
+                      <div class="video-text subtitle">Subtitle for video 2</div>
+                    </div>
+
+                    <div class="video-wrapper">
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="video3.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                      
+                       <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Video3</div>
+                      <div class="video-text subtitle">Subtitle for video 3</div>
+                    </div>
+                    </div>
+
+                -->
+                   <button class="carousel-arrow left">
+  <!-- Left Arrow -->
+  <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+</button>
+
+<button class="carousel-arrow right">
+  <!-- Right Arrow -->
+  <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="9 6 15 12 9 18" />
+  </svg>
+</button>
+             </div>
+
+             <!-- <header class="top-nav">
+        <div class="home-button">
+            <a href="#">REYNARZ</a>
+        </div>-->
+    </header>
+   <footer class="video-footer-text">
+    <div class="video-title"></div>
+    <div class="video-subtitle"></div>
+    <a href="#" class="footer-button" target="_blank" rel="noopener noreferrer" data-file="broken-path-explore.html">
+    View more
+  </a>
+    </footer>
+            </section>
+            <section class="grid-section">
+<div class="grid-container">
+  <a href="#" class="grid-item" data-file="broken-path-explore.html">
+    <img src="assets/images/01-01.jpg" alt="Image 1" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">BROKEN PATH</h3>
+      <p class="hashtags">#Unity3D #Game</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item" data-file="shred-engine-explore.html">
+    <img src="assets/images/engine5.png" alt="Image 2" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">Shred Engine</h3>
+      <p class="hashtags">#Engine #C++ #Jolt #Renderer</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/02-01.jpg" alt="Image 3" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">Mino Tool</h3>
+      <p class="hashtags">#OpenGL #CSharp #DearImGui</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/04-01.png" alt="Image 4" loading="eager"/>
+     <div class="overlay">
+      <h3 class="title">Navecita</h3>
+      <p class="hashtags">#C++ #OpenGL</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/sh3dpic.jpg" alt="Image 5" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">Shder3D</h3>
+      <p class="hashtags">#Kotlin #OpenGLES #Editor</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/03-01.jpg" alt="Image 6" loading="eager"/>
+      <div class="overlay">
+      <h3 class="title">Minity</h3>
+      <p class="hashtags">#Renderer-In-Engine #Unity3D #OpenGL</p>
+    </div>
+  </a>
+  <a href="#" class="grid-item">
+    <img src="assets/images/05-01.png" alt="Image 7" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">U Talk</h3>
+      <p class="hashtags">#Unity3D #Asset #Tool</p>
+    </div>
+  </a>
+ <!-- <a href="#" class="grid-item">
+    <img src="assets/images/03-01.png" alt="Image 6" />
+  </a>-->
+</div>
+</section>
+        </main>
+        
+    </div>
+
+    <script>
 
 
-<!-- JS -->
-<script src="assets/vendor/jquery/js/jquery-2.2.0.min.js" type="text/javascript"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/vendor/animatedheader/js/classie.js"></script>
-<script src="assets/vendor/animatedheader/js/cbpAnimatedHeader.min.js"></script>
-<script type="text/javascript" src="assets/vendor/imagesloaded/js/imagesloaded.pkgd.min.js"></script>
-<script type="text/javascript" src="assets/vendor/isotope/js/isotope.pkgd.min.js"></script>
-<script type="text/javascript" src="assets/vendor/jquery-parallax/js/jquery.parallax-1.1.3.js"></script>
-<script src="assets/vendor/mfp/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
-<script src="assets/vendor/anicounter/jquery.counterup.min.js" type="text/javascript"></script>
-<script src="assets/vendor/circle-progress/circle-progress.min.js" type="text/javascript"></script>
-<script src="assets/vendor/waypoints/waypoints.min.js" type="text/javascript"></script>
-<script src="assets/vendor/goalprogress/goalProgress.min.js" type="text/javascript"></script>
-<script src="assets/vendor/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+const videos = document.querySelectorAll(".carousel-video");
+let current = 0;
+let interval = setInterval(nextVideo, 12000);
 
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-<script type="text/javascript" src="assets/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+const footer = document.querySelector('.video-footer-text');
+const titleEl = footer.querySelector('.video-title');
+const subtitleEl = footer.querySelector('.video-subtitle');
+const buttonEl = footer.querySelector('.footer-button');
+
+let fadeTimeouts = [];
+
+function clearFadeTimeouts() {
+    fadeTimeouts.forEach(t => clearTimeout(t));
+    fadeTimeouts = [];
+}
+
+function fadeOutTexts(callback) {
+    titleEl.classList.remove('visible');
+    subtitleEl.classList.remove('visible');
+    buttonEl.classList.remove('visible');
+    buttonEl.style.pointerEvents = 'none';
+
+    // Wait for fade out transition duration (0.5s)
+    fadeTimeouts.push(setTimeout(() => {
+        if (callback) callback();
+    }, 500));
+}
+
+function fadeInTexts(title, subtitle, vidWrapper, file) {
+    titleEl.textContent = title;
+    subtitleEl.textContent = subtitle;
+
+    // Fade in title after 1 second delay
+    fadeTimeouts.push(setTimeout(() => {
+        titleEl.classList.add('visible');
+    }, 1000));
+
+    // Fade in subtitle 600ms after title fade in starts
+    fadeTimeouts.push(setTimeout(() => {
+        subtitleEl.classList.add('visible');
+    }, 1600));
 
 
-<!-- Custom scripts -->
-<script src="assets/custom/js/script.js" type="text/javascript"></script>
+     // Fade in button 600ms after title fade in starts
+    fadeTimeouts.push(setTimeout(() => {
+            buttonEl.classList.add('visible');
 
+   const buttonText = vidWrapper.getAttribute('data-button');
+
+
+    if (buttonText && buttonText.trim().toLowerCase() !== 'none') {
+        buttonEl.textContent = buttonText;
+        buttonEl.setAttribute('data-file', file);
+        buttonEl.style.pointerEvents = 'auto';
+        buttonEl.style.backgroundColor = 'white';
+        buttonEl.style.color = 'black';
+        buttonEl.style.border = '1px solid #ccc';
+    } else {
+        buttonEl.textContent = 'Coming soon';
+        buttonEl.removeAttribute('data-file');
+        buttonEl.style.pointerEvents = 'none';
+        buttonEl.style.backgroundColor = 'transparent';
+        buttonEl.style.color = 'white';
+        buttonEl.style.border = '1px solid white';
+    }
+
+    }, 2300));
+
+
+}
+
+function updateFooterText(video) {
+    clearFadeTimeouts();
+
+    const wrapper = video.closest('.video-wrapper');
+    const title = wrapper.querySelector('.video-text.title').textContent;
+    const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+    const file = wrapper.getAttribute('data-file');
+
+    fadeOutTexts(() => {
+        fadeInTexts(title, subtitle, wrapper, file);
+    });
+
+    if (file) 
+    {
+        buttonEl.setAttribute('data-file', file);
+    } 
+    else 
+    {
+        buttonEl.removeAttribute('data-file');
+    }
+}
+
+
+function nextVideo() {
+    videos[current].classList.remove("active");
+    current = (current + 1) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+
+    updateFooterText(videos[current]);
+}
+
+function prevVideo() {
+    videos[current].classList.remove("active");
+    current = (current - 1 + videos.length) % videos.length;
+    videos[current].classList.add("active");
+    videos[current].currentTime = 0;  // reset to start
+    videos[current].play();
+
+    updateFooterText(videos[current]);
+}
+
+document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
+    clearInterval(interval);
+    nextVideo();
+    interval = setInterval(nextVideo, 12000);
+});
+
+document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
+    clearInterval(interval);
+    prevVideo();
+    interval = setInterval(nextVideo, 12000);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const activeVideo = document.querySelector('.carousel-video.active');
+    if (activeVideo) updateFooterText(activeVideo);
+
+    sidebar.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        mainContent.scrollTop += e.deltaY;
+    }, { passive: false });
+
+    const nav = document.querySelector(".top-nav");
+    const scrollTarget = document.querySelector(".main-content");
+
+    scrollTarget.addEventListener("scroll", function () {
+        const scrollThreshold = 100;
+        if (scrollTarget.scrollTop > scrollThreshold) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    });
+
+    const gridItems = document.querySelectorAll('.grid-item');
+    let activeIndex = -1;
+
+    function setActiveVideo(index) {
+        if (index === activeIndex) return; // do nothing if the same video
+
+        videos.forEach((video, i) => {
+            const isActive = i === index;
+            video.classList.toggle('active', isActive);
+            if (isActive) {
+                updateFooterText(video);
+                // Optionally reset and play video here:
+                // video.currentTime = 0;
+                // video.play();
+            } else {
+                // Optionally pause and reset video here:
+                // video.pause();
+                // video.currentTime = 0;
+            }
+        });
+
+        activeIndex = index;
+    }
+
+   mainContent = document.querySelector('.main-content');
+  const slideBox = document.querySelector('.slide-box');
+  const gridContainer = document.querySelector('.grid-container');
+
+  if (mainContent) clampScroll(mainContent);
+  if (slideBox) clampScroll(slideBox);
+  if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) {
+    clampScroll(gridContainer);
+  }
+
+});
+
+// The rest of your iframe/sidebar code remains unchanged
+
+const slideBox = document.querySelector('.slide-box');
+const iframe = slideBox.querySelector('iframe');
+const closeBtn = document.querySelector('.close-btn');
+
+let currentFile = "";
+
+closeBtn.addEventListener('click', () => {
+    slideBox.classList.remove('show');
+    iframe.style.opacity = 0;
+});
+
+document.querySelectorAll("#mobile-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    const menu = document.getElementById("mobile-menu");
+    menu.classList.remove("show");
+  });
+});
+
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobile-menu");
+  menu.classList.toggle("show");
+}
+function setupSlideBoxLinks(selector) {
+    const links = document.querySelectorAll(selector);
+    const slideBox = document.querySelector('.slide-box');
+    const iframe = slideBox.querySelector('iframe');
+    const closeBtn = document.querySelector('.close-btn');
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+        iframe.style.opacity = 0;
+
+            e.preventDefault();
+            const file = link.getAttribute('data-file');
+
+            // Hide mobile menu if present
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('show');
+            }
+
+            if (slideBox.classList.contains('show') && currentFile === file) {
+                // Just close if same file is already shown
+                slideBox.classList.remove('show');
+                iframe.style.opacity = 0;
+                return;
+            }
+
+            if (!slideBox.classList.contains('show')) {
+                slideBox.classList.add('show');
+                        iframe.style.opacity = 0;
+                currentFile = file;
+                setTimeout(() => {
+                    iframe.src = file;
+                    iframe.style.opacity = 1;
+                }, 500);
+            } else {
+                iframe.style.opacity = 0;
+                iframe.addEventListener('transitionend', function handler() {
+                    iframe.removeEventListener('transitionend', handler);
+                    iframe.src = file;
+                    currentFile = file;
+                    setTimeout(() => iframe.style.opacity = 1, 50);
+                });
+            }
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            iframe.style.opacity = 0;
+            slideBox.classList.remove('show');
+        });
+    }
+}
+
+// Apply to both sidebar and mobile menu links
+setupSlideBoxLinks('.sidebar-links a[data-file]');
+setupSlideBoxLinks('.mobile-menu a[data-file]');
+setupSlideBoxLinks('.footer-button[data-file]');
+
+document.querySelectorAll('.grid-container img, .grid-container a').forEach(el => {
+  el.addEventListener('dragstart', e => e.preventDefault());
+});
+
+document.querySelectorAll('.grid-item[data-file]').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+
+    const slideBox = document.querySelector('.slide-box');
+    const iframe = slideBox.querySelector('iframe');
+
+    if(iframe)
+    {
+        iframe.style.opacity = 0;
+    }
+
+    const file = item.getAttribute('data-file');
+
+    if (!slideBox || !iframe || !file) return;
+
+    const closeBtn = slideBox.querySelector('.close-btn');
+
+    // If already showing the same file, close it
+    if (slideBox.classList.contains('show') && iframe.src.includes(file)) {
+      slideBox.classList.remove('show');
+      iframe.style.opacity = 0;
+
+      return;
+    }
+
+    if (!slideBox.classList.contains('show')) {
+      slideBox.classList.add('show');
+      setTimeout(() => {
+        iframe.src = file;
+        iframe.style.opacity = 1;
+      }, 500);
+    } else {
+      iframe.style.opacity = 0;
+      iframe.addEventListener('transitionend', function handler() {
+        iframe.removeEventListener('transitionend', handler);
+        iframe.src = file;
+        setTimeout(() => {
+          iframe.style.opacity = 1;
+        }, 50);
+      });
+    }
+  });
+});
+
+function clampScroll(div) {
+  div.addEventListener('scroll', () => {
+    div.scrollTop = Math.max(1, Math.min(div.scrollTop, div.scrollHeight - div.clientHeight - 1));
+  });
+}
+
+function clampScrollSmooth(div) {
+  div.addEventListener('scroll', () => {
+    const maxScroll = div.scrollHeight - div.clientHeight - 1;
+    const clamped = Math.max(1, Math.min(div.scrollTop, maxScroll));
+
+    // Only scroll if we need to clamp
+    if (div.scrollTop !== clamped) {
+      div.scrollTo({ top: clamped, behavior: 'smooth' });
+    }
+  });
+}
+
+</script>
+
+
+<iframe src="resume.html" style="display:none;" id="preload1"></iframe>
+<iframe src="coverletter.html" style="display:none;" id="preload2"></iframe>
 </body>
 </html>
