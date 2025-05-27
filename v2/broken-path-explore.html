@@ -63,6 +63,47 @@
         </div>
         </div>
 
+      <div id="lightbox" class="lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img id="lightbox-img" src="" alt="Expanded view">
+</div>
+
         <div style="height: 20px;"></div>
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-lightbox');
+
+// Show the lightbox
+document.querySelectorAll('.grid-left img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('show');
+    lightbox.classList.remove('hide'); // just in case
+  });
+});
+
+// Close the lightbox smoothly
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.remove('show');
+  lightbox.classList.add('hide');
+  setTimeout(() => {
+    lightbox.classList.remove('hide');
+    lightboxImg.src = ""; // optional: reset src
+  }, 400); // match the CSS transition time
+});
+
+lightbox.addEventListener('click', (e) => {
+  // If the click is directly on the background (not the image or close button)
+  if (e.target === lightbox) {
+    lightbox.classList.remove('show');
+    lightbox.classList.add('hide');
+    setTimeout(() => {
+      lightbox.classList.remove('hide');
+      lightboxImg.src = "";
+    }, 400); // match your transition duration
+  }
+});
+</script>
 </body>
 </html>
