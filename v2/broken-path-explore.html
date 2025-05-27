@@ -18,10 +18,9 @@
          <div class="hero-content">
         <h1>Broken Path</h1>
         <p>A Crazy Pixel Art Metroidvania by Reynardo Perez</p>
-        <a href="https://drive.usercontent.google.com/download?id=1JZpKZvFFrqUs-a12btwzV1OVfd0AAox3" class="hero-button" 
-        class="hero-button" 
-  target="_blank" 
-  rel="noopener noreferrer">Download Demo (Windows)</a>
+        <a id="download-btn" class="hero-button" href="https://www.dropbox.com/scl/fi/2a9dvfgmlppqu4f3571sn/Reynarz_BrokenPath_Demo.zip?rlkey=jg188hbnjxacuv1kmqrxqjech&st=6mwo5b67&dl=1" download>
+  Download Demo (Windows)
+</a>
     </div>
     </div>
 
@@ -137,6 +136,32 @@ document.addEventListener('keydown', (e) => {
   } else if (e.key === 'ArrowLeft') {
     showImage(currentIndex - 1);
   }
+});
+const button = document.getElementById('download-btn');
+const originalText = button.innerText;
+let dotCount = 0;
+let intervalId;
+
+button.addEventListener('click', function () {
+  // Measure the full rendered width of the button including padding/border
+  const buttonRect = button.getBoundingClientRect();
+  button.style.width = `${buttonRect.width}px`;
+
+  button.classList.add('loading');
+  button.innerText = 'Downloading   ';
+  dotCount = 0;
+
+  intervalId = setInterval(() => {
+    dotCount = (dotCount + 1) % 4;
+    button.innerText = 'Downloading' + '.'.repeat(dotCount);
+  }, 500);
+
+  setTimeout(() => {
+    clearInterval(intervalId);
+    button.innerText = originalText;
+    button.classList.remove('loading');
+    button.style.width = ''; // reset
+  }, 3000);
 });
 </script>
 

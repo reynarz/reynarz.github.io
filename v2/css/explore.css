@@ -98,6 +98,19 @@ body {
     transition: background 0.3s ease;
 }
 
+.hero-button.loading {
+  pointer-events: none;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+}
+@keyframes fadeText {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
 .hero-button:hover {
     background-color: #eaeaea;
 }
