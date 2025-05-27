@@ -171,19 +171,22 @@ body {
   font-family: "Consolas";
 }
 
-.links-section a:hover {
+.links-section a:hover 
+{
   text-decoration: underline;
 }
 
-    .social-icons a {
-      font-size: 1.3rem;
-      margin-right: 0.1rem;
-      color: white;
-    }
+  .social-icons a 
+  {
+    font-size: 1.3rem;
+    margin-right: 0.1rem;
+    color: white;
+  }
 
-    .experience {
-      white-space: pre-line;
-    }
+  .experience 
+  {
+    white-space: pre-line;
+  }
 
 .company-header {
   display: flex;
@@ -224,6 +227,23 @@ body {
   margin-bottom: 1.2em; /* or try 0.75em or 1em for more space */
 }
 
+.experience-entry em {
+  font-size: 16px;
+}
+
+.experience-entry .game-description {
+  font-size: 15px;
+}
+
+/*Duties description*/
+.experience-entry ul {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.experience-entry ul li {
+  margin-bottom: 0.9em; /* keep spacing consistent */
+}
 
 .experience-entry {
   border-bottom: 1px solid #FFFFFF70;
