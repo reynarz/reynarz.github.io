@@ -22,6 +22,7 @@ body {
     display: inline-block;
     transition: all 0.5s ease;
     font-family: "Consolas";
+    font-size: 17px;
 
   }
     a:hover {
@@ -135,7 +136,7 @@ body {
       gap: 0.5rem;
       margin-top: 1rem;
       color: #BFBFBF;
-      font-size: 15px;
+      font-size: 14px !important;
     }
 
     ul {
@@ -159,7 +160,15 @@ body {
   color: #4da6ff;    /* keep consistent link color */
   text-decoration: none;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
+  margin-top: 5px;
+  font-weight: bold;
+  border: 2px solid #333;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  font-family: "Consolas";
 }
 
 .links-section a:hover {
@@ -227,7 +236,7 @@ body {
   display: flex;
   align-items: center; /* vertical center */
   justify-content: space-between; /* space between name/title and links */
-  margin-bottom: 2rem; /* optional spacing below */
+  margin-bottom: 1.5rem; /* optional spacing below */
   gap: 1rem; /* optional gap between sections */
 }
 
@@ -308,14 +317,6 @@ body {
     font-size: 14px; /* slightly smaller font */
   }
 
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
   .section-title {
     width: 100%;  /* make section titles take full width */
     text-align: left;
@@ -331,21 +332,25 @@ body {
   .experience-section .section-title,
   .section-row .section-title {
     width: 100%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
   }
 
   .summary-section .section-content,
   .experience-section .section-content,
   .section-row .skills-grid,
   .section-row .technical-skills {
+
     width: 100%;
   }
 
   .skills-grid,
   .technical-skills {
-    grid-template-columns: repeat(1, 1fr); /* stack skills vertically */
+    grid-template-columns: repeat(3, 1fr); /* stack skills vertically */
     font-size: 16px;
+      margin-top: 0rem;
   }
+
+ 
 
   .download-resume-link {
     font-size: 1em;
