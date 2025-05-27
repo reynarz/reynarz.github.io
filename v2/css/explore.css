@@ -98,6 +98,22 @@ body {
     transition: background 0.3s ease;
 }
 
+.hero-button-noInteract {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    padding: 0.6em 1.5em;
+    font-size: clamp(0.7rem, 1.3vw, 1rem);
+    text-decoration: none;
+    font-family: 'Consolas', Courier, monospace;
+    border-radius: 2px;
+    pointer-events: none;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+}
+
 .hero-button.loading {
   pointer-events: none;
   background-color: transparent;
@@ -105,9 +121,26 @@ body {
   color: white;
   text-align: center;
 }
+
+.button-text {
+  display: inline-block;
+}
+
+.dot {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: inline-block;
+  width: 0.5ch;
+}
 @keyframes fadeText {
   0%   { opacity: 1; }
   50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeLoop {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.3; }
   100% { opacity: 1; }
 }
 

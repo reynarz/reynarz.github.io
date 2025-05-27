@@ -18,8 +18,9 @@
          <div class="hero-content">
         <h1>Broken Path</h1>
         <p>A Crazy Pixel Art Metroidvania by Reynardo Perez</p>
-        <a id="download-btn" class="hero-button" href="https://www.dropbox.com/scl/fi/2a9dvfgmlppqu4f3571sn/Reynarz_BrokenPath_Demo.zip?rlkey=jg188hbnjxacuv1kmqrxqjech&st=6mwo5b67&dl=1" download>
-  Download Demo (Windows)
+
+<a id="download-btn" class="hero-button" href="https://www.dropbox.com/scl/fi/2a9dvfgmlppqu4f3571sn/Reynarz_BrokenPath_Demo.zip?rlkey=jg188hbnjxacuv1kmqrxqjech&st=6mwo5b67&dl=1">
+  <span class="button-text">Download Demo (Windows)</span>
 </a>
     </div>
     </div>
@@ -137,30 +138,64 @@ document.addEventListener('keydown', (e) => {
     showImage(currentIndex - 1);
   }
 });
-const button = document.getElementById('download-btn');
-const originalText = button.innerText;
-let dotCount = 0;
-let intervalId;
 
-button.addEventListener('click', function () {
-  // Measure the full rendered width of the button including padding/border
+
+
+const button = document.getElementById('download-btn');
+const textSpan = button.querySelector('.button-text');
+const originalText = textSpan.textContent;
+
+let intervalId;
+let resetTimeout;
+button.addEventListener('click', function (e) {
+  e.preventDefault(); // block default so we can animate + trigger download ourselves
+
+  // Lock button width
   const buttonRect = button.getBoundingClientRect();
   button.style.width = `${buttonRect.width}px`;
 
   button.classList.add('loading');
-  button.innerText = 'Downloading   ';
-  dotCount = 0;
+
+  // Set up text with dot elements
+  textSpan.innerHTML = 'Downloading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
+  const dots = textSpan.querySelectorAll('.dot');
+
+  let state = 'fading-in';
+  let visibleCount = 0;
 
   intervalId = setInterval(() => {
-    dotCount = (dotCount + 1) % 4;
-    button.innerText = 'Downloading' + '.'.repeat(dotCount);
-  }, 500);
+    if (state === 'fading-in') {
+      if (visibleCount < dots.length) {
+        dots[visibleCount].style.opacity = 1;
+        visibleCount++;
+      } else {
+        state = 'fading-out';
+        setTimeout(() => {
+          dots.forEach(dot => dot.style.opacity = 0);
+          visibleCount = 0;
+          state = 'fading-in';
+        }, 400); // wait briefly after all dots appear
+      }
+    }
+  }, 300);
 
-  setTimeout(() => {
+  // ✅ Manually trigger the download
+  const realHref = button.getAttribute('href');
+  const downloadLink = document.createElement('a');
+  downloadLink.href = realHref;
+  downloadLink.setAttribute('download', '');
+  downloadLink.style.display = 'none';
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+
+  // Reset after 3 seconds
+  clearTimeout(resetTimeout);
+  resetTimeout = setTimeout(() => {
     clearInterval(intervalId);
-    button.innerText = originalText;
+    textSpan.textContent = originalText;
     button.classList.remove('loading');
-    button.style.width = ''; // reset
+    button.style.width = ''; // reset width
   }, 3000);
 });
 </script>
