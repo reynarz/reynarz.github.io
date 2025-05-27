@@ -611,6 +611,81 @@ function clampScrollSmooth(div) {
   });
 }
 
+
+async function preloadAsset(href, asType) {
+      return new Promise((resolve, reject) => {
+        // Avoid duplicating preloads
+        if (document.querySelector(`link[rel="preload"][href="${href}"]`)) {
+          return resolve();
+        }
+
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = href;
+        link.as = asType;
+        link.onload = resolve;
+        link.onerror = () => {
+          console.warn(`Failed to preload: ${href}`);
+          resolve(); // Don't reject — continue with others
+        };
+        document.head.appendChild(link);
+      });
+    }
+
+    // Parse an iframe HTML and preload its resources
+    async function preloadIframeResourcesFromHTML(url) {
+      try {
+        const htmlText = await fetch(url).then(res => res.text());
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+
+        const preloadList = [];
+
+        doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+          const href = link.getAttribute('href');
+          if (href) preloadList.push(preloadAsset(href, 'style'));
+        });
+
+        doc.querySelectorAll('script[src]').forEach(script => {
+          const src = script.getAttribute('src');
+          if (src) preloadList.push(preloadAsset(src, 'script'));
+        });
+
+        doc.querySelectorAll('img[src]').forEach(img => {
+          const src = img.getAttribute('src');
+          if (src) preloadList.push(preloadAsset(src, 'image'));
+        });
+
+        await Promise.all(preloadList);
+      } catch (e) {
+        console.error(`Error preloading from ${url}:`, e);
+      }
+    }
+
+    // Preload all iframe pages and load one of them
+    async function preloadAllAndShowIframe() {
+      const iframePages = [
+        'resume-page.html',
+        'coverletter.html',
+        'broken-path-explore.html',
+        'shred-engine-explore.html'
+      ];
+
+      // Preload assets for all iframe pages
+      for (const page of iframePages) {
+        await preloadIframeResourcesFromHTML(page);
+      }
+
+      // Then load one into iframe
+      const iframe = document.getElementById('iframe-container');
+      iframe.src = 'resume-page.html';
+      iframe.style.display = 'block';
+    }
+
+    // Set up button to trigger loading
+    document.getElementById('loadButton').addEventListener('click', () => {
+      preloadAllAndShowIframe();
+    });
 </script>
 
 
