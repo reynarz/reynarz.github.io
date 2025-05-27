@@ -1,4 +1,10 @@
 /* Reset */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
