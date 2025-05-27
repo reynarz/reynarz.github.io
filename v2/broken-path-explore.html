@@ -65,7 +65,9 @@
 
       <div id="lightbox" class="lightbox">
   <span class="close-lightbox">&times;</span>
+  <span class="lightbox-prev">&#10094;</span>
   <img id="lightbox-img" src="" alt="Expanded view">
+  <span class="lightbox-next">&#10095;</span>
 </div>
 
         <div style="height: 20px;"></div>
@@ -73,37 +75,71 @@
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close-lightbox');
+const nextBtn = document.querySelector('.lightbox-next');
+const prevBtn = document.querySelector('.lightbox-prev');
 
-// Show the lightbox
-document.querySelectorAll('.grid-left img').forEach(img => {
+const images = Array.from(document.querySelectorAll('.grid-left img'));
+let currentIndex = 0;
+
+function showImage(index) {
+  if (index < 0) index = images.length - 1;
+  if (index >= images.length) index = 0;
+
+  currentIndex = index;
+
+  lightboxImg.classList.add('hide');
+  setTimeout(() => {
+    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.classList.remove('hide');
+  }, 150); // match fade-out
+}
+
+// Open lightbox
+images.forEach((img, i) => {
   img.addEventListener('click', () => {
+    currentIndex = i;
     lightboxImg.src = img.src;
     lightbox.classList.add('show');
-    lightbox.classList.remove('hide'); // just in case
+    lightbox.classList.remove('hide');
+    document.body.classList.add('no-scroll'); // 🔒 Prevent scroll
   });
 });
 
-// Close the lightbox smoothly
-closeBtn.addEventListener('click', () => {
+// Close lightbox
+function closeLightbox() {
   lightbox.classList.remove('show');
   lightbox.classList.add('hide');
+  document.body.classList.remove('no-scroll'); // ✅ Restore scroll
   setTimeout(() => {
     lightbox.classList.remove('hide');
-    lightboxImg.src = ""; // optional: reset src
-  }, 400); // match the CSS transition time
+    lightboxImg.src = "";
+  }, 300);
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+
+// Close on background click
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
 });
 
-lightbox.addEventListener('click', (e) => {
-  // If the click is directly on the background (not the image or close button)
-  if (e.target === lightbox) {
-    lightbox.classList.remove('show');
-    lightbox.classList.add('hide');
-    setTimeout(() => {
-      lightbox.classList.remove('hide');
-      lightboxImg.src = "";
-    }, 400); // match your transition duration
+// Navigate
+nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+
+// Optional: close with ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  } else if (e.key === 'ArrowRight') {
+    showImage(currentIndex + 1);
+  } else if (e.key === 'ArrowLeft') {
+    showImage(currentIndex - 1);
   }
 });
 </script>
+
 </body>
 </html>

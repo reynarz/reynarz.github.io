@@ -3,6 +3,7 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 * {
@@ -131,6 +132,7 @@ body {
 }
 
 .grid-left img {
+    cursor: pointer;
     -webkit-user-drag: none;
     user-drag: none;
     user-select: none;
@@ -171,7 +173,9 @@ body {
     justify-content: center;
 }
 
-
+body.no-scroll {
+ /* overflow: hidden;*/
+}
 /* Lightbox container */
 .lightbox {
   position: fixed;
@@ -229,7 +233,33 @@ body {
   z-index: 10001;
 }
 
+/* Navigation buttons */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  z-index: 10001;
+  user-select: none;
+  padding: 0 20px;
+  transition: color 0.2s ease;
+}
 
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: #aaa;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
 @media (max-width: 900px) {
     .content-grid {
         display: flex;
