@@ -452,10 +452,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const slideBox = document.querySelector('.slide-box');
   const gridContainer = document.querySelector('.grid-container');
 
-  if (mainContent) clampScrollSmooth(mainContent);
-  if (slideBox) clampScrollSmooth(slideBox);
+  if (mainContent) clampScroll(mainContent);
+  if (slideBox) clampScroll(slideBox);
   if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) {
-    clampScrollSmooth(gridContainer);
+    clampScroll(gridContainer);
   }
 
 });
