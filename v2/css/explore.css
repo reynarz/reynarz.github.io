@@ -193,6 +193,7 @@ body {
         grid-auto-rows: 180px;
         align-items: center;
         padding-left: 0;
+        margin-left: 0px;
     }
 
     .grid-left img {
