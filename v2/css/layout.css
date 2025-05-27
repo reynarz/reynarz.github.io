@@ -272,3 +272,27 @@ font-size: 24px;
 .video-footer-text .visible {
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .video-carousel video,
+  .carousel-video {
+    height: 100vh;
+    object-fit: cover;
+    width: 100%;
+    max-height: 100vh;
+    display: block;
+  }
+
+  .carousel-track {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .video-wrapper {
+    height: 100vh;
+  }
+
+  .main-content {
+    overflow-x: hidden;
+  }
+}

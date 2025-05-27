@@ -293,7 +293,10 @@ body.no-scroll {
         width: 100%;
     }
 
-    .grid-right h2,
+    .grid-right h2 {
+        font-size: 20px;
+    }
+
     .grid-right p {
         font-size: 15px;
     }
