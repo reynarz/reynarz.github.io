@@ -35,6 +35,7 @@
     right: -100%; /* Start fully off-screen to the right */
     width: calc(100% - 300px); /* Leave space for the 300px sidebar */
     height: 100vh;
+    /*background-color: #0a0a0a;*/
     background-color: black;
     transition: right 0.5s ease;
     z-index: 9999;
@@ -153,8 +154,15 @@
                       <div class="video-overlay"></div>
                       <div class="video-gradient-overlay"></div>
                       <div class="video-text title">Broken Path</div>
-                      <div class="video-text subtitle">My Pixel Art video game being made in Unity3D.</div>
+                      <div class="video-text subtitle">My Pixel Art video game being made with Unity3D.</div>
                       </div>
+
+                        <div class="video-wrapper" >
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/3dplatformer.mp4" autoplay muted loop></video>
+                      <div class="video-text title">Mino's Adventure</div>
+                      <div class="video-text subtitle">3D Platformer (PC-Mobile) made with Unity3D 
+                        </div>
+                    </div>
 
                        <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/engineView.mp4" autoplay muted loop></video>
@@ -164,26 +172,28 @@
                       <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
                         </div>
                     </div>
-<!--
-                    <div class="video-wrapper">
-                      <video playsinline webkit-playsinline muted class="carousel-video" src="video2.mp4" autoplay muted loop></video>
-                      <div class="video-overlay"></div>
-                       <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Video2</div>
-                      <div class="video-text subtitle">Subtitle for video 2</div>
-                    </div>
+
+
 
                     <div class="video-wrapper">
-                      <video playsinline webkit-playsinline muted class="carousel-video" src="video3.mp4" autoplay muted loop></video>
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/navecita.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       
                        <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Video3</div>
-                      <div class="video-text subtitle">Subtitle for video 3</div>
+                      <div class="video-text title">Navecita</div>
+                      <div class="video-text subtitle">Game made from scratch, C++ + OpenGL</div>
                     </div>
                     </div>
 
-                -->
+                       <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
+                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/shder3d.mp4" autoplay muted loop></video>
+                      <div class="video-overlay"></div>
+                      <div class="video-gradient-overlay"></div>
+                      <div class="video-text title">Shder3D</div>
+                      <div class="video-text subtitle">3D GLSL shader editor for Android, made with Kotlin and OpenGL ES 2.0. 
+                        </div>
+                    </div>
+
                    <button class="carousel-arrow left">
   <!-- Left Arrow -->
   <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
@@ -228,6 +238,21 @@
       <p class="hashtags">#Engine #C++ #Jolt #Renderer</p>
     </div>
   </a>
+  <a href="#" class="grid-item" >
+    <img src="assets/images/minogrid.png" alt="Image 2" loading="eager"/>
+    <div class="overlay">
+      <h3 class="title">Mino's Adventure</h3>
+      <p class="hashtags">#Unity3D #Platformer #Solo-project</p>
+    </div>
+  </a>
+    <a href="#" class="grid-item">
+    <img src="assets/images/04-01.png" alt="Image 4" loading="eager"/>
+     <div class="overlay">
+      <h3 class="title">Navecita</h3>
+      <p class="hashtags">#C++ #OpenGL</p>
+    </div>
+  </a>
+
   <a href="#" class="grid-item">
     <img src="assets/images/02-01.jpg" alt="Image 3" loading="eager"/>
     <div class="overlay">
@@ -235,13 +260,7 @@
       <p class="hashtags">#OpenGL #CSharp #DearImGui</p>
     </div>
   </a>
-  <a href="#" class="grid-item">
-    <img src="assets/images/04-01.png" alt="Image 4" loading="eager"/>
-     <div class="overlay">
-      <h3 class="title">Navecita</h3>
-      <p class="hashtags">#C++ #OpenGL</p>
-    </div>
-  </a>
+
   <a href="#" class="grid-item">
     <img src="assets/images/sh3dpic.jpg" alt="Image 5" loading="eager"/>
     <div class="overlay">
@@ -253,7 +272,7 @@
     <img src="assets/images/03-01.jpg" alt="Image 6" loading="eager"/>
       <div class="overlay">
       <h3 class="title">Minity</h3>
-      <p class="hashtags">#Renderer-In-Engine #Unity3D #OpenGL</p>
+      <p class="hashtags">#Unity3D #Native plugin #Renderer</p>
     </div>
   </a>
   <a href="#" class="grid-item">
