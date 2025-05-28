@@ -472,10 +472,13 @@ let iframeLoadRequestId = 0; // ✅ Prevent race conditions
 let isSlideBoxBusy = false;
 
 closeBtn.addEventListener('click', () => {
+  if (isSlideBoxBusy) return;
+  isSlideBoxBusy = true;
+
   iframeLoadRequestId++;
   iframe.style.opacity = 0;
   slideBox.classList.remove('show');
-  isSlideBoxBusy = false;
+  setTimeout(() => isSlideBoxBusy = false, 500); // match transition
 });
 
 document.querySelectorAll("#mobile-menu a").forEach(link => {
@@ -496,9 +499,10 @@ function setupSlideBoxLinks(selector) {
     const closeBtn = document.querySelector('.close-btn');
 
     links.forEach(link => {
-     link.addEventListener('click', (e) => {
+   link.addEventListener('click', (e) => {
   e.preventDefault();
   if (isSlideBoxBusy) return;
+  isSlideBoxBusy = true;
 
   const file = link.getAttribute('data-file');
   const requestId = ++iframeLoadRequestId;
@@ -509,12 +513,11 @@ function setupSlideBoxLinks(selector) {
 
   if (slideBox.classList.contains('show') && currentFile === file) {
     slideBox.classList.remove('show');
-    isSlideBoxBusy = false;
+    setTimeout(() => isSlideBoxBusy = false, 500);
     return;
   }
 
   currentFile = file;
-  isSlideBoxBusy = true;
 
   if (!slideBox.classList.contains('show')) {
     slideBox.classList.add('show');
@@ -556,56 +559,43 @@ document.querySelectorAll('.grid-container img, .grid-container a').forEach(el =
   el.addEventListener('dragstart', e => e.preventDefault());
 });
 document.querySelectorAll('.grid-item[data-file]').forEach(item => {
-  item.addEventListener('click', e => {
-    e.preventDefault();
+ item.addEventListener('click', e => {
+  e.preventDefault();
+  if (isSlideBoxBusy) return;
+  isSlideBoxBusy = true;
 
-    if (isSlideBoxBusy) return;
+  const file = item.getAttribute('data-file');
+  const requestId = ++iframeLoadRequestId;
+  iframe.style.opacity = 0;
+  iframe.src = 'about:blank';
+  currentFile = file;
 
-    const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox.querySelector('iframe');
-    if (!slideBox || !iframe) return;
+  if (slideBox.classList.contains('show') && currentFile === file) {
+    slideBox.classList.remove('show');
+    setTimeout(() => isSlideBoxBusy = false, 500);
+    return;
+  }
 
-    const file = item.getAttribute('data-file');
-    if (!file) return;
-
-    const requestId = ++iframeLoadRequestId;
-    iframe.style.opacity = 0;
-    iframe.src = 'about:blank';
-    currentFile = file;
-    isSlideBoxBusy = true;
-
-    if (slideBox.classList.contains('show') && currentFile === file) {
-      if (iframeLoadRequestId > requestId) {
-        isSlideBoxBusy = false;
-        return;
-      }
-      slideBox.classList.remove('show');
+  if (!slideBox.classList.contains('show')) {
+    slideBox.classList.add('show');
+    setTimeout(() => {
+      if (iframeLoadRequestId !== requestId) return;
+      iframe.src = file;
+      iframe.style.opacity = 1;
+      isSlideBoxBusy = false;
+    }, 500);
+  } else {
+    iframe.addEventListener('transitionend', function handler() {
+      iframe.removeEventListener('transitionend', handler);
+      if (iframeLoadRequestId !== requestId) return;
+      iframe.src = file;
       setTimeout(() => {
-        isSlideBoxBusy = false;
-      }, 500); // match transition duration
-      return;
-    }
-
-    if (!slideBox.classList.contains('show')) {
-      slideBox.classList.add('show');
-      setTimeout(() => {
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
         iframe.style.opacity = 1;
         isSlideBoxBusy = false;
-      }, 500);
-    } else {
-      iframe.addEventListener('transitionend', function handler() {
-        iframe.removeEventListener('transitionend', handler);
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        setTimeout(() => {
-          iframe.style.opacity = 1;
-          isSlideBoxBusy = false;
-        }, 50);
-      });
-    }
-  });
+      }, 50);
+    });
+  }
+})
 });
 
 function clampScroll(div) {
