@@ -519,9 +519,12 @@ function setupSlideBoxLinks(selector) {
     slideBox.classList.add('show');
     setTimeout(() => {
       if (iframeLoadRequestId !== requestId) return;
-      iframe.src = file;
+   
+      loadIframeWhenReady(iframe, file, () => {
       iframe.style.opacity = 1;
       isSlideBoxBusy = false;
+        });
+
     }, 500);
   } else {
     iframe.addEventListener('transitionend', function handler() {
@@ -589,9 +592,10 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
       slideBox.classList.add('show');
       setTimeout(() => {
         if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        iframe.style.opacity = 1;
-        isSlideBoxBusy = false;
+        loadIframeWhenReady(iframe, file, () => {
+  iframe.style.opacity = 1;
+  isSlideBoxBusy = false;
+});
       }, 500);
     } else {
       iframe.addEventListener('transitionend', function handler() {
@@ -700,6 +704,25 @@ async function preloadAsset(href, asType) {
     document.getElementById('loadButton').addEventListener('click', () => {
       preloadAllAndShowIframe();
     });
+
+    function loadIframeWhenReady(iframe, src, onReady) {
+  iframe.onload = () => {
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    if (doc.readyState === 'complete') {
+      onReady();
+    } else {
+      const checkReady = setInterval(() => {
+        if (doc.readyState === 'complete') {
+          clearInterval(checkReady);
+          onReady();
+        }
+      }, 50);
+    }
+  };
+  iframe.src = src;
+}
+
+
 </script>
 
 
