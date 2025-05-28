@@ -468,6 +468,7 @@ const iframe = slideBox.querySelector('iframe');
 const closeBtn = document.querySelector('.close-btn');
 
 let currentFile = "";
+let iframeLoadRequestId = 0; // ✅ Prevent race conditions
 
 closeBtn.addEventListener('click', () => {
     slideBox.classList.remove('show');
@@ -493,46 +494,48 @@ function setupSlideBoxLinks(selector) {
 
     links.forEach(link => {
         link.addEventListener('click', (e) => {
+
+           e.preventDefault();
+
+    const file = link.getAttribute('data-file');
+    const requestId = ++iframeLoadRequestId; // ✅ New request ID
+
+    iframe.style.opacity = 0;
+
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) mobileMenu.classList.remove('show');
+
+    if (slideBox.classList.contains('show') && currentFile === file) {
+        slideBox.classList.remove('show');
         iframe.style.opacity = 0;
+        return;
+    }
 
-            e.preventDefault();
-            const file = link.getAttribute('data-file');
+    currentFile = file;
 
-            // Hide mobile menu if present
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) {
-                mobileMenu.classList.remove('show');
-            }
-
-            if (slideBox.classList.contains('show') && currentFile === file) {
-                // Just close if same file is already shown
-                slideBox.classList.remove('show');
-                iframe.style.opacity = 0;
-                return;
-            }
-
-            if (!slideBox.classList.contains('show')) {
-                slideBox.classList.add('show');
-                        iframe.style.opacity = 0;
-                currentFile = file;
-                setTimeout(() => {
-                    iframe.src = file;
-                    iframe.style.opacity = 1;
-                }, 500);
-            } else {
-                iframe.style.opacity = 0;
-                iframe.addEventListener('transitionend', function handler() {
-                    iframe.removeEventListener('transitionend', handler);
-                    iframe.src = file;
-                    currentFile = file;
-                    setTimeout(() => iframe.style.opacity = 1, 50);
-                });
-            }
+    if (!slideBox.classList.contains('show')) {
+        slideBox.classList.add('show');
+        setTimeout(() => {
+            if (iframeLoadRequestId !== requestId) return;
+            iframe.src = file;
+            iframe.style.opacity = 1;
+        }, 500);
+    } else {
+        iframe.addEventListener('transitionend', function handler() {
+            iframe.removeEventListener('transitionend', handler);
+            if (iframeLoadRequestId !== requestId) return;
+            iframe.src = file;
+            setTimeout(() => {
+                iframe.style.opacity = 1;
+            }, 50);
+        });
+    }
         });
     });
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
+            iframeLoadRequestId++; // ✅ Cancel pending loads
             iframe.style.opacity = 0;
             slideBox.classList.remove('show');
         });
@@ -554,36 +557,34 @@ document.querySelectorAll('.grid-item[data-file]').forEach(item => {
 
     const slideBox = document.querySelector('.slide-box');
     const iframe = slideBox.querySelector('iframe');
-
-    if(iframe)
-    {
-        iframe.style.opacity = 0;
-    }
+    if (!slideBox || !iframe) return;
 
     const file = item.getAttribute('data-file');
+    if (!file) return;
 
-    if (!slideBox || !iframe || !file) return;
+    const requestId = ++iframeLoadRequestId;
+    iframe.style.opacity = 0;
+    iframe.src = 'about:blank'; // optional: helps flush old content
+    currentFile = file;
 
-    const closeBtn = slideBox.querySelector('.close-btn');
+    if (slideBox.classList.contains('show') && currentFile === file) {
+  // Prevent double-click issues by waiting if a load is in progress
+  if (iframeLoadRequestId > requestId) return;
 
-    // If already showing the same file, close it
-    if (slideBox.classList.contains('show') && iframe.src.includes(file)) {
-      slideBox.classList.remove('show');
-      iframe.style.opacity = 0;
-
-      return;
-    }
-
+  slideBox.classList.remove('show');
+  return;
+}
     if (!slideBox.classList.contains('show')) {
       slideBox.classList.add('show');
       setTimeout(() => {
+        if (iframeLoadRequestId !== requestId) return;
         iframe.src = file;
         iframe.style.opacity = 1;
       }, 500);
     } else {
-      iframe.style.opacity = 0;
       iframe.addEventListener('transitionend', function handler() {
         iframe.removeEventListener('transitionend', handler);
+        if (iframeLoadRequestId !== requestId) return;
         iframe.src = file;
         setTimeout(() => {
           iframe.style.opacity = 1;
