@@ -145,10 +145,10 @@ font-size: 24px;
 .video-gradient-overlay {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 10;
     width: 100%;
     height: 35%; /* Change this value to control vertical size */
-    background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0));
+    background: linear-gradient(to top, rgba(0,0,0,0.3), rgba(0,0,0,0));
     z-index: 2; /* Above video, below footer */
 }
 
