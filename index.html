@@ -316,252 +316,213 @@
 <script>
 (() => {
     const mobileMenuEl = document.getElementById('mobile-menu');
-  window.toggleMobileMenu = () => {
-    if (mobileMenuEl) mobileMenuEl.classList.toggle('show');
-  }
-  // Video carousel setup
-  const videos = Array.from(document.querySelectorAll('.carousel-video'));
-  let current = 0;
-  let interval;
+    window.toggleMobileMenu = () => {
+        if (mobileMenuEl) mobileMenuEl.classList.toggle('show');
+    }
+    // Video carousel setup
+    const videos = Array.from(document.querySelectorAll('.carousel-video'));
+    let current = 0;
+    let interval;
 
-  // Footer elements
-  const footer = document.querySelector('.video-footer-text');
-  const titleEl = footer.querySelector('.video-title');
-  const subtitleEl = footer.querySelector('.video-subtitle');
-  const buttonEl = footer.querySelector('.footer-button');
+    // Footer elements
+    const footer = document.querySelector('.video-footer-text');
+    const titleEl = footer.querySelector('.video-title');
+    const subtitleEl = footer.querySelector('.video-subtitle');
+    const buttonEl = footer.querySelector('.footer-button');
 
-  // Fade timing constants
-  const FADE_OUT_MS = 500;
-  const FADE_TITLE_DELAY = 1000;
-  const FADE_SUB_DELAY = 1600;
-  const FADE_BTN_DELAY = 2300;
-  let fadeTimeouts = [];
+    // Fade timing constants
+    const FADE_OUT_MS = 500;
+    const FADE_TITLE_DELAY = 1000;
+    const FADE_SUB_DELAY = 1600;
+    const FADE_BTN_DELAY = 2300;
+    let fadeTimeouts = [];
 
-  function clearFadeTimeouts() {
-    fadeTimeouts.forEach(clearTimeout);
-    fadeTimeouts = [];
-  }
+    function clearFadeTimeouts() {
+        fadeTimeouts.forEach(clearTimeout);
+        fadeTimeouts = [];
+    }
 
-  function fadeOutTexts(callback) {
-    [titleEl, subtitleEl, buttonEl].forEach(el => el.classList.remove('visible'));
-    buttonEl.style.pointerEvents = 'none';
-    fadeTimeouts.push(setTimeout(callback, FADE_OUT_MS));
-  }
+    function fadeOutTexts(callback) {
+        [titleEl, subtitleEl, buttonEl].forEach(el => el.classList.remove('visible'));
+        buttonEl.style.pointerEvents = 'none';
+        fadeTimeouts.push(setTimeout(callback, FADE_OUT_MS));
+    }
 
-  function fadeInTexts({ title, subtitle, wrapper, file }) {
-    titleEl.textContent = title;
-    subtitleEl.textContent = subtitle;
+    function fadeInTexts({ title, subtitle, wrapper, file }) {
+        titleEl.textContent = title;
+        subtitleEl.textContent = subtitle;
 
-    fadeTimeouts.push(setTimeout(() => titleEl.classList.add('visible'), FADE_TITLE_DELAY));
-    fadeTimeouts.push(setTimeout(() => subtitleEl.classList.add('visible'), FADE_SUB_DELAY));
-    fadeTimeouts.push(
-      setTimeout(() => {
-        buttonEl.classList.add('visible');
-        const btnText = wrapper.dataset.button;
-        const hasButton = btnText && btnText.trim().toLowerCase() !== 'none';
+        fadeTimeouts.push(setTimeout(() => titleEl.classList.add('visible'), FADE_TITLE_DELAY));
+        fadeTimeouts.push(setTimeout(() => subtitleEl.classList.add('visible'), FADE_SUB_DELAY));
+        fadeTimeouts.push(
+            setTimeout(() => {
+                buttonEl.classList.add('visible');
+                const btnText = wrapper.dataset.button;
+                const hasButton = btnText && btnText.trim().toLowerCase() !== 'none';
 
-        if (hasButton) {
-          buttonEl.textContent = btnText;
-          buttonEl.dataset.file = file;
-          buttonEl.style.cssText = 'pointer-events:auto;background:white;color:black;border:1px solid #ccc';
-        } else {
-          buttonEl.textContent = 'Coming soon';
-          buttonEl.removeAttribute('data-file');
-          buttonEl.style.cssText = 'pointer-events:none;background:transparent;color:white;border:1px solid white';
+                if (hasButton) {
+                    buttonEl.textContent = btnText;
+                    buttonEl.dataset.file = file;
+                    buttonEl.style.cssText = 'pointer-events:auto;background:white;color:black;border:1px solid #ccc';
+                } else {
+                    buttonEl.textContent = 'Coming soon';
+                    buttonEl.removeAttribute('data-file');
+                    buttonEl.style.cssText = 'pointer-events:none;background:transparent;color:white;border:1px solid white';
+                }
+            }, FADE_BTN_DELAY)
+        );
+    }
+
+    function updateFooter(video) {
+        clearFadeTimeouts();
+        const wrapper = video.closest('.video-wrapper');
+        const title = wrapper.querySelector('.video-text.title').textContent;
+        const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+        const file = wrapper.dataset.file;
+
+        fadeOutTexts(() => fadeInTexts({ title, subtitle, wrapper, file }));
+    }
+
+    function showVideo(index) {
+        videos[current].classList.remove('active');
+        current = (index + videos.length) % videos.length;
+        const vid = videos[current];
+        vid.classList.add('active');
+        vid.currentTime = 0;
+        vid.play();
+        updateFooter(vid);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleLinks = document.querySelectorAll('.sidebar-links a[data-file], .mobile-menu a[data-file]');
+
+        function setActiveLink(clicked) {
+            toggleLinks.forEach(l => l.classList.remove('active'));
+            clicked.classList.add('active');
         }
-      }, FADE_BTN_DELAY)
-    );
-  }
+        function clearActiveLinks() {
+            toggleLinks.forEach(l => l.classList.remove('active'));
+        }
 
-  function updateFooter(video) {
-    clearFadeTimeouts();
-    const wrapper = video.closest('.video-wrapper');
-    const title = wrapper.querySelector('.video-text.title').textContent;
-    const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
-    const file = wrapper.dataset.file;
-
-    fadeOutTexts(() => fadeInTexts({ title, subtitle, wrapper, file }));
-  }
-
-  function showVideo(index) {
-    videos[current].classList.remove('active');
-    current = (index + videos.length) % videos.length;
-    const vid = videos[current];
-    vid.classList.add('active');
-    vid.currentTime = 0;
-    vid.play();
-    updateFooter(vid);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-       const toggleLinks = document.querySelectorAll('.sidebar-links a[data-file], .mobile-menu a[data-file]');
-
-    
-    function setActiveLink(clicked) {
-      toggleLinks.forEach(l => l.classList.remove('active'));
-      clicked.classList.add('active');
-    }
-    function clearActiveLinks() {
-      toggleLinks.forEach(l => l.classList.remove('active'));
-    }
-    
-      
-      
-    interval = setInterval(() => showVideo(current + 1), 12000);
-    const initial = document.querySelector('.carousel-video.active');
-    if (initial) updateFooter(initial);
-
-    document.querySelectorAll('.carousel-arrow').forEach(el => {
-      el.addEventListener('click', () => {
-        clearInterval(interval);
-        showVideo(el.classList.contains('right') ? current + 1 : current - 1);
         interval = setInterval(() => showVideo(current + 1), 12000);
-      });
-    });
+        const initial = document.querySelector('.carousel-video.active');
+        if (initial) updateFooter(initial);
 
-    const sidebar = document.querySelector('.sidebar');
-    const main = document.querySelector('.main-content');
-    const nav = document.querySelector('.top-nav');
+        document.querySelectorAll('.carousel-arrow').forEach(el => {
+            el.addEventListener('click', () => {
+                clearInterval(interval);
+                showVideo(el.classList.contains('right') ? current + 1 : current - 1);
+                interval = setInterval(() => showVideo(current + 1), 12000);
+            });
+        });
 
-    if (sidebar && main) {
-      sidebar.addEventListener('wheel', e => {
-        e.preventDefault();
-        main.scrollTop += e.deltaY;
-      }, { passive: false });
-    }
+        const sidebar = document.querySelector('.sidebar');
+        const main = document.querySelector('.main-content');
+        const nav = document.querySelector('.top-nav');
 
-    if (main && nav) {
-      main.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', main.scrollTop > 100);
-      });
-    }
-
-    document.querySelectorAll('.grid-item').forEach((item, i) => {
-      item.addEventListener('click', e => {
-        e.preventDefault();
-        const file = item.dataset.file;
-        if (file) {
-          handleLink(file);
-        } else {
-          showVideo(i);
+        if (sidebar && main) {
+            sidebar.addEventListener('wheel', e => {
+                e.preventDefault();
+                main.scrollTop += e.deltaY;
+            }, { passive: false });
         }
-      });
+
+        if (main && nav) {
+            main.addEventListener('scroll', () => {
+                nav.classList.toggle('scrolled', main.scrollTop > 100);
+            });
+        }
+
+        document.querySelectorAll('.grid-item').forEach((item, i) => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                const file = item.dataset.file;
+                if (file) {
+                    handleLink(file);
+                } else {
+                    showVideo(i);
+                }
+            });
+        });
+
+        [main, document.querySelector('.slide-box'), document.querySelector('.grid-container')]
+            .filter(Boolean)
+            .forEach(div =>
+                div.addEventListener('scroll', () => {
+                    const max = div.scrollHeight - div.clientHeight - 1;
+                    div.scrollTop = Math.max(1, Math.min(div.scrollTop, max));
+                })
+            );
+
+        const slideBox = document.querySelector('.slide-box');
+        const iframe = slideBox && slideBox.querySelector('iframe');
+        const closeBtn = document.querySelector('.close-btn');
+        let requestId = 0;
+        let busy = false;
+        let currentFile = '';
+
+        function loadFile(file, id) {
+            // Fade out if already shown
+            if (slideBox.classList.contains('show')) {
+                iframe.style.opacity = 0;
+                const onFadeOut = function handler() {
+                    iframe.removeEventListener('transitionend', handler);
+                    if (requestId !== id) return;
+                    iframe.src = file;
+                    setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
+                };
+                iframe.addEventListener('transitionend', onFadeOut);
+            } else {
+                slideBox.classList.add('show');
+                iframe.style.opacity = 0;
+                setTimeout(() => {
+                    if (requestId !== id) return;
+                    iframe.src = file;
+                    setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
+                }, 500);
+            }
+        }
+
+        function handleLink(file, linkElem) {
+            linkElem = linkElem || null; // make the link optional
+            if (busy) return;
+            busy = true;
+            const id = ++requestId;
+
+            // If same file, close & clear
+            if (slideBox.classList.contains('show') && currentFile === file) {
+                busy = false;
+                return;
+            }
+
+            // Otherwise open & highlight
+            currentFile = file;
+            if (linkElem) setActiveLink(linkElem);
+            loadFile(file, id);
+        }
+
+        toggleLinks.forEach(a =>
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                handleLink(a.dataset.file, a);
+            })
+        );
+
+        closeBtn?.addEventListener('click', () => {
+            requestId++;
+            iframe.style.opacity = 0;
+            slideBox.classList.remove('show');
+            busy = false;
+            clearActiveLinks();
+        });
+
+        document.querySelectorAll(
+            '.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file]'
+        ).forEach(a => a.addEventListener('click', e => {
+            e.preventDefault();
+            handleLink(a.dataset.file);
+        }));
     });
-
-    [main, document.querySelector('.slide-box'), document.querySelector('.grid-container')]
-      .filter(Boolean)
-      .forEach(div =>
-        div.addEventListener('scroll', () => {
-          const max = div.scrollHeight - div.clientHeight - 1;
-          div.scrollTop = Math.max(1, Math.min(div.scrollTop, max));
-        })
-      );
-
-    const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox && slideBox.querySelector('iframe');
-    const closeBtn = document.querySelector('.close-btn');
-    let requestId = 0;
-    let busy = false;
-    let currentFile = '';
-
-    function loadFile(file, id) {
-      // Fade out if already shown
-      if (slideBox.classList.contains('show')) {
-        iframe.style.opacity = 0;
-        const onFadeOut = function handler() {
-          iframe.removeEventListener('transitionend', handler);
-          if (requestId !== id) return;
-          iframe.src = file;
-          setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
-        };
-        iframe.addEventListener('transitionend', onFadeOut);
-      } else {
-        slideBox.classList.add('show');
-        iframe.style.opacity = 0;
-        setTimeout(() => {
-          if (requestId !== id) return;
-          iframe.src = file;
-          setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
-        }, 500);
-      }
-    }
-
-     function handleLink(file, linkElem) {
-      linkElem = linkElem || null;       // make the link optional
-      if (busy) return;
-      busy = true;
-      const id = ++requestId;
-
-      // If same file, close & clear
-      if (slideBox.classList.contains('show') && currentFile === file) {
-        //iframe.style.opacity = 0;
-        //slideBox.classList.remove('show');
-        busy = false;
-        //currentFile = '';
-       // clearActiveLinks();
-        return;
-      }
-
-      // Otherwise open & highlight
-      currentFile = file;
-      if (linkElem) setActiveLink(linkElem);
-      loadFile(file, id);
-    }
-      
-       toggleLinks.forEach(a =>
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        handleLink(a.dataset.file, a);
-      })
-    );
-      
-    closeBtn?.addEventListener('click', () => {
-      requestId++;
-      iframe.style.opacity = 0;
-      slideBox.classList.remove('show');
-      busy = false;
-      clearActiveLinks();  
-    });
-
-    document.querySelectorAll(
-      '.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file]'
-    ).forEach(a => a.addEventListener('click', e => {
-      e.preventDefault();
-      handleLink(a.dataset.file);
-    }));
-    
-    
-  });
-
-  async function preloadAsset(href, asType) {
-    if (document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = href;
-    link.as = asType;
-    document.head.appendChild(link);
-  }
-
-  async function preloadIframeResources(url) {
-    try {
-      const res = await fetch(url);
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      doc.querySelectorAll('link[rel="stylesheet"]').forEach(l => l.href && preloadAsset(l.href, 'style'));
-      doc.querySelectorAll('script[src]').forEach(s => s.src && preloadAsset(s.src, 'script'));
-      doc.querySelectorAll('img[src]').forEach(i => i.src && preloadAsset(i.src, 'image'));
-    } catch {}
-  }
-
-  async function preloadAllAndShow() {
-    const pages = ['resume-page.html', 'coverletter.html', 'broken-path-explore.html', 'shred-engine-explore.html'];
-    for (const page of pages) await preloadIframeResources(page);
-    const iframeEl = document.getElementById('iframe-container');
-    iframeEl.src = pages[0];
-    iframeEl.style.display = 'block';
-  }
-
-  document.getElementById('loadButton')?.addEventListener('click', preloadAllAndShow);
 })();
 </script>
 
