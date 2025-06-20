@@ -310,436 +310,238 @@
         
     </div>
 
-    <script>
+<script>
+(() => {
+  // Video carousel setup
+  const videos = Array.from(document.querySelectorAll('.carousel-video'));
+  let current = 0;
+  let interval;
 
+  // Footer elements
+  const footer = document.querySelector('.video-footer-text');
+  const titleEl = footer.querySelector('.video-title');
+  const subtitleEl = footer.querySelector('.video-subtitle');
+  const buttonEl = footer.querySelector('.footer-button');
 
-const videos = document.querySelectorAll(".carousel-video");
-let current = 0;
-let interval = setInterval(nextVideo, 12000);
+  // Fade timing constants
+  const FADE_OUT_MS = 500;
+  const FADE_TITLE_DELAY = 1000;
+  const FADE_SUB_DELAY = 1600;
+  const FADE_BTN_DELAY = 2300;
+  let fadeTimeouts = [];
 
-const footer = document.querySelector('.video-footer-text');
-const titleEl = footer.querySelector('.video-title');
-const subtitleEl = footer.querySelector('.video-subtitle');
-const buttonEl = footer.querySelector('.footer-button');
-
-let fadeTimeouts = [];
-
-function clearFadeTimeouts() {
-    fadeTimeouts.forEach(t => clearTimeout(t));
+  function clearFadeTimeouts() {
+    fadeTimeouts.forEach(clearTimeout);
     fadeTimeouts = [];
-}
+  }
 
-function fadeOutTexts(callback) {
-    titleEl.classList.remove('visible');
-    subtitleEl.classList.remove('visible');
-    buttonEl.classList.remove('visible');
+  function fadeOutTexts(callback) {
+    [titleEl, subtitleEl, buttonEl].forEach(el => el.classList.remove('visible'));
     buttonEl.style.pointerEvents = 'none';
+    fadeTimeouts.push(setTimeout(callback, FADE_OUT_MS));
+  }
 
-    // Wait for fade out transition duration (0.5s)
-    fadeTimeouts.push(setTimeout(() => {
-        if (callback) callback();
-    }, 500));
-}
-
-function fadeInTexts(title, subtitle, vidWrapper, file) {
+  function fadeInTexts({ title, subtitle, wrapper, file }) {
     titleEl.textContent = title;
     subtitleEl.textContent = subtitle;
 
-    // Fade in title after 1 second delay
-    fadeTimeouts.push(setTimeout(() => {
-        titleEl.classList.add('visible');
-    }, 1000));
+    // Staggered fade-in
+    fadeTimeouts.push(setTimeout(() => titleEl.classList.add('visible'), FADE_TITLE_DELAY));
+    fadeTimeouts.push(setTimeout(() => subtitleEl.classList.add('visible'), FADE_SUB_DELAY));
+    fadeTimeouts.push(
+      setTimeout(() => {
+        buttonEl.classList.add('visible');
+        const btnText = wrapper.dataset.button;
+        const hasButton = btnText && btnText.trim().toLowerCase() !== 'none';
 
-    // Fade in subtitle 600ms after title fade in starts
-    fadeTimeouts.push(setTimeout(() => {
-        subtitleEl.classList.add('visible');
-    }, 1600));
+        if (hasButton) {
+          buttonEl.textContent = btnText;
+          buttonEl.dataset.file = file;
+          buttonEl.style.cssText = 'pointer-events:auto;background:white;color:black;border:1px solid #ccc';
+        } else {
+          buttonEl.textContent = 'Coming soon';
+          buttonEl.removeAttribute('data-file');
+          buttonEl.style.cssText = 'pointer-events:none;background:transparent;color:white;border:1px solid white';
+        }
+      },
+      FADE_BTN_DELAY)
+    );
+  }
 
-
-     // Fade in button 600ms after title fade in starts
-    fadeTimeouts.push(setTimeout(() => {
-            buttonEl.classList.add('visible');
-
-   const buttonText = vidWrapper.getAttribute('data-button');
-
-
-    if (buttonText && buttonText.trim().toLowerCase() !== 'none') {
-        buttonEl.textContent = buttonText;
-        buttonEl.setAttribute('data-file', file);
-        buttonEl.style.pointerEvents = 'auto';
-        buttonEl.style.backgroundColor = 'white';
-        buttonEl.style.color = 'black';
-        buttonEl.style.border = '1px solid #ccc';
-    } else {
-        buttonEl.textContent = 'Coming soon';
-        buttonEl.removeAttribute('data-file');
-        buttonEl.style.pointerEvents = 'none';
-        buttonEl.style.backgroundColor = 'transparent';
-        buttonEl.style.color = 'white';
-        buttonEl.style.border = '1px solid white';
-    }
-
-    }, 2300));
-
-
-}
-
-function updateFooterText(video) {
+  function updateFooter(video) {
     clearFadeTimeouts();
-
     const wrapper = video.closest('.video-wrapper');
     const title = wrapper.querySelector('.video-text.title').textContent;
     const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
-    const file = wrapper.getAttribute('data-file');
+    const file = wrapper.dataset.file;
 
-    fadeOutTexts(() => {
-        fadeInTexts(title, subtitle, wrapper, file);
+    fadeOutTexts(() => fadeInTexts({ title, subtitle, wrapper, file }));
+  }
+
+  function showVideo(index) {
+    videos[current].classList.remove('active');
+    current = (index + videos.length) % videos.length;
+    const vid = videos[current];
+    vid.classList.add('active');
+    vid.currentTime = 0;
+    vid.play();
+    updateFooter(vid);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Start automatic carousel
+    interval = setInterval(() => showVideo(current + 1), 12000);
+
+    // Initialize footer for the active video
+    const initial = document.querySelector('.carousel-video.active');
+    if (initial) updateFooter(initial);
+
+    // Arrow controls
+    document.querySelectorAll('.carousel-arrow').forEach(el => {
+      el.addEventListener('click', () => {
+        clearInterval(interval);
+        showVideo(el.classList.contains('right') ? current + 1 : current - 1);
+        interval = setInterval(() => showVideo(current + 1), 12000);
+      });
     });
 
-    if (file) 
-    {
-        buttonEl.setAttribute('data-file', file);
-    } 
-    else 
-    {
-        buttonEl.removeAttribute('data-file');
-    }
-}
-
-
-function nextVideo() {
-    videos[current].classList.remove("active");
-    current = (current + 1) % videos.length;
-    videos[current].classList.add("active");
-    videos[current].currentTime = 0;  // reset to start
-    videos[current].play();
-
-    updateFooterText(videos[current]);
-}
-
-function prevVideo() {
-    videos[current].classList.remove("active");
-    current = (current - 1 + videos.length) % videos.length;
-    videos[current].classList.add("active");
-    videos[current].currentTime = 0;  // reset to start
-    videos[current].play();
-
-    updateFooterText(videos[current]);
-}
-
-document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
-    clearInterval(interval);
-    nextVideo();
-    interval = setInterval(nextVideo, 12000);
-});
-
-document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
-    clearInterval(interval);
-    prevVideo();
-    interval = setInterval(nextVideo, 12000);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
+    // Sidebar scroll locking
     const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    const activeVideo = document.querySelector('.carousel-video.active');
-    if (activeVideo) updateFooterText(activeVideo);
+    const main = document.querySelector('.main-content');
+    const nav = document.querySelector('.top-nav');
 
-    sidebar.addEventListener('wheel', (e) => {
+    if (sidebar && main) {
+      sidebar.addEventListener(
+        'wheel',
+        e => {
+          e.preventDefault();
+          main.scrollTop += e.deltaY;
+        },
+        { passive: false }
+      );
+    }
+
+    // Navigation bar style on scroll
+    if (main && nav) {
+      main.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', main.scrollTop > 100);
+      });
+    }
+
+    // Grid item clicks: video or slide-box page
+    document.querySelectorAll('.grid-item').forEach((item, i) => {
+      item.addEventListener('click', e => {
         e.preventDefault();
-        mainContent.scrollTop += e.deltaY;
-    }, { passive: false });
-
-    const nav = document.querySelector(".top-nav");
-    const scrollTarget = document.querySelector(".main-content");
-
-    scrollTarget.addEventListener("scroll", function () {
-        const scrollThreshold = 100;
-        if (scrollTarget.scrollTop > scrollThreshold) {
-            nav.classList.add("scrolled");
+        const file = item.dataset.file;
+        if (file) {
+          handleLink(file);
         } else {
-            nav.classList.remove("scrolled");
+          showVideo(i);
         }
+      });
     });
 
-    const gridItems = document.querySelectorAll('.grid-item');
-    let activeIndex = -1;
+    // Clamp scroll for containers
+    [
+      main,
+      document.querySelector('.slide-box'),
+      document.querySelector('.grid-container'),
+    ]
+      .filter(Boolean)
+      .forEach(div =>
+        div.addEventListener('scroll', () => {
+          const max = div.scrollHeight - div.clientHeight - 1;
+          div.scrollTop = Math.max(1, Math.min(div.scrollTop, max));
+        })
+      );
 
-    function setActiveVideo(index) {
-        if (index === activeIndex) return; // do nothing if the same video
-
-        videos.forEach((video, i) => {
-            const isActive = i === index;
-            video.classList.toggle('active', isActive);
-            if (isActive) {
-                updateFooterText(video);
-                // Optionally reset and play video here:
-                // video.currentTime = 0;
-                // video.play();
-            } else {
-                // Optionally pause and reset video here:
-                // video.pause();
-                // video.currentTime = 0;
-            }
-        });
-
-        activeIndex = index;
-    }
-
-   mainContent = document.querySelector('.main-content');
-  const slideBox = document.querySelector('.slide-box');
-  const gridContainer = document.querySelector('.grid-container');
-
-  if (mainContent) clampScroll(mainContent);
-  if (slideBox) clampScroll(slideBox);
-  if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) {
-    clampScroll(gridContainer);
-  }
-
-});
-
-// The rest of your iframe/sidebar code remains unchanged
-
-const slideBox = document.querySelector('.slide-box');
-const iframe = slideBox.querySelector('iframe');
-const closeBtn = document.querySelector('.close-btn');
-
-let currentFile = "";
-let iframeLoadRequestId = 0; // ✅ Prevent race conditions
-let isSlideBoxBusy = false;
-
-closeBtn.addEventListener('click', () => {
-  iframeLoadRequestId++;
-  iframe.style.opacity = 0;
-  slideBox.classList.remove('show');
-  isSlideBoxBusy = false;
-});
-
-document.querySelectorAll("#mobile-menu a").forEach(link => {
-  link.addEventListener("click", () => {
-    const menu = document.getElementById("mobile-menu");
-    menu.classList.remove("show");
-  });
-});
-
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobile-menu");
-  menu.classList.toggle("show");
-}
-function setupSlideBoxLinks(selector) {
-    const links = document.querySelectorAll(selector);
+    // Slide-box setup
     const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox.querySelector('iframe');
+    const iframe = slideBox && slideBox.querySelector('iframe');
     const closeBtn = document.querySelector('.close-btn');
+    let requestId = 0;
+    let busy = false;
+    let currentFile = '';
 
-    links.forEach(link => {
-     link.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (isSlideBoxBusy) return;
+    function loadFile(file, id) {
+      iframe.style.opacity = 0;
+      if (!slideBox.classList.contains('show')) slideBox.classList.add('show');
 
-  const file = link.getAttribute('data-file');
-  const requestId = ++iframeLoadRequestId;
-  iframe.style.opacity = 0;
-
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (mobileMenu) mobileMenu.classList.remove('show');
-
-  if (slideBox.classList.contains('show') && currentFile === file) {
-    slideBox.classList.remove('show');
-    isSlideBoxBusy = false;
-    return;
-  }
-
-  currentFile = file;
-  isSlideBoxBusy = true;
-
-  if (!slideBox.classList.contains('show')) {
-    slideBox.classList.add('show');
-    setTimeout(() => {
-      if (iframeLoadRequestId !== requestId) return;
-      iframe.src = file;
-      iframe.style.opacity = 1;
-      isSlideBoxBusy = false;
-    }, 500);
-  } else {
-    iframe.addEventListener('transitionend', function handler() {
-      iframe.removeEventListener('transitionend', handler);
-      if (iframeLoadRequestId !== requestId) return;
-      iframe.src = file;
       setTimeout(() => {
+        if (requestId !== id) return;
+        iframe.src = file;
         iframe.style.opacity = 1;
-        isSlideBoxBusy = false;
-      }, 50);
-    });
-  }
-});
-    });
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            iframeLoadRequestId++; // ✅ Cancel pending loads
-            iframe.style.opacity = 0;
-            slideBox.classList.remove('show');
-        });
+        busy = false;
+      }, slideBox.classList.contains('show') ? 50 : 500);
     }
-}
 
-// Apply to both sidebar and mobile menu links
-setupSlideBoxLinks('.sidebar-links a[data-file]');
-setupSlideBoxLinks('.mobile-menu a[data-file]');
-setupSlideBoxLinks('.footer-button[data-file]');
+    function handleLink(file) {
+      if (busy) return;
+      busy = true;
+      const id = ++requestId;
 
-document.querySelectorAll('.grid-container img, .grid-container a').forEach(el => {
-  el.addEventListener('dragstart', e => e.preventDefault());
-});
-document.querySelectorAll('.grid-item[data-file]').forEach(item => {
-  item.addEventListener('click', e => {
-    e.preventDefault();
-
-    if (isSlideBoxBusy) return;
-
-    const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox.querySelector('iframe');
-    if (!slideBox || !iframe) return;
-
-    const file = item.getAttribute('data-file');
-    if (!file) return;
-
-    const requestId = ++iframeLoadRequestId;
-    iframe.style.opacity = 0;
-    iframe.src = 'about:blank';
-    currentFile = file;
-    isSlideBoxBusy = true;
-
-    if (slideBox.classList.contains('show') && currentFile === file) {
-      if (iframeLoadRequestId > requestId) {
-        isSlideBoxBusy = false;
+      if (slideBox.classList.contains('show') && currentFile === file) {
+        slideBox.classList.remove('show');
+        busy = false;
+        currentFile = '';
         return;
       }
-      slideBox.classList.remove('show');
-      setTimeout(() => {
-        isSlideBoxBusy = false;
-      }, 500); // match transition duration
-      return;
+
+      currentFile = file;
+      loadFile(file, id);
     }
 
-    if (!slideBox.classList.contains('show')) {
-      slideBox.classList.add('show');
-      setTimeout(() => {
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        iframe.style.opacity = 1;
-        isSlideBoxBusy = false;
-      }, 500);
-    } else {
-      iframe.addEventListener('transitionend', function handler() {
-        iframe.removeEventListener('transitionend', handler);
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        setTimeout(() => {
-          iframe.style.opacity = 1;
-          isSlideBoxBusy = false;
-        }, 50);
+    closeBtn &&
+      closeBtn.addEventListener('click', () => {
+        requestId++;
+        iframe.style.opacity = 0;
+        slideBox.classList.remove('show');
+        busy = false;
       });
-    }
+
+    document
+      .querySelectorAll(
+        '.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file]'
+      )
+      .forEach(a => a.addEventListener('click', e => {
+        e.preventDefault();
+        handleLink(a.dataset.file);
+      }));
   });
-});
 
-function clampScroll(div) {
-  div.addEventListener('scroll', () => {
-    div.scrollTop = Math.max(1, Math.min(div.scrollTop, div.scrollHeight - div.clientHeight - 1));
-  });
-}
+  // Preload assets utilities
+  async function preloadAsset(href, asType) {
+    if (document.querySelector(`link[rel=\"preload\"][href=\"${href}\"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = href;
+    link.as = asType;
+    document.head.appendChild(link);
+  }
 
-function clampScrollSmooth(div) {
-  div.addEventListener('scroll', () => {
-    const maxScroll = div.scrollHeight - div.clientHeight - 1;
-    const clamped = Math.max(1, Math.min(div.scrollTop, maxScroll));
+  async function preloadIframeResources(url) {
+    try {
+      const res = await fetch(url);
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
 
-    // Only scroll if we need to clamp
-    if (div.scrollTop !== clamped) {
-      div.scrollTo({ top: clamped, behavior: 'smooth' });
-    }
-  });
-}
+      doc.querySelectorAll('link[rel=\"stylesheet\"]').forEach(l => l.href && preloadAsset(l.href, 'style'));
+      doc.querySelectorAll('script[src]').forEach(s => s.src && preloadAsset(s.src, 'script'));
+      doc.querySelectorAll('img[src]').forEach(i => i.src && preloadAsset(i.src, 'image'));
+    } catch {}
+  }
 
+  async function preloadAllAndShow() {
+    const pages = ['resume-page.html', 'coverletter.html', 'broken-path-explore.html', 'shred-engine-explore.html'];
+    for (const page of pages) await preloadIframeResources(page);
+    const iframeEl = document.getElementById('iframe-container');
+    iframeEl.src = pages[0];
+    iframeEl.style.display = 'block';
+  }
 
-async function preloadAsset(href, asType) {
-      return new Promise((resolve, reject) => {
-        // Avoid duplicating preloads
-        if (document.querySelector(`link[rel="preload"][href="${href}"]`)) {
-          return resolve();
-        }
-
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = href;
-        link.as = asType;
-        link.onload = resolve;
-        link.onerror = () => {
-          console.warn(`Failed to preload: ${href}`);
-          resolve(); // Don't reject — continue with others
-        };
-        document.head.appendChild(link);
-      });
-    }
-
-    // Parse an iframe HTML and preload its resources
-    async function preloadIframeResourcesFromHTML(url) {
-      try {
-        const htmlText = await fetch(url).then(res => res.text());
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
-
-        const preloadList = [];
-
-        doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-          const href = link.getAttribute('href');
-          if (href) preloadList.push(preloadAsset(href, 'style'));
-        });
-
-        doc.querySelectorAll('script[src]').forEach(script => {
-          const src = script.getAttribute('src');
-          if (src) preloadList.push(preloadAsset(src, 'script'));
-        });
-
-        doc.querySelectorAll('img[src]').forEach(img => {
-          const src = img.getAttribute('src');
-          if (src) preloadList.push(preloadAsset(src, 'image'));
-        });
-
-        await Promise.all(preloadList);
-      } catch (e) {
-        console.error(`Error preloading from ${url}:`, e);
-      }
-    }
-
-    // Preload all iframe pages and load one of them
-    async function preloadAllAndShowIframe() {
-      const iframePages = [
-        'resume-page.html',
-        'coverletter.html',
-        'broken-path-explore.html',
-        'shred-engine-explore.html'
-      ];
-
-      // Preload assets for all iframe pages
-      for (const page of iframePages) {
-        await preloadIframeResourcesFromHTML(page);
-      }
-
-      // Then load one into iframe
-      const iframe = document.getElementById('iframe-container');
-      iframe.src = 'resume-page.html';
-      iframe.style.display = 'block';
-    }
-
-    // Set up button to trigger loading
-    document.getElementById('loadButton').addEventListener('click', () => {
-      preloadAllAndShowIframe();
-    });
+  document.getElementById('loadButton')?.addEventListener('click', preloadAllAndShow);
+})();
 </script>
-
 
 <iframe src="resume-page.html" style="display:none;" id="preload1"></iframe>
 <iframe src="coverletter.html" style="display:none;" id="preload2"></iframe>
