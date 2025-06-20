@@ -129,15 +129,18 @@
   <p class="intro-text">
     My name is Reynardo Perez (Reynarz) and I’m a game programmer! Here you can see some of my personal projects.
   </p>
+        
+        
+       
+        
+</div>
+<div class="beginning-and-end">
+   <p class="only-thing-that-matters">
+       <!-- He is with us, even though we cannot see him -->
+                 <!-- Glory to Jesus Christ! -->
+   </p>
 </div>
 
-    <div class="social-icons">
-       <!--<a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-            <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/_reynarz" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-           --> 
-    </div>
 </aside>
 
         <!-- 🟦 Main Content Area -->
@@ -387,6 +390,19 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+       const toggleLinks = document.querySelectorAll('.sidebar-links a[data-file], .mobile-menu a[data-file]');
+
+    
+    function setActiveLink(clicked) {
+      toggleLinks.forEach(l => l.classList.remove('active'));
+      clicked.classList.add('active');
+    }
+    function clearActiveLinks() {
+      toggleLinks.forEach(l => l.classList.remove('active'));
+    }
+    
+      
+      
     interval = setInterval(() => showVideo(current + 1), 12000);
     const initial = document.querySelector('.carousel-video.active');
     if (initial) updateFooter(initial);
@@ -466,28 +482,41 @@
       }
     }
 
-    function handleLink(file) {
+     function handleLink(file, linkElem) {
+      linkElem = linkElem || null;       // make the link optional
       if (busy) return;
       busy = true;
       const id = ++requestId;
 
+      // If same file, close & clear
       if (slideBox.classList.contains('show') && currentFile === file) {
-        iframe.style.opacity = 0;
-        slideBox.classList.remove('show');
+        //iframe.style.opacity = 0;
+        //slideBox.classList.remove('show');
         busy = false;
-        currentFile = '';
+        //currentFile = '';
+       // clearActiveLinks();
         return;
       }
 
+      // Otherwise open & highlight
       currentFile = file;
+      if (linkElem) setActiveLink(linkElem);
       loadFile(file, id);
     }
-
+      
+       toggleLinks.forEach(a =>
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        handleLink(a.dataset.file, a);
+      })
+    );
+      
     closeBtn?.addEventListener('click', () => {
       requestId++;
       iframe.style.opacity = 0;
       slideBox.classList.remove('show');
       busy = false;
+      clearActiveLinks();  
     });
 
     document.querySelectorAll(
@@ -496,6 +525,8 @@
       e.preventDefault();
       handleLink(a.dataset.file);
     }));
+    
+    
   });
 
   async function preloadAsset(href, asType) {

@@ -85,11 +85,28 @@
 }
 
 .sidebar-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.04);
     color: rgba(255, 255, 255, 0.9);
 }
 
+.sidebar-links a.active,
+.mobile-menu a.active {
+  background-color: #333;  /* your hover color */
+  color: #fff;             /* or whatever contrasts */
+}
+
 .intro {
+    font-size: 12px;
+    font-family: monospace;
+    line-height: 1.6;
+    margin: 20px 0 30px;
+    padding-left: 35px;
+     -webkit-user-drag: none; /* Safari, Chrome */
+    user-drag: none;          /* Standard */
+    user-select: none;        /* Prevent selection */
+}
+
+.beginning-and-end {
     font-size: 12px;
     font-family: monospace;
     line-height: 1.6;
@@ -111,6 +128,15 @@
     color: rgba(255, 255, 255, 0.8);
     font-size: 13px;
     margin: 0 0 10px;
+}
+
+.only-thing-that-matters {
+    padding-top: 5px;
+    max-width: 200px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    margin: 0 0 10px;
+    text-align: center;
 }
 
 .social-icons {
