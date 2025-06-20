@@ -315,6 +315,10 @@
 
 <script>
 (() => {
+    const mobileMenuEl = document.getElementById('mobile-menu');
+  window.toggleMobileMenu = () => {
+    if (mobileMenuEl) mobileMenuEl.classList.toggle('show');
+  }
   // Video carousel setup
   const videos = Array.from(document.querySelectorAll('.carousel-video'));
   let current = 0;
