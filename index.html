@@ -345,7 +345,6 @@
     titleEl.textContent = title;
     subtitleEl.textContent = subtitle;
 
-    // Staggered fade-in
     fadeTimeouts.push(setTimeout(() => titleEl.classList.add('visible'), FADE_TITLE_DELAY));
     fadeTimeouts.push(setTimeout(() => subtitleEl.classList.add('visible'), FADE_SUB_DELAY));
     fadeTimeouts.push(
@@ -363,8 +362,7 @@
           buttonEl.removeAttribute('data-file');
           buttonEl.style.cssText = 'pointer-events:none;background:transparent;color:white;border:1px solid white';
         }
-      },
-      FADE_BTN_DELAY)
+      }, FADE_BTN_DELAY)
     );
   }
 
@@ -389,14 +387,10 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Start automatic carousel
     interval = setInterval(() => showVideo(current + 1), 12000);
-
-    // Initialize footer for the active video
     const initial = document.querySelector('.carousel-video.active');
     if (initial) updateFooter(initial);
 
-    // Arrow controls
     document.querySelectorAll('.carousel-arrow').forEach(el => {
       el.addEventListener('click', () => {
         clearInterval(interval);
@@ -405,30 +399,23 @@
       });
     });
 
-    // Sidebar scroll locking
     const sidebar = document.querySelector('.sidebar');
     const main = document.querySelector('.main-content');
     const nav = document.querySelector('.top-nav');
 
     if (sidebar && main) {
-      sidebar.addEventListener(
-        'wheel',
-        e => {
-          e.preventDefault();
-          main.scrollTop += e.deltaY;
-        },
-        { passive: false }
-      );
+      sidebar.addEventListener('wheel', e => {
+        e.preventDefault();
+        main.scrollTop += e.deltaY;
+      }, { passive: false });
     }
 
-    // Navigation bar style on scroll
     if (main && nav) {
       main.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', main.scrollTop > 100);
       });
     }
 
-    // Grid item clicks: video or slide-box page
     document.querySelectorAll('.grid-item').forEach((item, i) => {
       item.addEventListener('click', e => {
         e.preventDefault();
@@ -441,12 +428,7 @@
       });
     });
 
-    // Clamp scroll for containers
-    [
-      main,
-      document.querySelector('.slide-box'),
-      document.querySelector('.grid-container'),
-    ]
+    [main, document.querySelector('.slide-box'), document.querySelector('.grid-container')]
       .filter(Boolean)
       .forEach(div =>
         div.addEventListener('scroll', () => {
@@ -455,7 +437,6 @@
         })
       );
 
-    // Slide-box setup
     const slideBox = document.querySelector('.slide-box');
     const iframe = slideBox && slideBox.querySelector('iframe');
     const closeBtn = document.querySelector('.close-btn');
@@ -464,15 +445,25 @@
     let currentFile = '';
 
     function loadFile(file, id) {
-      iframe.style.opacity = 0;
-      if (!slideBox.classList.contains('show')) slideBox.classList.add('show');
-
-      setTimeout(() => {
-        if (requestId !== id) return;
-        iframe.src = file;
-        iframe.style.opacity = 1;
-        busy = false;
-      }, slideBox.classList.contains('show') ? 50 : 500);
+      // Fade out if already shown
+      if (slideBox.classList.contains('show')) {
+        iframe.style.opacity = 0;
+        const onFadeOut = function handler() {
+          iframe.removeEventListener('transitionend', handler);
+          if (requestId !== id) return;
+          iframe.src = file;
+          setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
+        };
+        iframe.addEventListener('transitionend', onFadeOut);
+      } else {
+        slideBox.classList.add('show');
+        iframe.style.opacity = 0;
+        setTimeout(() => {
+          if (requestId !== id) return;
+          iframe.src = file;
+          setTimeout(() => { iframe.style.opacity = 1; busy = false; }, 50);
+        }, 500);
+      }
     }
 
     function handleLink(file) {
@@ -481,6 +472,7 @@
       const id = ++requestId;
 
       if (slideBox.classList.contains('show') && currentFile === file) {
+        iframe.style.opacity = 0;
         slideBox.classList.remove('show');
         busy = false;
         currentFile = '';
@@ -491,27 +483,23 @@
       loadFile(file, id);
     }
 
-    closeBtn &&
-      closeBtn.addEventListener('click', () => {
-        requestId++;
-        iframe.style.opacity = 0;
-        slideBox.classList.remove('show');
-        busy = false;
-      });
+    closeBtn?.addEventListener('click', () => {
+      requestId++;
+      iframe.style.opacity = 0;
+      slideBox.classList.remove('show');
+      busy = false;
+    });
 
-    document
-      .querySelectorAll(
-        '.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file]'
-      )
-      .forEach(a => a.addEventListener('click', e => {
-        e.preventDefault();
-        handleLink(a.dataset.file);
-      }));
+    document.querySelectorAll(
+      '.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file]'
+    ).forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      handleLink(a.dataset.file);
+    }));
   });
 
-  // Preload assets utilities
   async function preloadAsset(href, asType) {
-    if (document.querySelector(`link[rel=\"preload\"][href=\"${href}\"]`)) return;
+    if (document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
     const link = document.createElement('link');
     link.rel = 'preload';
     link.href = href;
@@ -524,8 +512,7 @@
       const res = await fetch(url);
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
-
-      doc.querySelectorAll('link[rel=\"stylesheet\"]').forEach(l => l.href && preloadAsset(l.href, 'style'));
+      doc.querySelectorAll('link[rel="stylesheet"]').forEach(l => l.href && preloadAsset(l.href, 'style'));
       doc.querySelectorAll('script[src]').forEach(s => s.src && preloadAsset(s.src, 'script'));
       doc.querySelectorAll('img[src]').forEach(i => i.src && preloadAsset(i.src, 'image'));
     } catch {}
@@ -543,6 +530,7 @@
 })();
 </script>
 
+    
 <iframe src="resume-page.html" style="display:none;" id="preload1"></iframe>
 <iframe src="coverletter.html" style="display:none;" id="preload2"></iframe>
 </body>
