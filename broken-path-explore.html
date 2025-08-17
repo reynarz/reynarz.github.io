@@ -37,7 +37,7 @@
             <img src="assets/images/explore-broken-path/show1.jpg" alt="Screenshot 1">
             <img src="assets/images/explore-broken-path/show2.jpg" alt="Screenshot 2">
             <img src="assets/images/explore-broken-path/show3.jpg" alt="Screenshot 3">
-            <div class="media video" data-type="video" data-video-id="RyuXiyK8TgY" aria-label="Play trailer">
+            <div class="media video" data-type="video" data-video-id="RyuXiyK8TgY" data-start="3:53" aria-label="Play trailer">
               <img
                 src="https://img.youtube.com/vi/RyuXiyK8TgY/hqdefault.jpg"
                 alt="Watch trailer"
@@ -94,16 +94,32 @@ const closeBtn = document.querySelector('.close-lightbox');
 const nextBtn = document.querySelector('.lightbox-next');
 const prevBtn = document.querySelector('.lightbox-prev');
 
+    
+function parseStartTime(val) {
+  if (!val) return 0;
+  if (/^\d+$/.test(val)) return parseInt(val, 10); // already seconds
+  const parts = val.split(':').map(Number);
+  if (parts.some(isNaN)) return 0;
+  if (parts.length === 3) return parts[0]*3600 + parts[1]*60 + parts[2];
+  if (parts.length === 2) return parts[0]*60 + parts[1];
+  return 0;
+}
+    
 // Collect media in the same DOM order: images + video tiles
 const mediaNodes = Array.from(document.querySelectorAll('.grid-left > img, .grid-left > .media.video'));
 const media = mediaNodes.map(node => {
   if (node.tagName === 'IMG') {
     return { type: 'image', src: node.src };
   } else {
-    return { type: 'video', id: node.dataset.videoId };
+    return {
+      type: 'video',
+      id: node.dataset.videoId,
+      start: parseStartTime(node.dataset.start) // ← NEW
+    };
   }
 });
-
+    
+    
 let currentIndex = 0;
 
 function stopVideo() {
@@ -136,7 +152,9 @@ function showMedia(index) {
       lightboxImg.classList.remove('hide');
     });
   } else {
-    const autoplayUrl = `https://www.youtube.com/embed/${item.id}?autoplay=1&rel=0&modestbranding=1`;
+    const start = item.start || 0;
+      const autoplayUrl =
+  `https://www.youtube.com/embed/${item.id}?autoplay=1&rel=0&modestbranding=1${start ? `&start=${start}` : ''}`;
     lightboxVid.src = autoplayUrl;
     lightboxVid.style.display = 'block';
     requestAnimationFrame(() => {
