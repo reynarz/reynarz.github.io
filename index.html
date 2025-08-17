@@ -676,7 +676,7 @@ function openInSlideBox(file) {
       currentFile = file;          // set when actually navigating
       attachLoadThenFadeIn();      // attach before navigation
       loadIframeWithProgress(file, requestId);
-    }, 150); // match your slide transition (0.5s)
+    }, 500); // match your slide transition (0.5s)
   } else {
     // Swapping while open: fade out, swap, fade in
     showLoader('bar');
