@@ -25,10 +25,62 @@
 <!-- Slide-in box with fading iframe -->
 <div class="slide-box">
   <button id="closeBtn" class="close-btn">×</button>
+    
+      <!-- 🔵 Loader -->
+  <div id="loader" class="loader">
+    <div class="loader-bar"></div>
+    <div class="loader-dots" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
   <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
 
 <style>
+    .loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;               /* requested height */
+  z-index: 10002;            /* above close btn (10001) */
+  pointer-events: none;
+  display: none;             /* shown when .active */
+}
+.loader.active { display: block; }
+
+/* Progress mode (bar) */
+.loader-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;               /* requested height */
+  width: 2%;                 /* requested width */
+  background: #fff;
+  transform: translateX(0%); /* we move this 0 -> 98% */
+  transition: transform 0.12s linear;
+}
+/* Hide the bar when using dots fallback */
+.loader.dots .loader-bar { display: none; }
+
+/* Dots fallback (3 mini-bars) */
+.loader-dots {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  display: none;             /* shown when .dots */
+  gap: 2px;                  /* requested spacing */
+}
+.loader.dots .loader-dots { display: flex; }
+.loader-dots span {
+  height: 2px;               /* requested height */
+  width: 30px;               /* small mini-bar width */
+  background: #fff;
+  opacity: 0;
+}
+    
 .slide-box {
   position: fixed;
   top: 0;
@@ -471,6 +523,117 @@ let currentFile = "";
 let iframeLoadRequestId = 0; // prevent race conditions
 let isSlideBoxBusy = false;
 
+    /* ===== Loader helpers ===== */
+let dotsTimer = null;
+let currentAbortController = null;
+
+function showLoader(mode = 'bar') {
+  const el = document.getElementById('loader');
+  if (!el) return;
+  el.classList.add('active');
+  if (mode === 'dots') {
+    el.classList.add('dots');
+    startDots();
+  } else {
+    el.classList.remove('dots');
+    stopDots();
+  }
+}
+
+function hideLoader() {
+  stopDots();
+  const el = document.getElementById('loader');
+  if (el) el.classList.remove('active');
+}
+
+function setLoaderProgress(pct) {
+  const clamped = Math.max(0, Math.min(1, pct || 0));
+  const bar = document.querySelector('#loader .loader-bar');
+  if (!bar) return;
+  // 2% bar travels across; keep fully visible -> max 98%
+  const x = clamped * 98;
+  bar.style.transform = `translateX(${x}%)`;
+}
+
+function startDots() {
+  stopDots();
+  const spans = document.querySelectorAll('#loader .loader-dots span');
+  if (!spans.length) return;
+  // Steps: 0: show 1, 1: show 1-2, 2: show 1-3, 3: hide all, repeat
+  let step = 0;
+  dotsTimer = setInterval(() => {
+    if (step === 0) { spans.forEach(s => s.style.opacity = 0); spans[0].style.opacity = 1; }
+    else if (step === 1) { spans[1].style.opacity = 1; }
+    else if (step === 2) { spans[2].style.opacity = 1; }
+    else if (step === 3) { spans.forEach(s => s.style.opacity = 0); }
+    step = (step + 1) % 4;
+  }, 200); // requested 0.2s cadence
+}
+
+function stopDots() {
+  if (dotsTimer) {
+    clearInterval(dotsTimer);
+    dotsTimer = null;
+  }
+}
+
+/* Inject a <base> into the HTML so relative URLs inside srcdoc resolve. */
+function injectBaseTag(html, baseHref) {
+  if (/<base\s/i.test(html)) return html;
+  if (/<head[^>]*>/i.test(html)) {
+    return html.replace(/<head([^>]*)>/i, `<head$1><base href="${baseHref}">`);
+  }
+  // ensure a head exists if missing
+  return `<!doctype html><html><head><base href="${baseHref}"></head><body>${html}</body></html>`;
+}
+
+/* Load into iframe with progress when possible; fallback to dots + normal src */
+async function loadIframeWithProgress(file, requestId) {
+  // Cancel any in-flight
+  if (currentAbortController) currentAbortController.abort();
+  currentAbortController = new AbortController();
+
+  try {
+    showLoader('bar');
+    setLoaderProgress(0);
+
+    const res = await fetch(file, { signal: currentAbortController.signal, cache: 'no-cache' });
+    const total = Number(res.headers.get('Content-Length')) || 0;
+
+    // If we can't measure or stream, use fallback
+    if (!res.ok || !res.body || !total) throw new Error('no-measurable-progress');
+
+    const reader = res.body.getReader();
+    let received = 0;
+    const chunks = [];
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (requestId !== iframeLoadRequestId) return; // superseded
+      if (done) break;
+      chunks.push(value);
+      received += value.length;
+      setLoaderProgress(received / total);
+    }
+
+    // Build full HTML text and inject <base> so assets resolve
+    const blob = new Blob(chunks, { type: res.headers.get('Content-Type') || 'text/html' });
+    const html = await new Response(blob).text();
+    if (requestId !== iframeLoadRequestId) return;
+
+    const baseHref = new URL(file, location.href).href;
+    const htmlWithBase = injectBaseTag(html, baseHref);
+
+    // Navigate using srcdoc to avoid refetch and to keep the load event
+    iframe.srcdoc = htmlWithBase;
+  } catch (err) {
+    // Fallback to 3-bar animation and normal navigation
+    if (err.name === 'AbortError' || requestId !== iframeLoadRequestId) return;
+    showLoader('dots');
+    iframe.src = file;
+  }
+}
+    
 function openInSlideBox(file) {
   if (!file || isSlideBoxBusy) return;
 
@@ -482,6 +645,8 @@ function openInSlideBox(file) {
   if (slideBox.classList.contains('show') && currentFile === file) {
     slideBox.classList.remove('show');
     iframe.style.opacity = 0;
+    hideLoader();
+    if (currentAbortController) currentAbortController.abort();
     isSlideBoxBusy = false;
     return;
   }
@@ -493,7 +658,8 @@ function openInSlideBox(file) {
     iframe.addEventListener('load', () => {
       if (iframeLoadRequestId !== requestId) return;
       requestAnimationFrame(() => {
-        iframe.style.opacity = 1; // fade in
+        iframe.style.opacity = 1;   // fade in iframe
+        hideLoader();               // hide loader on load
         isSlideBoxBusy = false;
       });
     }, { once: true });
@@ -503,21 +669,24 @@ function openInSlideBox(file) {
     // Opening from closed state
     slideBox.classList.add('show');
     iframe.style.opacity = 0; // start hidden for fade
+    showLoader('bar');        // show loader immediately
+
     setTimeout(() => {
       if (iframeLoadRequestId !== requestId) return;
-      currentFile = file;        // set when actually navigating
-      iframe.src = file;         // navigate
-      attachLoadThenFadeIn();
-    }, 500); // wait for slide-in transition (matches CSS .5s)
+      currentFile = file;          // set when actually navigating
+      attachLoadThenFadeIn();      // attach before navigation
+      loadIframeWithProgress(file, requestId);
+    }, 500); // match your slide transition (0.5s)
   } else {
     // Swapping while open: fade out, swap, fade in
+    showLoader('bar');
     const onFadeOutEnd = (e) => {
       if (e.propertyName !== 'opacity') return;
       iframe.removeEventListener('transitionend', onFadeOutEnd);
       if (iframeLoadRequestId !== requestId) return;
-      currentFile = file;        // set when swapping src
-      iframe.src = file;
-      attachLoadThenFadeIn();
+      currentFile = file;          // set when swapping src
+      attachLoadThenFadeIn();      // attach before navigation
+      loadIframeWithProgress(file, requestId);
     };
     iframe.addEventListener('transitionend', onFadeOutEnd);
     // trigger fade-out
@@ -538,13 +707,14 @@ document.querySelectorAll('.sidebar-links a[data-file], .mobile-menu a[data-file
 // Close button (single listener)
 if (closeBtn) {
   closeBtn.addEventListener('click', () => {
-    iframeLoadRequestId++; // cancel any pending loads
+    iframeLoadRequestId++;        // cancel any pending loads
+    if (currentAbortController) currentAbortController.abort();
+    hideLoader();
     iframe.style.opacity = 0;
     slideBox.classList.remove('show');
     isSlideBoxBusy = false;
   });
 }
-
 // Mobile menu close on link click (non-data-file links)
 document.querySelectorAll("#mobile-menu a").forEach(link => {
   link.addEventListener("click", () => {
