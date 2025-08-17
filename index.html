@@ -19,35 +19,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@200..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.png">
-
 </head>
 <body>
 
+<!-- Slide-in box with fading iframe -->
 <div class="slide-box">
-    <button id="closeBtn" class="close-btn">×</button>
+  <button id="closeBtn" class="close-btn">×</button>
   <iframe id="contentFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
-<style>
 
+<style>
 .slide-box {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start fully off-screen to the right */
-    width: calc(100% - 300px); /* Leave space for the 300px sidebar */
-    height: 100vh;
-    /*background-color: #0a0a0a;*/
-    background-color: black;
-    transition: right 0.5s ease;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: -100%; /* Start fully off-screen to the right */
+  width: calc(100% - 300px); /* Leave space for the 300px sidebar */
+  height: 100vh;
+  background-color: black;
+  transition: right 0.5s ease;
+  z-index: 9999;
 }
 @media (max-width: 1024px) {
-  .slide-box {
-    width: 100%; /* Take full width on mobile */
-  }
+  .slide-box { width: 100%; }
 }
-.slide-box.show {
-    right: 0; /* Slide into position */
-}
+.slide-box.show { right: 0; }
 
 .slide-box iframe {
   width: 100%;
@@ -55,10 +50,6 @@
   border: none;
   opacity: 1;
   transition: opacity 0.6s ease;
-}
-
-.slide-box iframe.fade-out {
-  opacity: 0;
 }
 
 .close-btn {
@@ -75,281 +66,244 @@
   transition: transform 0.24s ease-out, color 0.24s ease;
   padding: 20px;
 }
-
 .close-btn:hover {
   color: #FFFFFF90;
   transform: scale(0.9);
 }
 </style>
 
-    <div class="container">
+<div class="container">
 
   <div class="mobile-header">
-<div class="mobile-header-top">
-    <div class="home-button">
-      <a href="#">REYNARZ</a>
+    <div class="mobile-header-top">
+      <div class="home-button">
+        <a href="#">REYNARZ</a>
+      </div>
+      <div class="hamburger-container">
+        <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+      </div>
     </div>
-    <div class="hamburger-container">
-      <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+    <div id="mobile-menu" class="mobile-menu">
+      <a href="#" data-file="resume-page.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+      <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+      <hr class="sidebar-divider">
+      <a href="https://www.linkedin.com/in/reynardoperez" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+      <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+      <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank"><i class="fa-brands fa-youtube"></i>Youtube</a>
     </div>
   </div>
-  <div id="mobile-menu" class="mobile-menu">
-    <a href="#" data-file="resume-page.html"><i class="fas fa-file-alt"></i>RESUMe</a>
-    <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
-  <hr class="sidebar-divider">
-    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-    <a href="https://github.com/reynarzz" target="_blank"><i class="fa-solid fa-code-branch"></i>GitHub</a>
-    <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank"><i class="fa-brands fa-youtube"></i>Youtube</a>
 
-  </div>
-</div>
-
-
-        <!-- 🔴 Sidebar -->
-        <aside class="sidebar">
+  <!-- 🔴 Sidebar -->
+  <aside class="sidebar">
     <div class="profile-section">
-        <img src="assets/images/profile.png" alt="Profile Picture" class="profile-pic">
-        <h2 class="name">Reynardo Pérez</h2>
+      <img src="assets/images/profile.png" alt="Profile Picture" class="profile-pic">
+      <h2 class="name">Reynardo Pérez</h2>
     </div>
 
-   <div class="sidebar-links">
-  <a href="#" data-file="resume-page.html"><i class="fas fa-file-alt"></i>RESUMe</a>
-  <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
-  <hr class="sidebar-divider">
-
-    <div class="social-buttons">
-    <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-    <a href="https://github.com/reynarzz" target="_blank" class="social-btn"><i class="fa-solid fa-code-branch"></i>GitHub</a>
-    <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i>Youtube</a>
-  </div>
-</div>
+    <div class="sidebar-links">
+      <a href="#" data-file="resume-page.html"><i class="fas fa-file-alt"></i>RESUMe</a>
+      <a href="#" data-file="coverletter.html"><i class="fa-solid fa-envelope"></i>COVER LETTER</a>
+      <hr class="sidebar-divider">
+      <div class="social-buttons">
+        <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+        <a href="https://github.com/reynarzz" target="_blank" class="social-btn"><i class="fa-solid fa-code-branch"></i>GitHub</a>
+        <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i>Youtube</a>
+      </div>
+    </div>
 
     <div class="intro">
-  <strong>HELLO, WELCOME!</strong>
-  <p class="intro-text">
-    My name is Reynardo Perez (Reynarz) I’m a gameplay, tools programmer! <br>Here you can see some of my personal projects.
-  </p>
+      <strong>HELLO, WELCOME!</strong>
+      <p class="intro-text">
+        My name is Reynardo Perez (Reynarz) I’m a gameplay, tools programmer! <br>Here you can see some of my personal projects.
+      </p>
+    </div>
+    <div class="social-icons"></div>
+  </aside>
+
+  <!-- 🟦 Main Content Area -->
+  <main class="main-content">
+    <!-- 🟡 Top Nav (currently commented out) -->
+
+    <!-- Video section -->
+    <section class="video-section">
+      <div class="video-carousel">
+        <div class="carousel-track">
+
+          <div class="video-wrapper" data-file="broken-path-explore.html" data-button="View More">
+            <video 
+              playsinline 
+              webkit-playsinline 
+              muted 
+              class="carousel-video active" 
+              poster="assets/images/brokenVideoWait.png" 
+              preload="none">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="video-gradient-overlay"></div>
+            <div class="video-text title">Broken Path</div>
+            <div class="video-text subtitle">My Pixel Art video game being made with Unity3D.</div>
+          </div>
+
+          <div class="video-wrapper" data-file="mino-explore.html" data-button="View More">
+            <video 
+              playsinline 
+              webkit-playsinline 
+              muted 
+              class="carousel-video" 
+              poster="assets/images/minoVideoWait.png" 
+              preload="none">
+            </video>
+            <div class="video-text title">Mino's Adventure</div>
+            <div class="video-text subtitle">3D Platformer (PC-Mobile) made with Unity3D</div>
+          </div>
+
+          <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
+            <video 
+              playsinline 
+              webkit-playsinline 
+              muted 
+              class="carousel-video" 
+              poster="assets/images/engineVideoWait.png" 
+              preload="none">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="video-gradient-overlay"></div>
+            <div class="video-text title">SHRED ENGINE</div>
+            <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer.</div>
+          </div>
+
+          <div class="video-wrapper">
+            <video 
+              playsinline 
+              webkit-playsinline 
+              muted 
+              class="carousel-video" 
+              poster="assets/images/MinoToolVideoWait.png" 
+              preload="none">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="video-gradient-overlay"></div>
+            <div class="video-text title">Mino tool</div>
+            <div class="video-text subtitle">My C# custom library to create powerful graphics tools. OpenGL, Custom renderer.</div>
+          </div>
+
+          <div class="video-wrapper">
+            <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/navecita.mp4" autoplay muted loop></video>
+            <div class="video-overlay"></div>
+            <div class="video-gradient-overlay"></div>
+            <div class="video-text title">Navecita</div>
+            <div class="video-text subtitle">Game made from scratch, C++ + OpenGL</div>
+          </div>
+
+          <div class="video-wrapper">
+            <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/shder3d.mp4" autoplay muted loop></video>
+            <div class="video-overlay"></div>
+            <div class="video-gradient-overlay"></div>
+            <div class="video-text title">Shder3D</div>
+            <div class="video-text subtitle">3D GLSL shader editor for Android, made with Kotlin and OpenGL ES 2.0.</div>
+          </div>
+
+          <button class="carousel-arrow left">
+            <!-- Left Arrow -->
+            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <button class="carousel-arrow right">
+            <!-- Right Arrow -->
+            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- <header class="top-nav">...</header> -->
+
+        <footer class="video-footer-text">
+          <div class="video-title"></div>
+          <div class="video-subtitle"></div>
+          <a href="#" class="footer-button" target="_blank" rel="noopener noreferrer" data-file="broken-path-explore.html">
+            View more
+          </a>
+        </footer>
+      </div>
+    </section>
+
+    <section class="grid-section">
+      <div class="grid-container">
+        <a href="#" class="grid-item" data-file="broken-path-explore.html">
+          <img src="assets/images/01-01.jpg" alt="Image 1" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">BROKEN PATH</h3>
+            <p class="hashtags">#Unity3D #Game</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item" data-file="mino-explore.html">
+          <img src="assets/images/minogrid3.png"  alt="Image 2" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Mino's Adventure</h3>
+            <p class="hashtags">#Unity3D #Platformer #Solo-project</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item" data-file="shred-engine-explore.html">
+          <img src="assets/images/engine5.png" alt="Image 2" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Shred Engine</h3>
+            <p class="hashtags">#Engine #C++ #Jolt #Renderer</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item">
+          <img src="assets/images/02-01.jpg" alt="Image 3" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Mino Tool</h3>
+            <p class="hashtags">#OpenGL #CSharp #DearImGui</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item">
+          <img src="assets/images/04-01.png" alt="Image 4" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Navecita</h3>
+            <p class="hashtags">#C++ #OpenGL</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item">
+          <img src="assets/images/sh3dpic.jpg" alt="Image 5" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Shder3D</h3>
+            <p class="hashtags">#Kotlin #OpenGLES #Editor</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item">
+          <img src="assets/images/03-01.jpg" alt="Image 6" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">Minity</h3>
+            <p class="hashtags">#Unity3D #Native plugin #Renderer</p>
+          </div>
+        </a>
+
+        <a href="#" class="grid-item">
+          <img src="assets/images/05-01.png" alt="Image 7" loading="eager"/>
+          <div class="overlay">
+            <h3 class="title">U Talk</h3>
+            <p class="hashtags">#Unity3D #Asset #Tool</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
 </div>
-    <div class="social-icons">
-       <!--<a href="https://github.com/reynarzz" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/reynardoperez" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-            <a href="https://www.youtube.com/channel/UCYxGHl-M49FFuR5YyndAYgw" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/_reynarz" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-           --> 
-    </div>
-</aside>
 
-        <!-- 🟦 Main Content Area -->
-        <main class="main-content">
-            <!-- 🟡 Top Nav -->
-      
-            <!-- Video section (placeholder) -->
-            <section class="video-section">
-                <div class="video-carousel">
-                    <div class="carousel-track">
-
-                      <div class="video-wrapper" data-file="broken-path-explore.html" data-button="View More">
-                      <!--<video playsinline webkit-playsinline muted class="carousel-video active" src="assets/videos/brokenPath.mp4" autoplay muted loop></video>-->
-                          <video 
-                          playsinline 
-                          webkit-playsinline 
-                          muted 
-                          class="carousel-video active" 
-                          poster="assets/images/brokenVideoWait.png" 
-                          preload="none">
-                        </video>
-                          
-                      <div class="video-overlay"></div>
-                      <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Broken Path</div>
-                      <div class="video-text subtitle">My Pixel Art video game being made with Unity3D.</div>
-                      </div>
-
-                        
-                           <div class="video-wrapper" data-file="mino-explore.html" data-button="View More">
-                      <!--<video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/3dplatformer.mp4" autoplay muted loop></video>-->
-                     
-                                      <video 
-                          playsinline 
-                          webkit-playsinline 
-                          muted 
-                          class="carousel-video" 
-                          poster="assets/images/minoVideoWait.png" 
-                          preload="none">
-                        </video>
-                              
-                    <div class="video-text title">Mino's Adventure</div>
-                      <div class="video-text subtitle">3D Platformer (PC-Mobile) made with Unity3D 
-                        </div>
-                    </div>
-                        
-                        
-                              <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
-                      <!--<video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/engineView.mp4" autoplay muted loop></video>-->
-                        <video 
-                          playsinline 
-                          webkit-playsinline 
-                          muted 
-                          class="carousel-video" 
-                          poster="assets/images/engineVideoWait.png" 
-                          preload="none">
-                        </video>
-                      <div class="video-overlay"></div>
-                      <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">SHRED ENGINE</div>
-                      <div class="video-text subtitle">My custom 3D/2D game engine made with C++, Jolt physics, Box2D, and own renderer. 
-                        </div>
-                    </div>
-               
-                        
-                    <div class="video-wrapper">
-                      <!--<video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/minoTool.mp4" autoplay muted loop></video>-->
-                           <video 
-                          playsinline 
-                          webkit-playsinline 
-                          muted 
-                          class="carousel-video" 
-                          poster="assets/images/MinoToolVideoWait.png" 
-                          preload="none">
-                        </video>
-                        
-                      <div class="video-overlay"></div>
-                      
-                       <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Mino tool</div>
-                      <div class="video-text subtitle">My C# custom library to create powerful graphics tools. OpenGL, Custom renderer.</div>
-                    </div>
-                        
-
-                      
-
-                    <div class="video-wrapper">
-                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/navecita.mp4" autoplay muted loop></video>
-                      <div class="video-overlay"></div>
-                      
-                       <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Navecita</div>
-                      <div class="video-text subtitle">Game made from scratch, C++ + OpenGL</div>
-                    </div>
-
-                       <div class="video-wrapper">
-                      <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/shder3d.mp4" autoplay muted loop></video>
-                      <div class="video-overlay"></div>
-                      <div class="video-gradient-overlay"></div>
-                      <div class="video-text title">Shder3D</div>
-                      <div class="video-text subtitle">3D GLSL shader editor for Android, made with Kotlin and OpenGL ES 2.0. 
-                        </div>
-                    </div>
-
-                   <button class="carousel-arrow left">
-  <!-- Left Arrow -->
-  <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="15 18 9 12 15 6" />
-  </svg>
-</button>
-
-<button class="carousel-arrow right">
-  <!-- Right Arrow -->
-  <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="9 6 15 12 9 18" />
-  </svg>
-</button>
-             </div>
-
-             <!-- <header class="top-nav">
-        <div class="home-button">
-            <a href="#">REYNARZ</a>
-        </div>-->
-    </header>
-   <footer class="video-footer-text">
-    <div class="video-title"></div>
-    <div class="video-subtitle"></div>
-    <a href="#" class="footer-button" target="_blank" rel="noopener noreferrer" data-file="broken-path-explore.html">
-    View more
-  </a>
-    </footer>
-            </section>
-            <section class="grid-section">
-<div class="grid-container">
-  <a href="#" class="grid-item" data-file="broken-path-explore.html">
-    <img src="assets/images/01-01.jpg" alt="Image 1" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">BROKEN PATH</h3>
-      <p class="hashtags">#Unity3D #Game</p>
-    </div>
-  </a>
-    
-       <a href="#" class="grid-item" data-file="mino-explore.html">
-    <img src="assets/images/minogrid3.png"  alt="Image 2" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">Mino's Adventure</h3>
-      <p class="hashtags">#Unity3D #Platformer #Solo-project</p>
-    </div>
-  </a>
-    
-    
-     <a href="#" class="grid-item" data-file="shred-engine-explore.html">
-    <img src="assets/images/engine5.png" alt="Image 2" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">Shred Engine</h3>
-      <p class="hashtags">#Engine #C++ #Jolt #Renderer</p>
-    </div>
-  </a>
-    
-    
- 
-     <a href="#" class="grid-item">
-    <img src="assets/images/02-01.jpg" alt="Image 3" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">Mino Tool</h3>
-      <p class="hashtags">#OpenGL #CSharp #DearImGui</p>
-    </div>
-  </a>
-    
-    
- 
-    <a href="#" class="grid-item">
-    <img src="assets/images/04-01.png" alt="Image 4" loading="eager"/>
-     <div class="overlay">
-      <h3 class="title">Navecita</h3>
-      <p class="hashtags">#C++ #OpenGL</p>
-    </div>
-  </a>
-
- 
-  <a href="#" class="grid-item">
-    <img src="assets/images/sh3dpic.jpg" alt="Image 5" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">Shder3D</h3>
-      <p class="hashtags">#Kotlin #OpenGLES #Editor</p>
-    </div>
-  </a>
-  <a href="#" class="grid-item">
-    <img src="assets/images/03-01.jpg" alt="Image 6" loading="eager"/>
-      <div class="overlay">
-      <h3 class="title">Minity</h3>
-      <p class="hashtags">#Unity3D #Native plugin #Renderer</p>
-    </div>
-  </a>
-  <a href="#" class="grid-item">
-    <img src="assets/images/05-01.png" alt="Image 7" loading="eager"/>
-    <div class="overlay">
-      <h3 class="title">U Talk</h3>
-      <p class="hashtags">#Unity3D #Asset #Tool</p>
-    </div>
-  </a>
- <!-- <a href="#" class="grid-item">
-    <img src="assets/images/03-01.png" alt="Image 6" />
-  </a>-->
-</div>
-</section>
-        </main>
-        
-    </div>
-
-    <script>
-
-
+<script>
+/* ===========================
+   Carousel / Footer Text
+   =========================== */
 const videos = document.querySelectorAll(".carousel-video");
 let current = 0;
 let interval = setInterval(nextVideo, 12000);
@@ -362,324 +316,253 @@ const buttonEl = footer.querySelector('.footer-button');
 let fadeTimeouts = [];
 
 function clearFadeTimeouts() {
-    fadeTimeouts.forEach(t => clearTimeout(t));
-    fadeTimeouts = [];
+  fadeTimeouts.forEach(t => clearTimeout(t));
+  fadeTimeouts = [];
 }
 
 function fadeOutTexts(callback) {
-    titleEl.classList.remove('visible');
-    subtitleEl.classList.remove('visible');
-    buttonEl.classList.remove('visible');
-    buttonEl.style.pointerEvents = 'none';
+  titleEl.classList.remove('visible');
+  subtitleEl.classList.remove('visible');
+  buttonEl.classList.remove('visible');
+  buttonEl.style.pointerEvents = 'none';
 
-    // Wait for fade out transition duration (0.5s)
-    fadeTimeouts.push(setTimeout(() => {
-        if (callback) callback();
-    }, 500));
+  // Wait for fade out transition duration (0.5s)
+  fadeTimeouts.push(setTimeout(() => {
+    if (callback) callback();
+  }, 500));
 }
 
 function fadeInTexts(title, subtitle, vidWrapper, file) {
-    titleEl.textContent = title;
-    subtitleEl.textContent = subtitle;
+  titleEl.textContent = title;
+  subtitleEl.textContent = subtitle;
 
-    // Fade in title after 1 second delay
-    fadeTimeouts.push(setTimeout(() => {
-        titleEl.classList.add('visible');
-    }, 1000));
+  // Fade in title after 1 second delay
+  fadeTimeouts.push(setTimeout(() => {
+    titleEl.classList.add('visible');
+  }, 1000));
 
-    // Fade in subtitle 600ms after title fade in starts
-    fadeTimeouts.push(setTimeout(() => {
-        subtitleEl.classList.add('visible');
-    }, 1600));
+  // Fade in subtitle 600ms after title fade in starts
+  fadeTimeouts.push(setTimeout(() => {
+    subtitleEl.classList.add('visible');
+  }, 1600));
 
+  // Fade in button shortly after
+  fadeTimeouts.push(setTimeout(() => {
+    buttonEl.classList.add('visible');
 
-     // Fade in button 600ms after title fade in starts
-    fadeTimeouts.push(setTimeout(() => {
-            buttonEl.classList.add('visible');
-
-   const buttonText = vidWrapper.getAttribute('data-button');
-
+    const buttonText = vidWrapper.getAttribute('data-button');
 
     if (buttonText && buttonText.trim().toLowerCase() !== 'none') {
-        buttonEl.textContent = buttonText;
+      buttonEl.textContent = buttonText;
+      if (file) {
         buttonEl.setAttribute('data-file', file);
         buttonEl.style.pointerEvents = 'auto';
-        buttonEl.style.backgroundColor = 'white';
-        buttonEl.style.color = 'black';
-        buttonEl.style.border = '1px solid #ccc';
-    } else {
-        buttonEl.textContent = 'Coming soon';
+      } else {
         buttonEl.removeAttribute('data-file');
         buttonEl.style.pointerEvents = 'none';
-        buttonEl.style.backgroundColor = 'transparent';
-        buttonEl.style.color = 'white';
-        buttonEl.style.border = '1px solid white';
+      }
+      buttonEl.style.backgroundColor = 'white';
+      buttonEl.style.color = 'black';
+      buttonEl.style.border = '1px solid #ccc';
+    } else {
+      buttonEl.textContent = 'Coming soon';
+      buttonEl.removeAttribute('data-file');
+      buttonEl.style.pointerEvents = 'none';
+      buttonEl.style.backgroundColor = 'transparent';
+      buttonEl.style.color = 'white';
+      buttonEl.style.border = '1px solid white';
     }
-
-    }, 2300));
-
-
+  }, 2300));
 }
 
 function updateFooterText(video) {
-    clearFadeTimeouts();
+  clearFadeTimeouts();
 
-    const wrapper = video.closest('.video-wrapper');
-    const title = wrapper.querySelector('.video-text.title').textContent;
-    const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
-    const file = wrapper.getAttribute('data-file');
+  const wrapper = video.closest('.video-wrapper');
+  const title = wrapper.querySelector('.video-text.title').textContent;
+  const subtitle = wrapper.querySelector('.video-text.subtitle').textContent;
+  const file = wrapper.getAttribute('data-file');
 
-    fadeOutTexts(() => {
-        fadeInTexts(title, subtitle, wrapper, file);
-    });
+  fadeOutTexts(() => {
+    fadeInTexts(title, subtitle, wrapper, file);
+  });
 
-    if (file) 
-    {
-        buttonEl.setAttribute('data-file', file);
-    } 
-    else 
-    {
-        buttonEl.removeAttribute('data-file');
-    }
+  if (file) {
+    buttonEl.setAttribute('data-file', file);
+  } else {
+    buttonEl.removeAttribute('data-file');
+  }
 }
 
-
 function nextVideo() {
-    videos[current].classList.remove("active");
-    current = (current + 1) % videos.length;
-    videos[current].classList.add("active");
-    videos[current].currentTime = 0;  // reset to start
-    videos[current].play();
-
-    updateFooterText(videos[current]);
+  videos[current].classList.remove("active");
+  current = (current + 1) % videos.length;
+  videos[current].classList.add("active");
+  videos[current].currentTime = 0;  // reset to start
+  videos[current].play().catch(()=>{});
+  updateFooterText(videos[current]);
 }
 
 function prevVideo() {
-    videos[current].classList.remove("active");
-    current = (current - 1 + videos.length) % videos.length;
-    videos[current].classList.add("active");
-    videos[current].currentTime = 0;  // reset to start
-    videos[current].play();
-
-    updateFooterText(videos[current]);
+  videos[current].classList.remove("active");
+  current = (current - 1 + videos.length) % videos.length;
+  videos[current].classList.add("active");
+  videos[current].currentTime = 0;  // reset to start
+  videos[current].play().catch(()=>{});
+  updateFooterText(videos[current]);
 }
 
 document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
-    clearInterval(interval);
-    nextVideo();
-    interval = setInterval(nextVideo, 12000);
+  clearInterval(interval);
+  nextVideo();
+  interval = setInterval(nextVideo, 12000);
 });
 
 document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
-    clearInterval(interval);
-    prevVideo();
-    interval = setInterval(nextVideo, 12000);
+  clearInterval(interval);
+  prevVideo();
+  interval = setInterval(nextVideo, 12000);
 });
 
+/* ===========================
+   General Layout behaviors
+   =========================== */
 document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    const activeVideo = document.querySelector('.carousel-video.active');
-    if (activeVideo) updateFooterText(activeVideo);
+  const sidebar = document.querySelector('.sidebar');
+  const mainContent = document.querySelector('.main-content');
+  const activeVideo = document.querySelector('.carousel-video.active');
+  if (activeVideo) updateFooterText(activeVideo);
 
+  // Scroll sidebar wheel -> main content
+  if (sidebar && mainContent) {
     sidebar.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        mainContent.scrollTop += e.deltaY;
+      e.preventDefault();
+      mainContent.scrollTop += e.deltaY;
     }, { passive: false });
-
-    const nav = document.querySelector(".top-nav");
-    const scrollTarget = document.querySelector(".main-content");
-
-    scrollTarget.addEventListener("scroll", function () {
-        const scrollThreshold = 100;
-        if (scrollTarget.scrollTop > scrollThreshold) {
-            nav.classList.add("scrolled");
-        } else {
-            nav.classList.remove("scrolled");
-        }
-    });
-
-    const gridItems = document.querySelectorAll('.grid-item');
-    let activeIndex = -1;
-
-    function setActiveVideo(index) {
-        if (index === activeIndex) return; // do nothing if the same video
-
-        videos.forEach((video, i) => {
-            const isActive = i === index;
-            video.classList.toggle('active', isActive);
-            if (isActive) {
-                updateFooterText(video);
-                // Optionally reset and play video here:
-                // video.currentTime = 0;
-                // video.play();
-            } else {
-                // Optionally pause and reset video here:
-                // video.pause();
-                // video.currentTime = 0;
-            }
-        });
-
-        activeIndex = index;
-    }
-
-   mainContent = document.querySelector('.main-content');
-  const slideBox = document.querySelector('.slide-box');
-  const gridContainer = document.querySelector('.grid-container');
-
-  if (mainContent) clampScroll(mainContent);
-  if (slideBox) clampScroll(slideBox);
-  if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) {
-    clampScroll(gridContainer);
   }
 
+  const nav = document.querySelector(".top-nav");
+  const scrollTarget = document.querySelector(".main-content");
+  if (nav && scrollTarget) {
+    scrollTarget.addEventListener("scroll", function () {
+      const scrollThreshold = 100;
+      if (scrollTarget.scrollTop > scrollThreshold) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    });
+  }
+
+  const gridContainer = document.querySelector('.grid-container');
+  if (mainContent) clampScroll(mainContent);
+  if (document.querySelector('.slide-box')) clampScroll(document.querySelector('.slide-box'));
+  if (gridContainer && gridContainer.scrollHeight > gridContainer.clientHeight) clampScroll(gridContainer);
 });
 
-// The rest of your iframe/sidebar code remains unchanged
-
+/* ===========================
+   Slide-box open/close (Unified)
+   =========================== */
 const slideBox = document.querySelector('.slide-box');
-const iframe = slideBox.querySelector('iframe');
-const closeBtn = document.querySelector('.close-btn');
+const iframe = document.getElementById('contentFrame');
+const closeBtn = document.getElementById('closeBtn');
 
 let currentFile = "";
-let iframeLoadRequestId = 0; // ✅ Prevent race conditions
+let iframeLoadRequestId = 0; // prevent race conditions
 let isSlideBoxBusy = false;
 
-closeBtn.addEventListener('click', () => {
-  iframeLoadRequestId++;
-  iframe.style.opacity = 0;
-  slideBox.classList.remove('show');
-  isSlideBoxBusy = false;
-});
+function openInSlideBox(file) {
+  if (!file || isSlideBoxBusy) return;
 
+  // Close mobile menu if open
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenu) mobileMenu.classList.remove('show');
+
+  // Toggle close if same file + already open
+  if (slideBox.classList.contains('show') && currentFile === file) {
+    slideBox.classList.remove('show');
+    iframe.style.opacity = 0;
+    isSlideBoxBusy = false;
+    return;
+  }
+
+  const requestId = ++iframeLoadRequestId;
+  isSlideBoxBusy = true;
+
+  const attachLoadThenFadeIn = () => {
+    iframe.addEventListener('load', () => {
+      if (iframeLoadRequestId !== requestId) return;
+      requestAnimationFrame(() => {
+        iframe.style.opacity = 1; // fade in
+        isSlideBoxBusy = false;
+      });
+    }, { once: true });
+  };
+
+  if (!slideBox.classList.contains('show')) {
+    // Opening from closed state
+    slideBox.classList.add('show');
+    iframe.style.opacity = 0; // start hidden for fade
+    setTimeout(() => {
+      if (iframeLoadRequestId !== requestId) return;
+      currentFile = file;        // set when actually navigating
+      iframe.src = file;         // navigate
+      attachLoadThenFadeIn();
+    }, 500); // wait for slide-in transition (matches CSS .5s)
+  } else {
+    // Swapping while open: fade out, swap, fade in
+    const onFadeOutEnd = (e) => {
+      if (e.propertyName !== 'opacity') return;
+      iframe.removeEventListener('transitionend', onFadeOutEnd);
+      if (iframeLoadRequestId !== requestId) return;
+      currentFile = file;        // set when swapping src
+      iframe.src = file;
+      attachLoadThenFadeIn();
+    };
+    iframe.addEventListener('transitionend', onFadeOutEnd);
+    // trigger fade-out
+    requestAnimationFrame(() => { iframe.style.opacity = 0; });
+  }
+}
+
+// Single, consolidated click handler for ALL [data-file] triggers
+document.querySelectorAll('.sidebar-links a[data-file], .mobile-menu a[data-file], .footer-button[data-file], .grid-item[data-file]')
+  .forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const file = el.getAttribute('data-file');
+      if (file) openInSlideBox(file);
+    });
+  });
+
+// Close button (single listener)
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    iframeLoadRequestId++; // cancel any pending loads
+    iframe.style.opacity = 0;
+    slideBox.classList.remove('show');
+    isSlideBoxBusy = false;
+  });
+}
+
+// Mobile menu close on link click (non-data-file links)
 document.querySelectorAll("#mobile-menu a").forEach(link => {
   link.addEventListener("click", () => {
     const menu = document.getElementById("mobile-menu");
-    menu.classList.remove("show");
+    if (menu) menu.classList.remove("show");
   });
 });
 
 function toggleMobileMenu() {
   const menu = document.getElementById("mobile-menu");
-  menu.classList.toggle("show");
-}
-function setupSlideBoxLinks(selector) {
-    const links = document.querySelectorAll(selector);
-    const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox.querySelector('iframe');
-    const closeBtn = document.querySelector('.close-btn');
-
-    links.forEach(link => {
-     link.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (isSlideBoxBusy) return;
-
-  const file = link.getAttribute('data-file');
-  const requestId = ++iframeLoadRequestId;
-  iframe.style.opacity = 0;
-
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (mobileMenu) mobileMenu.classList.remove('show');
-
-  if (slideBox.classList.contains('show') && currentFile === file) {
-    slideBox.classList.remove('show');
-    isSlideBoxBusy = false;
-    return;
-  }
-
-  currentFile = file;
-  isSlideBoxBusy = true;
-
-  if (!slideBox.classList.contains('show')) {
-    slideBox.classList.add('show');
-    setTimeout(() => {
-      if (iframeLoadRequestId !== requestId) return;
-      iframe.src = file;
-      iframe.style.opacity = 1;
-      isSlideBoxBusy = false;
-    }, 500);
-  } else {
-    iframe.addEventListener('transitionend', function handler() {
-      iframe.removeEventListener('transitionend', handler);
-      if (iframeLoadRequestId !== requestId) return;
-      iframe.src = file;
-      setTimeout(() => {
-        iframe.style.opacity = 1;
-        isSlideBoxBusy = false;
-      }, 50);
-    });
-  }
-});
-    });
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            iframeLoadRequestId++; // ✅ Cancel pending loads
-            iframe.style.opacity = 0;
-            slideBox.classList.remove('show');
-        });
-    }
+  if (menu) menu.classList.toggle("show");
 }
 
-// Apply to both sidebar and mobile menu links
-setupSlideBoxLinks('.sidebar-links a[data-file]');
-setupSlideBoxLinks('.mobile-menu a[data-file]');
-setupSlideBoxLinks('.footer-button[data-file]');
-
+/* ===========================
+   Misc helpers
+   =========================== */
 document.querySelectorAll('.grid-container img, .grid-container a').forEach(el => {
   el.addEventListener('dragstart', e => e.preventDefault());
-});
-document.querySelectorAll('.grid-item[data-file]').forEach(item => {
-  item.addEventListener('click', e => {
-    e.preventDefault();
-
-    if (isSlideBoxBusy) return;
-
-    const slideBox = document.querySelector('.slide-box');
-    const iframe = slideBox.querySelector('iframe');
-    if (!slideBox || !iframe) return;
-
-    const file = item.getAttribute('data-file');
-    if (!file) return;
-
-    const requestId = ++iframeLoadRequestId;
-    iframe.style.opacity = 0;
-    iframe.src = 'about:blank';
-    currentFile = file;
-    isSlideBoxBusy = true;
-
-    if (slideBox.classList.contains('show') && currentFile === file) {
-      if (iframeLoadRequestId > requestId) {
-        isSlideBoxBusy = false;
-        return;
-      }
-      slideBox.classList.remove('show');
-      setTimeout(() => {
-        isSlideBoxBusy = false;
-      }, 500); // match transition duration
-      return;
-    }
-
-    if (!slideBox.classList.contains('show')) {
-      slideBox.classList.add('show');
-      setTimeout(() => {
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        iframe.style.opacity = 1;
-        isSlideBoxBusy = false;
-      }, 500);
-    } else {
-      iframe.addEventListener('transitionend', function handler() {
-        iframe.removeEventListener('transitionend', handler);
-        if (iframeLoadRequestId !== requestId) return;
-        iframe.src = file;
-        setTimeout(() => {
-          iframe.style.opacity = 1;
-          isSlideBoxBusy = false;
-        }, 50);
-      });
-    }
-  });
 });
 
 function clampScroll(div) {
@@ -692,96 +575,88 @@ function clampScrollSmooth(div) {
   div.addEventListener('scroll', () => {
     const maxScroll = div.scrollHeight - div.clientHeight - 1;
     const clamped = Math.max(1, Math.min(div.scrollTop, maxScroll));
-
-    // Only scroll if we need to clamp
     if (div.scrollTop !== clamped) {
       div.scrollTo({ top: clamped, behavior: 'smooth' });
     }
   });
 }
 
-
+/* ===========================
+   (Optional) Preloading helpers (guarded)
+   =========================== */
 async function preloadAsset(href, asType) {
-      return new Promise((resolve, reject) => {
-        // Avoid duplicating preloads
-        if (document.querySelector(`link[rel="preload"][href="${href}"]`)) {
-          return resolve();
-        }
-
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = href;
-        link.as = asType;
-        link.onload = resolve;
-        link.onerror = () => {
-          console.warn(`Failed to preload: ${href}`);
-          resolve(); // Don't reject — continue with others
-        };
-        document.head.appendChild(link);
-      });
+  return new Promise((resolve) => {
+    // Avoid duplicating preloads
+    if (document.querySelector(`link[rel="preload"][href="${href}"]`)) {
+      return resolve();
     }
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = href;
+    link.as = asType;
+    link.onload = resolve;
+    link.onerror = () => { console.warn(`Failed to preload: ${href}`); resolve(); };
+    document.head.appendChild(link);
+  });
+}
 
-    // Parse an iframe HTML and preload its resources
-    async function preloadIframeResourcesFromHTML(url) {
-      try {
-        const htmlText = await fetch(url).then(res => res.text());
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
+// Parse an iframe HTML and preload its resources
+async function preloadIframeResourcesFromHTML(url) {
+  try {
+    const htmlText = await fetch(url).then(res => res.text());
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, 'text/html');
 
-        const preloadList = [];
-
-        doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-          const href = link.getAttribute('href');
-          if (href) preloadList.push(preloadAsset(href, 'style'));
-        });
-
-        doc.querySelectorAll('script[src]').forEach(script => {
-          const src = script.getAttribute('src');
-          if (src) preloadList.push(preloadAsset(src, 'script'));
-        });
-
-        doc.querySelectorAll('img[src]').forEach(img => {
-          const src = img.getAttribute('src');
-          if (src) preloadList.push(preloadAsset(src, 'image'));
-        });
-
-        await Promise.all(preloadList);
-      } catch (e) {
-        console.error(`Error preloading from ${url}:`, e);
-      }
-    }
-
-    // Preload all iframe pages and load one of them
-    async function preloadAllAndShowIframe() {
-      const iframePages = [
-        'resume-page.html',
-        'coverletter.html',
-        'broken-path-explore.html',
-        'shred-engine-explore.html'
-      ];
-
-      // Preload assets for all iframe pages
-      for (const page of iframePages) {
-        await preloadIframeResourcesFromHTML(page);
-      }
-
-      // Then load one into iframe
-      const iframe = document.getElementById('iframe-container');
-      iframe.src = 'resume-page.html';
-      iframe.style.display = 'block';
-    }
-
-    // Set up button to trigger loading
-    document.getElementById('loadButton').addEventListener('click', () => {
-      preloadAllAndShowIframe();
+    const preloadList = [];
+    doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href) preloadList.push(preloadAsset(href, 'style'));
     });
+    doc.querySelectorAll('script[src]').forEach(script => {
+      const src = script.getAttribute('src');
+      if (src) preloadList.push(preloadAsset(src, 'script'));
+    });
+    doc.querySelectorAll('img[src]').forEach(img => {
+      const src = img.getAttribute('src');
+      if (src) preloadList.push(preloadAsset(src, 'image'));
+    });
+
+    await Promise.all(preloadList);
+  } catch (e) {
+    console.error(`Error preloading from ${url}:`, e);
+  }
+}
+
+// Preload all iframe pages and load one of them (only if you wire a button)
+async function preloadAllAndShowIframe() {
+  const iframePages = [
+    'resume-page.html',
+    'coverletter.html',
+    'broken-path-explore.html',
+    'shred-engine-explore.html'
+  ];
+
+  for (const page of iframePages) {
+    await preloadIframeResourcesFromHTML(page);
+  }
+
+  const i = document.getElementById('contentFrame'); // corrected ID
+  if (i) {
+    i.src = 'resume-page.html';
+    i.style.display = 'block';
+  }
+}
+
+// Only attach if a button with this id exists
+const loadBtn = document.getElementById('loadButton');
+if (loadBtn) loadBtn.addEventListener('click', preloadAllAndShowIframe);
 </script>
 
-
+<!-- Hidden iframes to help warm caches -->
 <iframe src="resume-page.html" style="display:none;" id="preload1"></iframe>
 <iframe src="coverletter.html" style="display:none;" id="preload2"></iframe>
+
+<!-- He is with us, even though we cannot see him -->
+<!-- Glory to Jesus Christ! -->
 </body>
 </html>
-
-   <!-- He is with us, even though we cannot see him -->
-                 <!-- Glory to Jesus Christ! -->
