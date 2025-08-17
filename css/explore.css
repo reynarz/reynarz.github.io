@@ -398,3 +398,56 @@ body.no-scroll {
   .custom-list li {
     margin-bottom: 1rem;
   }
+
+/* Make a media tile (for video) behave like an image cell */
+.grid-left > .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.grid-left > .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* clicks land on the media wrapper */
+}
+
+/* Play icon overlay for video tiles */
+.media.video .play-badge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,.7);
+  pointer-events: none;
+}
+
+/* Lightbox video sizing & transitions to match the image */
+#lightbox-vid {
+  display: none;            /* toggled by JS */
+  width: 90%;
+  max-width: 1000px;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scale(1);
+}
+#lightbox.show #lightbox-vid.showing {
+  opacity: 1;
+}
+
+/* Fade helper (used by JS on both image & video) */
+#lightbox-img.hide,
+#lightbox-vid.hide {
+  opacity: 0;
+  transform: scale(0.98);
+}
