@@ -711,6 +711,9 @@ if (closeBtn) {
     if (currentAbortController) currentAbortController.abort();
     hideLoader();
     iframe.style.opacity = 0;
+    
+      iframe.contentWindow.postMessage({ action: "stopVideo" }, "*");
+      
     slideBox.classList.remove('show');
     isSlideBoxBusy = false;
   });

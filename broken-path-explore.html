@@ -95,6 +95,11 @@ const closeBtn = document.querySelector('.close-lightbox');
 const nextBtn = document.querySelector('.lightbox-next');
 const prevBtn = document.querySelector('.lightbox-prev');
 
+    window.addEventListener("message", (event) => {
+  if (event.data.action === "stopVideo") {
+    stopVideo();
+  }
+});
     
 function parseStartTime(val) {
   if (!val) return 0;

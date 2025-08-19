@@ -33,14 +33,14 @@
       <img src="assets/images/explore-mino/show9.png" alt="Screenshot 2">
       
         
+        
+              <img src="assets/images/explore-mino/show3.png" alt="Screenshot 4">
+
+      <img src="assets/images/explore-mino/show1.png" alt="Screenshot 1">
         <div class="media video" data-type="video" data-video-id="3_pLr8hs7MQ" aria-label="Play trailer">
         <img src="assets/images/explore-mino/show10.png" alt="Screenshot 3">
         <span class="play-badge" aria-hidden="true">▶</span>
       </div>
-        
-      <img src="assets/images/explore-mino/show1.png" alt="Screenshot 1">
-      <img src="assets/images/explore-mino/show3.png" alt="Screenshot 4">
-
         
       <!-- Video tile (replace YOUTUBE_ID_HERE with your video ID, e.g. dQw4w9WgXcQ) -->
       
@@ -93,6 +93,11 @@
 
   <!-- Script -->
   <script>
+      window.addEventListener("message", (event) => {
+  if (event.data.action === "stopVideo") {
+    stopVideo();
+  }
+});
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxVid = document.getElementById('lightbox-vid');
