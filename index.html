@@ -163,6 +163,7 @@
                     <div class="carousel-track">
 
                       <div class="video-wrapper" data-file="broken-path-explore.html" data-button="View More">
+                      <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video active" src="assets/videos/brokenPath_3.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       <div class="video-gradient-overlay"></div>
@@ -171,7 +172,8 @@
                       </div>
 
                         
-                           <div class="video-wrapper" data-file="mino-explore.html" data-button="View More">
+                    <div class="video-wrapper" data-file="mino-explore.html" data-button="View More">
+                         <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/3dplatformer_3.mp4" autoplay muted loop></video>
                       <div class="video-text title">Mino's Adventure</div>
                       <div class="video-text subtitle">3D Platformer (PC-Mobile) made with Unity3D 
@@ -180,6 +182,7 @@
                         
                         
                               <div class="video-wrapper" data-file="shred-engine-explore.html" data-button="View More">
+                                   <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/engineView_4.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       <div class="video-gradient-overlay"></div>
@@ -191,6 +194,7 @@
                      
                         
                     <div class="video-wrapper">
+                         <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/MinoTool_4.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       
@@ -203,6 +207,7 @@
                       
 
                     <div class="video-wrapper">
+                         <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/navecita_2.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       
@@ -212,6 +217,7 @@
                     </div>
 
                        <div class="video-wrapper">
+                            <div class="loading-spinner"></div>
                       <video playsinline webkit-playsinline muted class="carousel-video" src="assets/videos/shder3d_.mp4" autoplay muted loop></video>
                       <div class="video-overlay"></div>
                       <div class="video-gradient-overlay"></div>
@@ -449,6 +455,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.querySelector('.sidebar');
   const mainContent = document.querySelector('.main-content');
   const activeVideo = document.querySelector('.carousel-video.active');
+    
+    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+    const video = wrapper.querySelector('video');
+    const spinner = wrapper.querySelector('.loading-spinner');
+
+    if (!spinner) return;
+        
+    // Hide spinner once the video can start playing
+    video.addEventListener('loadeddata', () => {
+      spinner.style.display = 'none';
+         //spinner.remove(); // get rid of it once first frame is ready
+    });
+        
+    // Also hide if video errors out (optional)
+    video.addEventListener('error', () => {
+      spinner.style.display = 'none';
+    });
+        
+        
+  });
+    
+    
   if (activeVideo) updateFooterText(activeVideo);
 
   // Scroll sidebar wheel -> main content
